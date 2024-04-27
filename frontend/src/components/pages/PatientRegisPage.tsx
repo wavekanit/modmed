@@ -11,7 +11,7 @@ type FormData = {
   DOB: Date;
   sex: string;
   address: string;
-  tell: string;
+  tel: string;
   email: string;
   nationality: string;
   race: string;
@@ -37,7 +37,7 @@ const INITIAL_DATA: FormData = {
   DOB: new Date(),
   sex: "",
   address: "",
-  tell: "",
+  tel: "",
   email: "",
   nationality: "",
   race: "",
