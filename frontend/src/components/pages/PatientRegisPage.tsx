@@ -9,6 +9,7 @@ type Props = {};
 
 type FormData = {
   firstName: string;
+  middleName: string;
   lastName: string;
   idNumber: string;
   DOB: Date;
@@ -21,6 +22,7 @@ type FormData = {
   religion: string;
   bloodType: string;
   eConFirstName: string;
+  eConMiddleName: string;
   eConLastName: string;
   eConRelation: string;
   eConTel: string;
@@ -35,6 +37,7 @@ type FormData = {
 
 const INITIAL_DATA: FormData = {
   firstName: "",
+  middleName: "",
   lastName: "",
   idNumber: "",
   DOB: new Date(),
@@ -47,6 +50,7 @@ const INITIAL_DATA: FormData = {
   religion: "",
   bloodType: "",
   eConFirstName: "",
+  eConMiddleName: "",
   eConLastName: "",
   eConRelation: "",
   eConTel: "",

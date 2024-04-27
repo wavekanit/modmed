@@ -4,6 +4,7 @@ import { redirect } from 'react-router-dom';
 
 type PersonalInfoRegis = {
   firstName: string;
+  middleName: string;
   lastName: string;
   idNumber: string;
   DOB: Date;
@@ -35,6 +36,7 @@ type PersonalInfoRegisProps = PersonalInfoRegis & {
 
 export function PersonalInfoRegis({
   firstName,
+  middleName,
   lastName,
   DOB,
   sex,
@@ -65,6 +67,20 @@ export function PersonalInfoRegis({
       </div>
       <div className="my-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Middle Name
+        </label>
+        <input
+          type="text"
+          name="middleName"
+          value={middleName}
+          onChange={(e) => updateFields({ middleName: e.target.value })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Middle Name"
+          required
+        />
+      </div>
+      <div className="my-2">
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Last Name
         </label>
         <input
@@ -82,7 +98,7 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="date"
-          name="birthDate"
+          name="DOB"
           value={DOB.toISOString().split("T")[0]}
           onChange={(e) =>
             updateFields({ DOB: new Date(e.target.value) })
@@ -96,7 +112,7 @@ export function PersonalInfoRegis({
         </label>
         <select
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          name="Sex"
+          name="sex"
           value={sex}
           onChange={(e) => updateFields({ sex: e.target.value })}
         >
@@ -111,7 +127,7 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="text"
-          name="Adress"
+          name="address"
           value={address}
           onChange={(e) => updateFields({ address: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -124,7 +140,7 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="text"
-          name="Tel"
+          name="tel"
           value={tel}
           onChange={(e) => updateFields({ tel: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -137,7 +153,7 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="text"
-          name="Email"
+          name="email"
           value={email}
           onChange={(e) => updateFields({ email: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -150,7 +166,7 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="text"
-          name="Nationality"
+          name="nationality"
           value={nationality}
           onChange={(e) => updateFields({ nationality: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -163,7 +179,7 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="text"
-          name="Race"
+          name="race"
           value={race}
           onChange={(e) => updateFields({ race: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -176,7 +192,7 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="text"
-          name="Religion"
+          name="religion"
           value={religion}
           onChange={(e) => updateFields({ religion: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -189,7 +205,7 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="text"
-          name="Blood Type"
+          name="bloodType"
           value={bloodType}
           onChange={(e) => updateFields({ bloodType: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
