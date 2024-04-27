@@ -10,13 +10,20 @@ import { EmailRegis } from "./docRegisterStep/EmailRegis";
 type Props = {};
 
 type FormData = {
-  firstName: string;
-  lastName: string;
-  birthDate: Date;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
+  fName: string;
+  mName: string;
+  lName: string;
+  idNumber: string;
+  DOB: Date;
+  sex: string;
+  addresses: string;
+  tel: string;
+  nationality: string;
+  race: string;
+  religion: string;
+  bloodType: string;
+  department: string;
+  license_id: string;
   education: {
     degree: string;
     institute: string;
@@ -29,13 +36,20 @@ type FormData = {
 };
 
 const INITIAL_DATA: FormData = {
-  firstName: "",
-  lastName: "",
-  birthDate: new Date(),
-  street: "",
-  city: "",
-  state: "",
-  zip: "",
+  fName: "",
+  mName: "",
+  lName: "",
+  idNumber: "",
+  DOB: new Date,
+  sex: "",
+  addresses: "",
+  tel: "",
+  nationality: "",
+  race: "",
+  religion: "",
+  bloodType: "",
+  department: "",
+  license_id: "",
   education: [{ degree: "", institute: "", year: "", sepecificField: "" }],
   email: "",
   password: "",

@@ -1,28 +1,44 @@
-import React from "react";
+import React from 'react'
 import FormWrapper from "../FormWrapper";
+import { redirect } from 'react-router-dom';
 
-type PersonalData = {
-  firstName: string;
-  lastName: string;
-  birthDate: Date;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-};
+type PersonalInfoRegis = {
+  fName: string;
+  mName: string;
+  lName: string;
+  idNumber: string;
+  DOB: Date;
+  sex: string;
+  addresses: string;
+  tel: string;
+  email: string;
+  nationality: string;
+  race: string;
+  religion: string;
+  bloodType: string;
+  department: string;
+  license_id: string;
+}
 
-type PersonalInfoRegisProps = PersonalData & {
-  updateFields: (fields: Partial<PersonalData>) => void;
+type PersonalInfoRegisProps = PersonalInfoRegis & {
+  updateFields: (fields: Partial<PersonalInfoRegis>) => void;
 };
 
 export function PersonalInfoRegis({
-  firstName,
-  lastName,
-  birthDate,
-  street,
-  city,
-  state,
-  zip,
+  fName,
+  mName,
+  lName,
+  DOB,
+  sex,
+  addresses,
+  tel,
+  email,
+  nationality,
+  race,
+  religion,
+  bloodType,
+  department,
+  license_id,
   updateFields,
 }: PersonalInfoRegisProps) {
   return (
@@ -33,11 +49,25 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="text"
-          name="firstName"
-          value={firstName}
-          onChange={(e) => updateFields({ firstName: e.target.value })}
+          name="fName"
+          value={fName}
+          onChange={(e) => updateFields({ fName: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="First Name"
+          required
+        />
+      </div>
+      <div className="my-2">
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Middle Name
+        </label>
+        <input
+          type="text"
+          name="mName"
+          value={mName}
+          onChange={(e) => updateFields({ mName: e.target.value })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Middle Name"
           required
         />
       </div>
@@ -47,9 +77,9 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="text"
-          name="lastName"
-          value={lastName}
-          onChange={(e) => updateFields({ lastName: e.target.value })}
+          name="lName"
+          value={lName}
+          onChange={(e) => updateFields({ lName: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Last Name"
         />
@@ -60,64 +90,148 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="date"
-          name="birthDate"
-          value={birthDate.toISOString().split("T")[0]}
+          name="DOB"
+          value={DOB.toISOString().split("T")[0]}
           onChange={(e) =>
-            updateFields({ birthDate: new Date(e.target.value) })
+            updateFields({ DOB: new Date(e.target.value) })
           }
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
       </div>
       <div className="my-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Street
+          Sex
+        </label>
+        <select
+          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          name="sex"
+          value={sex}
+          onChange={(e) => updateFields({ sex: e.target.value })}
+        >
+          <option value="">Select</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+      <div className="my-2">
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Addresses
         </label>
         <input
           type="text"
-          name="street"
-          value={street}
-          onChange={(e) => updateFields({ street: e.target.value })}
+          name="addresses"
+          value={addresses}
+          onChange={(e) => updateFields({ addresses: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Street"
+          placeholder="Addresses"
         />
       </div>
       <div className="my-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          City
+          Tel
         </label>
         <input
           type="text"
-          name="city"
-          value={city}
-          onChange={(e) => updateFields({ city: e.target.value })}
+          name="tel"
+          value={tel}
+          onChange={(e) => updateFields({ tel: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="City"
-        />
-      </div>
-      <div className="my-2">
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          State
-        </label>
-        <input
-          type="text"
-          name="state"
-          value={state}
-          onChange={(e) => updateFields({ state: e.target.value })}
-          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="State"
+          placeholder="Tel"
         />
       </div>
       <div>
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Zip
+          Email
         </label>
         <input
           type="text"
-          name="zip"
-          value={zip}
-          onChange={(e) => updateFields({ zip: e.target.value })}
+          name="email"
+          value={email}
+          onChange={(e) => updateFields({ email: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Zip"
+          placeholder="Email"
+        />
+      </div>
+      <div>
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Nationality
+        </label>
+        <input
+          type="text"
+          name="nationality"
+          value={nationality}
+          onChange={(e) => updateFields({ nationality: e.target.value })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Nationality"
+        />
+      </div>
+      <div>
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Race
+        </label>
+        <input
+          type="text"
+          name="race"
+          value={race}
+          onChange={(e) => updateFields({ race: e.target.value })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Race"
+        />
+      </div>
+      <div>
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Religion
+        </label>
+        <input
+          type="text"
+          name="religion"
+          value={religion}
+          onChange={(e) => updateFields({ religion: e.target.value })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Religion"
+        />
+      </div>
+      <div>
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Blood Type
+        </label>
+        <select
+          name="blood Type"
+          value={bloodType}
+          onChange={(e) => updateFields({ bloodType: e.target.value })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option value="">Select</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="O">O</option>
+          <option value="AB">AB</option>
+        </select>
+      </div>
+      <div className="my-2">
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Department
+        </label>
+        <input
+          type="text"
+          name="department"
+          value={department}
+          onChange={(e) => updateFields({ department: e.target.value })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Department"
+        />
+      </div>
+      <div className="my-2">
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          License ID
+        </label>
+        <input
+          type="text"
+          name="license_id"
+          value={license_id}
+          onChange={(e) => updateFields({ license_id: e.target.value })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="License ID"
         />
       </div>
     </FormWrapper>
