@@ -6,7 +6,26 @@ type Props = {}
 
 type FormData = {
     firstName: string;
-    
+    lastName: string;
+    idNumber: string;
+    DOB: Date;
+    sex: string;
+    address: string;
+    tell: string;
+    email: string;
+    nationality: string;
+    race: string;
+    religion: string;
+    bloodType: string;
+    eConFirstName: string;
+    eConLastName: string;
+    eConRelation: string;
+    eConTell: string;
+    eConEmail: string;
+    eConAddress: string;
+
+
+
 };
 
 export default function PatientRegisPage({}: Props) {
