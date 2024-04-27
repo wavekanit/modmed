@@ -1,6 +1,7 @@
 import React from "react";
 import { FormEvent, useState } from "react";
 import { useMultistepForm } from "../UseMultiForm";
+import { PersonalInfoRegis } from "./patientRegisterPage/PersonalInfoRegis";
 
 type Props = {};
 
@@ -60,7 +61,7 @@ export default function PatientRegisPage({}: Props) {
     });
   }
   const { step, isFirstStep, isLastStep, back, next } = useMultistepForm([
-    // <PersonalInfoRegis {...data} updateFields={updateFields} />,
+    <PersonalInfoRegis {...data} updateFields={updateFields} />,
     // <EducationalRegis {...data} updateFields={updateFields} />,
     // <EmailRegis {...data} updateFields={updateFields} />,
   ]);
