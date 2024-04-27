@@ -182,4 +182,4 @@ INSERT INTO register (fName, lName, tel, email)
         ('Somporn', 'Wongmamuang', '0815462563', 'somporn@modmed.com');
 INSERT INTO account (username, pw, roles, r_id, d_id)
     VALUES
-        ('somporn@modmed.com', '123456', 'regis', 1)
+        ('somporn@modmed.com', '123456', 'regis', 1);
