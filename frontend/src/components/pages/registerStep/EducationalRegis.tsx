@@ -45,7 +45,7 @@ export function EducationalRegis(props: PersonalInfoRegisProps) {
   };
 
   return (
-    <FormWrapper title="2/2 Educational Background">
+    <FormWrapper title="2/3 Educational Background">
       {data.education.map((x, i) => {
         return (
           <div className="my-2" key={i}>

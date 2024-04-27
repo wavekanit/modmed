@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import { useMultistepForm } from "../UseMultiForm";
 import { PersonalInfoRegis } from "./registerStep/PersonalInfoRegis";
 import { EducationalRegis } from "./registerStep/EducationalRegis";
+import { EmailRegis } from "./registerStep/EmailRegis";
 
 type Props = {};
 
@@ -49,7 +50,7 @@ export default function StaffRegisPage({}: Props) {
   const { step, isFirstStep, isLastStep, back, next } = useMultistepForm([
     <PersonalInfoRegis {...data} updateFields={updateFields} />,
     <EducationalRegis {...data} updateFields={updateFields} />,
-    // <AccountInfoRegis {...data} updateFields={updateFields} />,
+    <EmailRegis {...data} updateFields={updateFields} />,
   ]);
   function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -70,10 +71,21 @@ export default function StaffRegisPage({}: Props) {
               >
                 {step}
                 <div className="my-2 flex justify-between">
-                  {!isFirstStep && (
+                  {isFirstStep ? (
                     <button
+                      className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2 mx-2"
+                      type="button"
+                      disabled
+                    >
+                      Back
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
                       className="w-1/2 text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2 mx-2"
-                      onClick={back}
+                      onClick={() => {
+                        back();
+                      }}
                     >
                       Back
                     </button>

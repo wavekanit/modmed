@@ -26,7 +26,7 @@ export function PersonalInfoRegis({
   updateFields,
 }: PersonalInfoRegisProps) {
   return (
-    <FormWrapper title="1/2 Personal Information">
+    <FormWrapper title="1/3 Personal Information">
       <div className="my-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           First Name
