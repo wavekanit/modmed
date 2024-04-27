@@ -1,21 +1,25 @@
+//personalInfo
+
 import React from 'react'
 import FormWrapper from "../FormWrapper";
 import { redirect } from 'react-router-dom';
 
 type PersonalInfoRegis = {
-  firstName: string;
-  middleName: string;
-  lastName: string;
+  fName: string;
+  mName: string;
+  lName: string;
   idNumber: string;
   DOB: Date;
   sex: string;
-  address: string;
+  addresses: string;
   tel: string;
   email: string;
   nationality: string;
   race: string;
   religion: string;
   bloodType: string;
+  department: string;
+  license_id: string;
 }
 
 type PersonalInfoRegisProps = PersonalInfoRegis & {
@@ -35,18 +39,20 @@ type PersonalInfoRegisProps = PersonalInfoRegis & {
 // };
 
 export function PersonalInfoRegis({
-  firstName,
-  middleName,
-  lastName,
+  fName,
+  mName,
+  lName,
   DOB,
   sex,
-  address,
+  addresses,
   tel,
   email,
   nationality,
   race,
   religion,
   bloodType,
+  department,
+  license_id,
   updateFields,
 }: PersonalInfoRegisProps) {
   return (
@@ -57,9 +63,9 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="text"
-          name="firstName"
-          value={firstName}
-          onChange={(e) => updateFields({ firstName: e.target.value })}
+          name="fName"
+          value={fName}
+          onChange={(e) => updateFields({ fName: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="First Name"
           required
@@ -71,9 +77,9 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="text"
-          name="middleName"
-          value={middleName}
-          onChange={(e) => updateFields({ middleName: e.target.value })}
+          name="mName"
+          value={mName}
+          onChange={(e) => updateFields({ mName: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Middle Name"
           required
@@ -85,9 +91,9 @@ export function PersonalInfoRegis({
         </label>
         <input
           type="text"
-          name="lastName"
-          value={lastName}
-          onChange={(e) => updateFields({ lastName: e.target.value })}
+          name="lName"
+          value={lName}
+          onChange={(e) => updateFields({ lName: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Last Name"
         />
@@ -123,15 +129,15 @@ export function PersonalInfoRegis({
       </div>
       <div className="my-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Adress
+          Addresses
         </label>
         <input
           type="text"
-          name="address"
-          value={address}
-          onChange={(e) => updateFields({ address: e.target.value })}
+          name="addresses"
+          value={addresses}
+          onChange={(e) => updateFields({ addresses: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Address"
+          placeholder="Addresses"
         />
       </div>
       <div className="my-2">
@@ -144,7 +150,7 @@ export function PersonalInfoRegis({
           value={tel}
           onChange={(e) => updateFields({ tel: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="State"
+          placeholder="Tel"
         />
       </div>
       <div>
@@ -203,13 +209,43 @@ export function PersonalInfoRegis({
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Blood Type
         </label>
-        <input
-          type="text"
-          name="bloodType"
+        <select
+          name="blood Type"
           value={bloodType}
           onChange={(e) => updateFields({ bloodType: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Blood Type"
+        >
+          <option value="">Select</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="O">O</option>
+          <option value="AB">AB</option>
+        </select>
+      </div>
+      <div className="my-2">
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Department
+        </label>
+        <input
+          type="text"
+          name="department"
+          value={department}
+          onChange={(e) => updateFields({ department: e.target.value })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Department"
+        />
+      </div>
+      <div className="my-2">
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          License ID
+        </label>
+        <input
+          type="text"
+          name="license_id"
+          value={license_id}
+          onChange={(e) => updateFields({ license_id: e.target.value })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="License ID"
         />
       </div>
     </FormWrapper>

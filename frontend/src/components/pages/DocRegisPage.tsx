@@ -1,3 +1,5 @@
+//docRegis
+
 import React from "react";
 import { FormEvent, useState } from "react";
 import { useMultistepForm } from "../UseMultiForm";
@@ -54,6 +56,15 @@ export default function StaffRegisPage({}: Props) {
   ]);
   function onSubmit(e: FormEvent) {
     e.preventDefault();
+    if(data.password !== data.confirmPassword){
+      alert("Password and Confirm Password do not match");
+      setData((prevData) => ({
+        ...prevData,
+        password: "",
+        confirmPassword: ""
+      }));
+      return;
+    }
     if (!isLastStep) return next();
     alert("Successful Account Creation");
   }
