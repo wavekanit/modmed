@@ -5,6 +5,7 @@ import axios from "axios";
 import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage";
 import StaffRegisPage from "./components/pages/DocRegisPage";
+import PatientRegisPage from "./components/pages/PatientRegisPage";
 
 function App() {
   // localStorage.setItem("abc", "jwtjwt");
@@ -43,6 +44,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<StaffRegisPage />} />
+        <Route path="/patient" element={<PatientRegisPage />} />
       </Routes>
     </>
   );
