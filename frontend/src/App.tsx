@@ -23,7 +23,7 @@ function App() {
 
   return (
     <>
-      <button
+      {/* <button
         onClick={async () => {
           try {
             const result = await axios.get(
@@ -35,9 +35,7 @@ function App() {
             console.log(error);
           }
         }}
-      >
-        abc
-      </button>
+      ></button> */}
       <Nav />
       <Routes>
         <Route path="/" element={<HomePage />} />
