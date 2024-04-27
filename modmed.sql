@@ -166,7 +166,7 @@ INSERT INTO emergency_contact (fName, lName, tel, addresses, email)
         ('Pitchayuth', 'Yampong', '0523124456', 'Chumpon', 'picha@local.com'),
         ('Chukiat', 'Bunny', '0845256325', 'Sukhumvit, Samutprakarn', 'jekchu@local.com');
 
-INSERT INTO patient (fName,lName,idNumber,DOB,sex,addresses,tell,email,nationality,race,religion,bloodType,e_id,relation)
+INSERT INTO patient (fName,lName,idNumber,DOB,sex,addresses,tel,email,nationality,race,religion,bloodType,e_id,relation)
     VALUES
         ('Apichat', 'Aimi', '1101402256352', '2004-04-04', 'Male', '784 Sanam Chandra, Nakorn Prathom', '0965236521','apichar@hotmail.com', 'Thai', 'Thai', 'Buddhist', 'A', 2, 'Husband'),
         ('Pairoj', 'Saisam', '1104774521698', '1945-07-04', 'Male', 'Mars', '0412563254','pair@hotmail.com', 'Thai', 'Thai', 'Buddhist', 'AB+', 1, 'Son'),
