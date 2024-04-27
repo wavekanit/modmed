@@ -1,5 +1,5 @@
 import React from "react";
-import FormWrapper from "./FormWrapper";
+import FormWrapper from "../FormWrapper";
 
 type EmailRegisData = {
   email: string;
@@ -25,11 +25,11 @@ export function EmailRegis({
         </label>
         <input
           type="text"
-          name="firstName"
+          name="username"
           value={email}
           onChange={(e) => updateFields({ email: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="First Name"
+          placeholder="username"
           required
         />
       </div>
@@ -43,7 +43,7 @@ export function EmailRegis({
           value={email}
           onChange={(e) => updateFields({ password: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="First Name"
+          placeholder="password"
           required
         />
       </div>
@@ -57,7 +57,7 @@ export function EmailRegis({
           value={email}
           onChange={(e) => updateFields({ confirmPassword: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="First Name"
+          placeholder="password"
           required
         />
       </div>

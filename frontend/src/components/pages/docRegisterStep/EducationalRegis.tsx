@@ -1,5 +1,5 @@
 import React from "react";
-import FormWrapper from "./FormWrapper";
+import FormWrapper from "../FormWrapper";
 
 type EducationalData = {
   education: {

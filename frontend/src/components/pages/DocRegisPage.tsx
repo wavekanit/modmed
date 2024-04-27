@@ -1,9 +1,9 @@
 import React from "react";
 import { FormEvent, useState } from "react";
 import { useMultistepForm } from "../UseMultiForm";
-import { PersonalInfoRegis } from "./registerStep/PersonalInfoRegis";
-import { EducationalRegis } from "./registerStep/EducationalRegis";
-import { EmailRegis } from "./registerStep/EmailRegis";
+import { PersonalInfoRegis } from "./docRegisterStep/PersonalInfoRegis";
+import { EducationalRegis } from "./docRegisterStep/EducationalRegis";
+import { EmailRegis } from "./docRegisterStep/EmailRegis";
 
 type Props = {};
 
