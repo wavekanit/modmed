@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "MFTv#13181",
+    password: "",
     database: "modmed",
     port: 3306
 });
@@ -66,7 +66,7 @@ function insertEmergencyContact(emergency){
 
 function insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, e_id, relation, department, license_id){
     return new Promise((resolve, reject) => {
-        db.query("INSERT INTO doctor (fName, mName, lName, idNumber,DOB, sex, address, tel, email, nationality,race, religion, bloodType, e_id, relation, department, license_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, relation, department, license_id], (error, result) => {
+        db.query("INSERT INTO doctor (fName, mName, lName, idNumber,DOB, sex, address, tel, email, nationality,race, religion, bloodType, e_id, relation, department, license_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, e_id, relation, department, license_id], (error, result) => {
             if(error){
                 console.log(error)
                 reject(error);
