@@ -12,9 +12,9 @@ app.use(bodyParser.json());
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "root",
+    password: "MFTv#13181",
     database: "modmed",
-    port: 8889
+    port: 3306
 });
 
 db.connect( (error) => {
@@ -172,3 +172,5 @@ app.listen(3000, () => {
 });
 
 // ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY '1234';
+
+
