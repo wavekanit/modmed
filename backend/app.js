@@ -74,6 +74,10 @@ function insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, em
     return new Promise((resolve, reject) => {
         console.log(DOB);
         db.query("INSERT INTO doctor (fName, mName, lName, idNumber,DOB, sex, addresses, tel, email, nationality,race, religion, bloodType, e_id, relation, department, license_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, e_id, relation, department, license_id], (error, result) => {
+<<<<<<< HEAD
+=======
+       
+>>>>>>> origin/today
             if(error){
                 console.log(error)
                 reject(error);
@@ -146,18 +150,26 @@ app.post("/insertDocInfo", async (req, res) => {
         console.log(error);
         res.send("Failed to insert doctor");
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/today
     
 
 });
 
 function checkLogin(email, password){
     return new Promise((resolve, reject) => {
+        console.log("Username : " + email);
+        console.log("pw : " + password);
         db.query("SELECT * FROM account WHERE username = ? AND pw = ?", [email, password], (error, result) => {
             if(error){
+                console.log("WRONG");
                 console.log(error);
                 reject(error);
             } else {
+                console.log("CORRECT");
+                console.log(result);
                 resolve(result);
             }
         });
@@ -216,7 +228,10 @@ app.post("/login", (req, res) => {
         console.log(error);
         res.send("Failed");
     });
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/today
 });
 
 
