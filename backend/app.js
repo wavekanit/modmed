@@ -12,7 +12,11 @@ app.use(bodyParser.json());
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
+<<<<<<< HEAD
     password: "root",
+=======
+    password: "",
+>>>>>>> origin/today
     database: "modmed",
     port: 8889
 });
@@ -66,8 +70,12 @@ function insertEmergencyContact(emergency){
 
 function insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, e_id, relation, department, license_id){
     return new Promise((resolve, reject) => {
+<<<<<<< HEAD
         console.log(DOB);
         db.query("INSERT INTO doctor (fName, mName, lName, idNumber,DOB, sex, addresses, tel, email, nationality,race, religion, bloodType, e_id, relation, department, license_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, e_id, relation, department, license_id], (error, result) => {
+=======
+        db.query("INSERT INTO doctor (fName, mName, lName, idNumber,DOB, sex, address, tel, email, nationality,race, religion, bloodType, e_id, relation, department, license_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, e_id, relation, department, license_id], (error, result) => {
+>>>>>>> origin/today
             if(error){
                 console.log(error)
                 reject(error);
@@ -116,6 +124,7 @@ app.post("/insertDocInfo", async (req, res) => {
     console.log("First Name " + fName);
     console.log("DOB " + DOB);
     var emer_id;
+<<<<<<< HEAD
     try {
         const alreadyDoc = await getAlreadExistEmerInfo(emergency.fName, emergency.lName);
         if(alreadyDoc.length != 0){
@@ -140,6 +149,57 @@ app.post("/insertDocInfo", async (req, res) => {
         console.log(error);
         res.send("Failed to insert doctor");
     }
+=======
+    getAlreadExistDocInfo(emergency.fName, emergency.lName)
+        .then(alreadyDoc => {
+            if(alreadyDoc.length != 0){
+                // res.send(alreadyDoc[0]);
+                emer_id = alreadyDoc[0].e_id;
+                console.log(alreadyDoc[0].e_id);
+            }else{
+                insertEmergencyContact(emergency)
+                    .then(result => {
+                        console.log(result);
+                        emer_id = result.insertId;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+            insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, e_id, relation, department, license_id)
+                .then(result => {  
+                     console.log(result);
+                     d_id = result.insertId;
+                     insertDocEdu(d_id, d_edu)
+                        .then(result => {
+                            console.log(result);
+                            
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+    // const { emergency} = req.body;
+    // db.query("INSERT INTO emergency_contact (fName, mName, lName, tel, addresses, email) VALUES (?,?,?,?,?,?)", [emergency.fName, emergency.mName, emergency.lName, emergency.tel, emergency.address, emergency.email], (error, result) => {
+    //     if(error){
+    //         console.log(error)
+    //     } else {
+    //         console.log("Emergency Contact Inserted")
+    //         res.send(result)
+    //     }
+    // });
+    
+>>>>>>> origin/today
 });
 
 
