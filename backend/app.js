@@ -25,8 +25,8 @@ db.connect( (error) => {
     }
 });
 
-app.get("/", (req, res) => {
-    db.query("SELECT * FROM account", (error, result) => {
+app.get("/docInfo", (req, res) => {
+    db.query("SELECT * FROM doctor", (error, result) => {
         if(error){
             console.log(error)
         } else {
@@ -34,6 +34,8 @@ app.get("/", (req, res) => {
         }
     });
 });
+
+
 
 function getAlreadExistDocInfo(fName, lName){
     return new Promise((resolve, reject) => {
@@ -63,7 +65,7 @@ function insertEmergencyContact(emergency){
 }
 
 function insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, relation, department, license_id){
-    
+
 }
 
 app.post("/insertDocInfo", (req, res) => {
