@@ -1,8 +1,26 @@
 import React from "react";
+import axios from "axios";
 
 type Props = {};
 
 export default function LoginPage({}: Props) {
+  const checkUsername = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const email = (e.currentTarget.elements[0] as HTMLInputElement).value;
+    const password = (e.currentTarget.elements[1] as HTMLInputElement).value;
+    console.log(email, password);
+
+    axios
+      .post("http://localhost:3000/login", { email, password })
+      .then((response) => {
+        console.log(response.data);
+        localStorage.setItem("token", JSON.stringify(response.data));
+        window.location.href = "/welcome";
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -17,7 +35,11 @@ export default function LoginPage({}: Props) {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Login
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form
+              onSubmit={checkUsername}
+              className="space-y-4 md:space-y-6"
+              action="#"
+            >
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Your email
@@ -46,7 +68,7 @@ export default function LoginPage({}: Props) {
                 type="submit"
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
-                Create an account
+                Login
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Already have an account?{" "}
