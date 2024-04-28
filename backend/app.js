@@ -65,8 +65,49 @@ function insertEmergencyContact(emergency){
 }
 
 function insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, relation, department, license_id){
-
+    return new Promise((resolve, reject) => {
+        db.query("INSERT INTO doctor (fName, mName, lName, idNumber,DOB, sex, address, tel, email, nationality,race, religion, bloodType, relation, department, license_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, relation, department, license_id], (error, result) => {
+            if(error){
+                console.log(error)
+                reject(error);
+            } else {
+                console.log("Doctor Inserted")
+                resolve(result);
+            }
+        });
+    });
 }
+
+function insertDocEdu(d_id, d_edu){
+    return new Promise((resolve, reject) => {
+        for (let i = 0; i < d_edu.length; i++) {
+            db.query("INSERT INTO doctor_education (d_id, degree, school, year) VALUES (?,?,?,?)", [d_id, d_edu[i].degree, d_edu[i].school, d_edu[i].year], (error, result) => {
+                if(error){
+                    console.log(error)
+                    reject(error);
+                } else {
+                    console.log("Doctor Education Inserted")
+                    resolve(result);
+                }
+            });
+        }
+    });
+}
+
+function insertDocAcc(d_id, email, password){
+    return new Promise((resolve, reject) => {
+        db.query("INSERT INTO account (d_id, username, pw, roles) VALUES (?,?,?,?)", [d_id, email, password,"doctor"], (error, result) => {
+            if(error){
+                console.log(error)
+                reject(error);
+            } else {
+                console.log("Doctor Account Inserted")
+                resolve(result);
+            }
+        });
+    });
+}
+
 
 app.post("/insertDocInfo", (req, res) => {
     const { fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion,bloodType, emergency, relation, department, license_id, d_edu, password} = req.body;
@@ -83,14 +124,29 @@ app.post("/insertDocInfo", (req, res) => {
                 insertEmergencyContact(emergency)
                     .then(result => {
                         console.log(result);
-                        // res.send(result);
                         emer_id = result.insertId;
-                        // db.query("INSERT INTO doctor (fName, mName, lName, idNumber, DO
                     })
                     .catch(error => {
                         console.log(error);
                     });
             }
+            insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, relation, department, license_id)
+                .then(result => {  
+                     console.log(result);
+                     d_id = result.insertId;
+                     insertDocEdu(d_id, d_edu)
+                        .then(result => {
+                            console.log(result);
+                            
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+
+                })
+                .catch(error => {
+                    console.log(error);
+                });
 
         })
         .catch(error => {
