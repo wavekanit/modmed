@@ -74,10 +74,6 @@ function insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, em
     return new Promise((resolve, reject) => {
         console.log(DOB);
         db.query("INSERT INTO doctor (fName, mName, lName, idNumber,DOB, sex, addresses, tel, email, nationality,race, religion, bloodType, e_id, relation, department, license_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, e_id, relation, department, license_id], (error, result) => {
-<<<<<<< HEAD
-       
-=======
->>>>>>> origin/today
             if(error){
                 console.log(error)
                 reject(error);
@@ -150,7 +146,7 @@ app.post("/insertDocInfo", async (req, res) => {
         console.log(error);
         res.send("Failed to insert doctor");
     }
-<<<<<<< HEAD
+
     
 
 });
@@ -220,8 +216,7 @@ app.post("/login", (req, res) => {
         console.log(error);
         res.send("Failed");
     });
-=======
->>>>>>> origin/today
+
 });
 
 
