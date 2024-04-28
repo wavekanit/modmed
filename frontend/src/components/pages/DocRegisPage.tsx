@@ -1,3 +1,5 @@
+//docRegis
+
 import React from "react";
 import { FormEvent, useState } from "react";
 import { useMultistepForm } from "../UseMultiForm";
@@ -5,13 +7,20 @@ import { PersonalInfoRegis } from "./docRegisterStep/PersonalInfoRegis";
 type Props = {};
 
 type FormData = {
-  firstName: string;
-  lastName: string;
-  birthDate: Date;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
+  fName: string;
+  mName: string;
+  lName: string;
+  idNumber: string;
+  DOB: Date;
+  sex: string;
+  addresses: string;
+  tel: string;
+  nationality: string;
+  race: string;
+  religion: string;
+  bloodType: string;
+  department: string;
+  license_id: string;
   education: {
     degree: string;
     institute: string;
@@ -24,13 +33,20 @@ type FormData = {
 };
 
 const INITIAL_DATA: FormData = {
-  firstName: "",
-  lastName: "",
-  birthDate: new Date(),
-  street: "",
-  city: "",
-  state: "",
-  zip: "",
+  fName: "",
+  mName: "",
+  lName: "",
+  idNumber: "",
+  DOB: new Date,
+  sex: "",
+  addresses: "",
+  tel: "",
+  nationality: "",
+  race: "",
+  religion: "",
+  bloodType: "",
+  department: "",
+  license_id: "",
   education: [{ degree: "", institute: "", year: "", sepecificField: "" }],
   email: "",
   password: "",
@@ -50,6 +66,15 @@ export default function StaffRegisPage({}: Props) {
   ]);
   function onSubmit(e: FormEvent) {
     e.preventDefault();
+    if(data.password !== data.confirmPassword){
+      alert("Password and Confirm Password do not match");
+      setData((prevData) => ({
+        ...prevData,
+        password: "",
+        confirmPassword: ""
+      }));
+      return;
+    }
     if (!isLastStep) return next();
     alert("Successful Account Creation");
   }

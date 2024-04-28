@@ -2,11 +2,14 @@ import React from "react";
 import { FormEvent, useState } from "react";
 import { useMultistepForm } from "../UseMultiForm";
 import { PersonalInfoRegis } from "./patientRegisterPage/PersonalInfoRegis";
+import { EcontactRegis } from "./patientRegisterPage/EmergencyRegis";
+import { AllergyRegis } from "./patientRegisterPage/AllergyRegis";
 
 type Props = {};
 
 type FormData = {
   firstName: string;
+  middleName: string;
   lastName: string;
   idNumber: string;
   DOB: Date;
@@ -19,9 +22,10 @@ type FormData = {
   religion: string;
   bloodType: string;
   eConFirstName: string;
+  eConMiddleName: string;
   eConLastName: string;
   eConRelation: string;
-  eConTell: string;
+  eConTel: string;
   eConEmail: string;
   eConAddress: string;
   allergy: {
@@ -33,6 +37,7 @@ type FormData = {
 
 const INITIAL_DATA: FormData = {
   firstName: "",
+  middleName: "",
   lastName: "",
   idNumber: "",
   DOB: new Date(),
@@ -45,9 +50,10 @@ const INITIAL_DATA: FormData = {
   religion: "",
   bloodType: "",
   eConFirstName: "",
+  eConMiddleName: "",
   eConLastName: "",
   eConRelation: "",
-  eConTell: "",
+  eConTel: "",
   eConEmail: "",
   eConAddress: "",
   allergy: [{ type: "", allergen: "", status: 0 }],
@@ -62,13 +68,13 @@ export default function PatientRegisPage({}: Props) {
   }
   const { step, isFirstStep, isLastStep, back, next } = useMultistepForm([
     <PersonalInfoRegis {...data} updateFields={updateFields} />,
-    // <EducationalRegis {...data} updateFields={updateFields} />,
-    // <EmailRegis {...data} updateFields={updateFields} />,
+    <EcontactRegis {...data} updateFields={updateFields} />,
+    <AllergyRegis {...data} updateFields={updateFields} />,
   ]);
   function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (!isLastStep) return next();
-    alert("Successful Account Creation");
+    alert("Successful Inserting Patient Infomation");
   }
   return (
     <>
@@ -94,7 +100,7 @@ export default function PatientRegisPage({}: Props) {
                   ) : (
                     <button
                       type="button"
-                      className="w-1/2 text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2 mx-2"
+                      className="w-1/2 text-white bg-green-600 hover:bg-primary-700 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2 mx-2"
                       onClick={() => {
                         back();
                       }}

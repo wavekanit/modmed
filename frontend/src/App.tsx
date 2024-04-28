@@ -38,7 +38,6 @@ function App() {
         }}
         
       ></button> */}
-      hello
       <Nav />
       <Routes>
         <Route path="/" element={<HomePage />} />
