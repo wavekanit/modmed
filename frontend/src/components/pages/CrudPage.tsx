@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import checkLogin from "../../checkLogin";
 
 type Props = {};
+const role = localStorage.getItem("r_id");
 
 export default function CrudPage({}: Props) {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -10,7 +12,8 @@ export default function CrudPage({}: Props) {
   };
 
   return (
-    <div>
+    <>{checkLogin() && role !== null ? 
+    <div>        
       <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
         <div className="mx-auto max-w-screen-2xl px-4 lg:px-12">
           <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
@@ -577,6 +580,7 @@ export default function CrudPage({}: Props) {
       )}
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
-    </div>
+    </div> : null}</>
   );
+
 }
