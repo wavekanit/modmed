@@ -10,19 +10,10 @@ import AddInfo from "./components/pages/crudStep/AddInfoPage.tsx";
 import EditInfoPage from "./components/pages/crudStep/EditInfoPage.tsx";
 
 function App() {
-  // localStorage.setItem("abc", "jwtjwt");
-  // console.log(localStorage.getItem('abc'))
-  // localStorage.removeItem("abc");
-  // useEffect(() => {
-  //   const result = axios
-  //     .get("https://66196f5f125e9bb9f299fd65.mockapi.io/user")
-  //     .then((result) => {
-  //       console.log(result);
-  //     }).catch((error) => {
-  //       console.log(error);
-  //     })
-  //   console.log(1);
-  // }, []);
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  if (isLoggedIn === null) {
+    localStorage.setItem("isLoggedIn", "false");
+  }
 
   return (
     <>
