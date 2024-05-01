@@ -18,6 +18,7 @@ export default function LoginPage({}: Props) {
           alert("Invalid credentials");
           return;
         } else {
+          alert("Login successful");
           var role = "register";
           console.log(response.data);
           Object.keys(response.data[0]).map((key) => {
@@ -28,7 +29,7 @@ export default function LoginPage({}: Props) {
           });
           localStorage.setItem("role", role);
           localStorage.setItem("isLoggedIn", "true");
-          window.location.href = "/welcome";
+          window.location.href = "/";
         }
       })
       .catch((error) => {
