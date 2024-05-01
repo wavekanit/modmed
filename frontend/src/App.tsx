@@ -19,6 +19,7 @@ function App() {
     <>
       <Nav />
       <Routes>
+        {/* add roff */}
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<StaffRegisPage />} />
