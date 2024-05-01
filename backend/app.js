@@ -24,11 +24,11 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root",
-    database: "modmed",
-    port: 8889
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT
 });
 
 db.connect( (error) => {
@@ -36,6 +36,7 @@ db.connect( (error) => {
         console.log(error)
     } else {
         console.log("MySQL Connected")
+        console.log("START---------------------------------------------------------------------------------------")
     }
 });
 
