@@ -7,6 +7,9 @@ import LoginPage from "./components/pages/LoginPage";
 import StaffRegisPage from "./components/pages/DocRegisPage";
 import PatientRegisPage from "./components/pages/PatientRegisPage";
 import Welcome from "./components/pages/Welcome";
+import CrudPage from "./components/pages/CrudPage";
+import AddInfo from "./components/pages/crudStep/AddInfoPage.tsx";
+import EditInfoPage from "./components/pages/crudStep/EditInfoPage.tsx";
 
 function App() {
   // localStorage.setItem("abc", "jwtjwt");
@@ -46,6 +49,9 @@ function App() {
         <Route path="/register" element={<StaffRegisPage />} />
         <Route path="/patient" element={<PatientRegisPage />} />
         <Route path="/welcome" element={<Welcome />} />
+        <Route path="/crud" element={<CrudPage />} />
+        <Route path="/Add" element={<AddInfo />} />
+        <Route path="/Edit" element={<EditInfoPage />} />
       </Routes>
     </>
   );
