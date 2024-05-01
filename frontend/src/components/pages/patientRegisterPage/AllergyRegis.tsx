@@ -45,7 +45,7 @@ export function AllergyRegis(props: AllergyRegisProps) {
     };
 
   return (
-    <FormWrapper title="Allergy">
+    <FormWrapper title="3/3 Allergy Information">
       {data.allergy.map((x, i) => {
         return (
             <div className="my-2" key={i}>

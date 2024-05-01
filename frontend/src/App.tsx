@@ -22,8 +22,8 @@ function App() {
         {/* add roff */}
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<StaffRegisPage />} />
-        <Route path="/patient" element={<PatientRegisPage />} />
+        <Route path="/add_doctor" element={<StaffRegisPage />} />
+        <Route path="/add_patient" element={<PatientRegisPage />} />
         <Route path="/crud" element={<CrudPage />} />
         <Route path="/Add" element={<AddInfo />} />
         <Route path="/Edit" element={<EditInfoPage />} />

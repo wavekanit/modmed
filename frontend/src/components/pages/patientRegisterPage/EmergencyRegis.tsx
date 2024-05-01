@@ -26,7 +26,7 @@ export function EcontactRegis({
   updateFields, // Add the missing prop here
 }: EcontactRegisProps) {
   return (
-    <FormWrapper title="Emergency Contact">
+    <FormWrapper title="2/3 Emergency Contact">
       <div className="my-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           First Name

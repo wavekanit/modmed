@@ -3,7 +3,9 @@
 import React from "react";
 import { FormEvent, useState } from "react";
 import { useMultistepForm } from "../UseMultiForm";
-import { PersonalInfoRegis } from "./docRegisterStep/PersonalInfoRegis";
+import { PersonalInfoRegis } from "./docRegisterPage/PersonalInfoRegis";
+import { EcontactRegis } from "./patientRegisterPage/EmergencyRegis";
+import { EducationalRegis } from "./docRegisterPage/EducationalRegis";
 type Props = {};
 
 type FormData = {
@@ -62,7 +64,8 @@ export default function StaffRegisPage({}: Props) {
   }
   const { step, isFirstStep, isLastStep, back, next } = useMultistepForm([
     <PersonalInfoRegis {...data} updateFields={updateFields} />,
-    <EmergencyContactRegis {...data} updateFields={updateFields} />,
+    <EcontactRegis {...data} updateFields={updateFields} />,
+    <EducationalRegis {...data} updateFields={updateFields} />,
   ]);
   function onSubmit(e: FormEvent) {
     e.preventDefault();
