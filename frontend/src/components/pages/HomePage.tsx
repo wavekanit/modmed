@@ -1,11 +1,7 @@
 import React from "react";
-import Nav from "../Nav";
+import checkLogin from "../../checkLogin";
 type Props = {};
 
 export default function HomePage({}: Props) {
-  return (
-    <>
-      <h1>Hello Main</h1>
-    </>
-  );
+  return <>{checkLogin() ? <h1>{localStorage.getItem("fName")}</h1> : null}</>;
 }
