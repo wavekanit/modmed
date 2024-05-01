@@ -87,7 +87,7 @@ CREATE TABLE patient
   DOB         DATE         NOT NULL,
   sex         VARCHAR (10) NOT NULL,
   addresses   TEXT         NULL    ,
-  tell        VARCHAR (10) NOT NULL,
+  tel        VARCHAR (10) NOT NULL,
   email       VARCHAR (50) NULL    ,
   nationality VARCHAR (50) NOT NULL,
   race        VARCHAR (50) NOT NULL,
@@ -163,12 +163,15 @@ INSERT INTO emergency_contact (fName, lName, tel, addresses, email)
     VALUES
         ('Wongsatorn', 'Sungsila', '0875412653', '98/83 Bangna', 'wongsatorn.sung@local.com'),
         ('Kanit', 'Bunny', '0122254523', 'Royal Naval Academy', 'bunny@local.com'),
-        ('Pitchayuth', 'Yampong', '0523124456', 'Chumpon', 'picha@local.com');
+        ('Pitchayuth', 'Yampong', '0523124456', 'Chumpon', 'picha@local.com'),
+        ('Chukiat', 'Bunny', '0845256325', 'Sukhumvit, Samutprakarn', 'jekchu@local.com');
 
-INSERT INTO patient (fName,lName,idNumber,DOB,sex,addresses,tell,email,nationality,race,religion,bloodType,e_id,relation)
+INSERT INTO patient (fName,lName,idNumber,DOB,sex,addresses,tel,email,nationality,race,religion,bloodType,e_id,relation)
     VALUES
         ('Apichat', 'Aimi', '1101402256352', '2004-04-04', 'Male', '784 Sanam Chandra, Nakorn Prathom', '0965236521','apichar@hotmail.com', 'Thai', 'Thai', 'Buddhist', 'A', 2, 'Husband'),
-        ('Pairoj', 'Saisam', '1104774521698', '1945-07-04', 'Male', 'Mars', '0412563254','pair@hotmail.com', 'Thai', 'Thai', 'Buddhist', 'AB+', 1, 'Son');
+        ('Pairoj', 'Saisam', '1104774521698', '1945-07-04', 'Male', 'Mars', '0412563254','pair@hotmail.com', 'Thai', 'Thai', 'Buddhist', 'AB+', 1, 'Son'),
+        ('Seesawat', 'Samranmark', '1458569652365', '2000-12-04', 'Female', 'Suam Phueng, Ratchaburi', '0856555541','s.samran@hotmail.com', 'Thai', 'Thai/Denmark', 'Protestant', 'B+', 4, 'Father'),
+        ('Jumpol', 'Polvichai', '3145258754234', '1980-07-04', 'Male', 'KMUTT, Bangkok', '0985745245','jumo@hotmail.com', 'Thai', 'Thai', 'Buddhist', 'O-', 2, 'Relative');
 
 
 INSERT INTO doctor(fName,lName,idNumber,DOB,sex,addresses,tel,email,nationality,race,religion,bloodType,e_id,relation,department,license_id)
@@ -182,4 +185,5 @@ INSERT INTO register (fName, lName, tel, email)
         ('Somporn', 'Wongmamuang', '0815462563', 'somporn@modmed.com');
 INSERT INTO account (username, pw, roles, r_id, d_id)
     VALUES
-        ('somporn@modmed.com', '123456', 'regis', 1)
+        ('somporn@modmed.com', '123456', 'regis', 1, NULL),
+        ('weera@modmed.com', 'jekchu', 'doctor', NULL, 1);

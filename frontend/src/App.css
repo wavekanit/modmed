@@ -1,4 +1,10 @@
 /* i need to set backfround color to gray-900 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html {
   background-color: rgb(17 24 39);;
 }

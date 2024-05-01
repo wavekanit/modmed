@@ -1,0 +1,40 @@
+{
+    "fName" : "Supakrit",
+    "mName" : "",
+    "lName" : "Limprasert",
+    "idNumber" : "3102544152359",
+    "DOB": "1998-10-29",
+    "sex" : "Male",
+    "address" : "745 Rama IX, Bangkok",
+    "tel" : "0620650992",
+    "email" : "sh@gmail.com",
+    "nationality" : "Thai",
+    "race" : "Thai",
+    "religion" : "Bd",
+    "bloodType" : "O",
+    "emergency":{
+        "fName":"Kittipong",
+        "mName":"",
+        "lName":"Tapyou",
+        "tel":"0620650992",
+        "addresses":"1111111",
+        "email":"kittipong.tpy@gmail.com"
+    },
+    "relation" : "father",
+    "department" : "cpe",
+    "license_id":"112233",
+    "d_edu": [
+        {"level_edu" : "b",
+        "diploma" : "CCC",
+        "institute" :"KMUTT",
+        "country" : "thailand",
+        "year_graduated":"2004"},
+        {"level_edu" : "m",
+        "diploma" : "h222",
+        "institute" :"KMUTT",
+        "country" : "thailand",
+        "year_graduated":"2001"}
+
+    ],
+    "password" : "90909090"
+}
