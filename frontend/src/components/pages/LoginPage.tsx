@@ -18,6 +18,7 @@ export default function LoginPage({}: Props) {
           alert("Invalid credentials");
           return;
         } else {
+          alert("Login successful");
           var role = "register";
           console.log(response.data);
           Object.keys(response.data[0]).map((key) => {
@@ -28,7 +29,7 @@ export default function LoginPage({}: Props) {
           });
           localStorage.setItem("role", role);
           localStorage.setItem("isLoggedIn", "true");
-          window.location.href = "/welcome";
+          window.location.href = "/";
         }
       })
       .catch((error) => {
@@ -84,15 +85,6 @@ export default function LoginPage({}: Props) {
               >
                 Login
               </button>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Don't have an account yet?{" "}
-                <a
-                  href="/register"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Register Here
-                </a>
-              </p>
             </form>
           </div>
         </div>
