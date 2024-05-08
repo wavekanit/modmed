@@ -19,8 +19,20 @@ db.connect( (error) => {
     }
 });
 
+router.post("/addCure", (req, res) => {
+    const {p_id, basic_symp, diag_result, methods, d_id, room_id} = req.body;
+    db.query("INSERT INTO cure_history (p_id, date_cure, basic_symp, diag_result, methods, progress_status, d_id, room_id) VALUES (?,CURRENT_TIMESTAMP,?,?,?,1,?,?)", [p_id, basic_symp,diag_result, methods,d_id, room_id], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Cure History Added");
+        }
+    });
+});
 
-router.get("/getCureHistory/:id?", (req, res) => {
+
+router.get("/getCureHistory/:id", (req, res) => {
     const id = req.params.id;
     db.query("SELECT * FROM cure_history WHERE p_id = ?", [id], (error, result) => {
         if(error){
@@ -33,7 +45,7 @@ router.get("/getCureHistory/:id?", (req, res) => {
     });
 });
 
-router.get("/getPatientAllergy/:id?", (req, res) => {
+router.get("/getPatientAllergy/:id", (req, res) => {
     const id = req.params.id;
     db.query("SELECT * FROM patient_allergy WHERE p_id = ?", [id], (error, result) => {
         if(error){
