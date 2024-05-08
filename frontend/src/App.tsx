@@ -27,8 +27,8 @@ function App() {
         <Route path="/crud" element={<CrudPage />} />
         <Route path="/Add" element={<AddInfo />} />
         <Route path="/Edit" element={<EditInfoPage />} />
-        <Route path = "manage_doctor" element = {<CrudPage />} />
-        <Route path = "manage_patient" element = {<CrudPage />} />
+        <Route path="manage_doctor" element={<CrudPage />} />
+        <Route path="manage_patient" element={<CrudPage />} />
       </Routes>
     </>
   );
