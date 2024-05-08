@@ -35,16 +35,27 @@ db.connect( (error) => {
 // }
 
 
-router.get("/docInfo", (req, res) => {
-    db.query("SELECT * FROM employee", (error, result) => {
+router.get("/getDocList/:id?", (req, res) => {
+    const id = req.params.id;
+    let query = "SELECT * FROM employee WHERE role_name = 'doctor'";
+    let params = [];
+
+    if (id) {
+        query += " AND id = ?";
+        params.push(id);
+    }
+
+    db.query(query, params, (error, result) => {
         if(error){
-            console.log(error)
+            console.log(error);
+            res.status(500).send("Internal Server Error");
         } else {
-            console.log(result)
-            res.send(result)
+            console.log(result);
+            res.send(result);
         }
     });
 });
+
 
 // function getAlreadExistEmerInfo(fName, lName){
 //     return new Promise((resolve, reject) => {
