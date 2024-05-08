@@ -33,7 +33,7 @@ CREATE TABLE cure_history
 CREATE TABLE edu
 (
   id             INTEGER      NOT NULL,
-  level_edu      VARCHAR (1)  NOT NULL,
+  level_edu      VARCHAR (50)  NOT NULL,
   diploma        VARCHAR (50) NOT NULL,
   institute      VARCHAR (50) NOT NULL,
   country        VARCHAR (50) NOT NULL,
@@ -201,3 +201,29 @@ INSERT INTO employee (fName, lName, idNumber, DOB, sex, addresses, tel, email, p
         ('Acharee', 'Weerapong', '1104521345687', '1997-10-12','Female', 'Bangna, Bangkok', '0625526987', 'acharee.w@modmed.com', 'password', 'Thai', 'Thai', 'Buddhist', 'AB+', 5, 'Friend', 'finance',NULL,NULL),
         ('Chuchai', 'Wiwatana', '3100521245657', '1964-02-09','Male', 'Victory Monument', '0914567852', 'chuchai.w@modmed.com', '888', 'Thai', 'Thai', 'Buddhist', 'A-', 2, 'Son', 'register', NULL,NULL),
         ('Sanan', 'Srakaew', '3887451243216', '1960-04-23','Male', 'Srakaew', '0865986542', 'sanan.s@modmed.com', 'qwerty', 'Thai', 'Thai', 'Buddhist', 'O+', 2, 'Son', 'doctor', 'H19374', 'Heart');
+
+INSERT INTO edu (id, level_edu, diploma, institute, country, year_graduated)
+    VALUES
+        (1, 'Bachelor', 'MD (Orthopedics)', 'Chulalongkorn University', 'Thailand', 1960),
+        (1, 'Master', 'M.Sci (Psychology)', 'Chulalongkorn University', 'Thailand', 1968),
+        (2, 'Bachelor', 'MD (Eye studies)', 'Mahidol University', 'Thailand', 2004),
+        (3, 'Bachelor' , 'B.Acc (Accountant)', 'King Mongkut''s Institute of Technology Ladkrabang','Thailand', 2017);
+
+
+INSERT INTO patient_allergy (p_id, type_allergy, allergy, status_allergy)
+    VALUES
+        (1, 'food', 'peach', 1),
+        (1, 'food', 'pad kraphao', 1),
+        (1, 'drug', 'paracetamol', 1),
+        (1, 'food', 'peanuts', 1),
+        (5, 'food', 'seafood', 1),
+        (5, 'symptom', 'diabetes', 1),
+        (1, 'food', 'orange', 1);
+
+INSERT INTO room (room_id)
+    VALUES
+        ('101'), ('102'), ('103'), ('104'), ('105'), ('201'),('202'),('203'),('204'),('205');
+
+INSERT INTO cure_history(p_id, date_cure, basic_symp, diag_result, methods, progress_status, d_id, room_id, date_finished)
+    VALUES
+        (1, '2024-05-08 12:30:00', "Backache", "Backbone Broken", "Give some adrinalines", 1 ,1, NULL, NULL);
