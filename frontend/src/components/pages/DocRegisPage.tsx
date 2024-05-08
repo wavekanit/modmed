@@ -6,6 +6,8 @@ import { useMultistepForm } from "../UseMultiForm";
 import { PersonalInfoRegis } from "./docRegisterPage/PersonalInfoRegis";
 import { EcontactRegis } from "./patientRegisterPage/EmergencyRegis";
 import { EducationalRegis } from "./docRegisterPage/EducationalRegis";
+import { useNavigate, useLocation } from 'react-router-dom';
+
 type Props = {};
 
 type FormData = {
@@ -57,6 +59,15 @@ const INITIAL_DATA: FormData = {
 
 export default function StaffRegisPage({}: Props) {
   const [data, setData] = React.useState<FormData>(INITIAL_DATA);
+  const navigate = useNavigate();
+
+  function goBack(bool) {
+    if(bool) {
+      alert("Successful Docter Insertion !");
+      navigate("/doctorinfo");
+    }
+  }
+
   function updateFields(fields: Partial<FormData>) {
     setData((prev) => {
       return { ...prev, ...fields };
@@ -113,6 +124,7 @@ export default function StaffRegisPage({}: Props) {
                         : "bg-blue-600 hover:bg-blue-700"
                     }  font-medium rounded-lg text-sm px-5 py-2.5 text-center my-2 mx-2`}
                     type="submit"
+                    onClick={() => isLastStep ? goBack(1) : goBack(0)}
                   >
                     {isLastStep ? "Finish" : "Next"}
                   </button>

@@ -8,6 +8,8 @@ import PatientRegisPage from "./components/pages/PatientRegisPage";
 import CrudPage from "./components/pages/CrudPage";
 import AddInfo from "./components/pages/crudStep/AddInfoPage.tsx";
 import EditInfoPage from "./components/pages/crudStep/EditInfoPage.tsx";
+import DocInfo from "./components/pages/DoctorInfoPage";
+import DocDetail from "./components/pages/docMoreDetailInfo/doctorDetailPage";
 
 function App() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -29,6 +31,8 @@ function App() {
         <Route path="/Edit" element={<EditInfoPage />} />
         <Route path = "manage_doctor" element = {<CrudPage />} />
         <Route path = "manage_patient" element = {<CrudPage />} />
+        <Route path = "/doctorinfo" element = {<DocInfo/>}/>
+        <Route path = "/doctorinfo/details" element = {<DocDetail/>}/>
       </Routes>
     </>
   );
