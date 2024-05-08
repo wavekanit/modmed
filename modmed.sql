@@ -5,6 +5,8 @@ CREATE DATABASE modmed
 
 USE modmed;
 
+-- Test something
+
 -- Create table part        
 CREATE TABLE attendance
 (
