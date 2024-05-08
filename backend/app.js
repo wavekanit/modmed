@@ -74,7 +74,7 @@ app.post("/login", (req, res) => {
             const returnResult = {
                 id: result[0].id,
                 fName : result[0].fName,
-                mName : result[0].mName,
+                // mName : result[0].mName,
                 lName : result[0].lName,
                 email: result[0].email,
                 role_name: result[0].role_name
