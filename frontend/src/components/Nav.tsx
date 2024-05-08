@@ -11,11 +11,11 @@ export default function Nav({}: Props) {
     window.location.href = "/";
   };
 
-  const role = localStorage.getItem("r_id");
+  const role = localStorage.getItem("role_name");
 
   return (
     <>
-      {role === null && isLoggedIn !== "false" && (
+      {role === "doctor" && isLoggedIn !== "false" && (
         <nav className="bg-white border-gray-200 dark:bg-gray-900">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -60,7 +60,7 @@ export default function Nav({}: Props) {
           </div>
         </nav>
       )}
-      {role !== null && (
+      {role === "register" && isLoggedIn !== "false" && (
         <nav className="bg-white border-gray-200 dark:bg-gray-900">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a className="flex items-center space-x-3 rtl:space-x-reverse">

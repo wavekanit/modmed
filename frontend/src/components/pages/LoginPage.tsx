@@ -19,15 +19,10 @@ export default function LoginPage({}: Props) {
           return;
         } else {
           alert("Login successful");
-          var role = "register";
           console.log(response.data);
-          Object.keys(response.data[0]).map((key) => {
-            if (key === "d_id") {
-              role = "doctor";
-            }
-            localStorage.setItem(key, JSON.stringify(response.data[0][key]));
+          Object.keys(response.data).map((key) => {
+            localStorage.setItem(key, JSON.stringify(response.data[key]));
           });
-          localStorage.setItem("role", role);
           localStorage.setItem("isLoggedIn", "true");
           window.location.href = "/";
         }
