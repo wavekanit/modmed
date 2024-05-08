@@ -3,11 +3,11 @@ const mysql = require("mysql");
 const dotenv = require("dotenv");
 const cors = require('cors');
 const {readdir, readdirSync} = require("fs");
-const doctor = require("./Routes/doctor");
-const staff = require("./Routes/staff");
-const patient = require("./Routes/patient");
-const getDocInfo  = require("./Routes/doctor");
-const getRegInfo = require("./Routes/staff");
+// const doctor = require("./Routes/doctor");
+// const staff = require("./Routes/staff");
+// const patient = require("./Routes/patient");
+// const getDocInfo  = require("./Routes/doctor");
+// const getRegInfo = require("./Routes/staff");
 
 
 
@@ -41,59 +41,60 @@ db.connect( (error) => {
 });
 
 
-readdirSync("./Routes").map((file) => app.use('/api', require(`./Routes/${file}`)));
+readdirSync("./Routes").map((file) => app.use('/api', require('./Routes/'+file)));
+// readdirSync("./Routes").map((file) => console.log(file));
 
 
-function checkLogin(email, password){
-    return new Promise((resolve, reject) => {
-        console.log("Username : " + email);
-        console.log("pw : " + password);
-        db.query("SELECT * FROM account WHERE username = ? AND pw = ?", [email, password], (error, result) => {
-            if(error){
-                console.log("WRONG");
-                console.log(error);
-                reject(error);
-            } else {
-                console.log("CORRECT");
-                console.log(result);
-                resolve(result);
-            }
-        });
-    });
-}
+// function checkLogin(email, password){
+//     return new Promise((resolve, reject) => {
+//         console.log("Username : " + email);
+//         console.log("pw : " + password);
+//         db.query("SELECT * FROM account WHERE username = ? AND pw = ?", [email, password], (error, result) => {
+//             if(error){
+//                 console.log("WRONG");
+//                 console.log(error);
+//                 reject(error);
+//             } else {
+//                 console.log("CORRECT");
+//                 console.log(result);
+//                 resolve(result);
+//             }
+//         });
+//     });
+// }
 
 
 
 
-app.post("/login", (req, res) => {
-    const {email, password} = req.body;
-    checkLogin(email, password).then((result) => {
-        if(result.length != 0){
-            if(result[0].roles == "doctor"){
-                getDocInfo(result[0].d_id).then((result) => {
-                    console.log(result);
-                    res.send(result);
-                }).catch((error) => {
-                    console.log(error);
-                    res.send("Failed1");
-                });
-            }else{
-                getRegInfo(result[0].r_id).then((result) => {
-                    res.send(result);
-                }).catch((error) => {
-                    console.log(error);
-                    res.send("Failed2");
-                });
+// app.post("/login", (req, res) => {
+//     const {email, password} = req.body;
+//     checkLogin(email, password).then((result) => {
+//         if(result.length != 0){
+//             if(result[0].roles == "doctor"){
+//                 getDocInfo(result[0].d_id).then((result) => {
+//                     console.log(result);
+//                     res.send(result);
+//                 }).catch((error) => {
+//                     console.log(error);
+//                     res.send("Failed1");
+//                 });
+//             }else{
+//                 getRegInfo(result[0].r_id).then((result) => {
+//                     res.send(result);
+//                 }).catch((error) => {
+//                     console.log(error);
+//                     res.send("Failed2");
+//                 });
 
-            }
-        }else{
-            res.send("Failed");
-        }
-    }).catch((error) => {
-        console.log(error);
-        res.send("Failed");
-    });
-});
+//             }
+//         }else{
+//             res.send("Failed");
+//         }
+//     }).catch((error) => {
+//         console.log(error);
+//         res.send("Failed");
+//     });
+// });
 
 
 
@@ -102,5 +103,4 @@ app.listen(3000, () => {
 });
 
 // ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY '1234';
-
 
