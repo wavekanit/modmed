@@ -11,9 +11,8 @@ import PatientRegisPage from "./components/pages/patientRegisterPage/PatientRegi
 import DocInfo from "./components/pages/docInfo/DoctorInfoPage.tsx";
 import DocDetail from "./components/pages/docInfo/doctorDetailPage.tsx";
 import DocEdit from "./components/pages/docEditInfo/DocEditInfoPage";
-
+import PatientInfo from "./components/pages/patientInfo/PatientInfoPage";
 import SearchPatientPage from "./components/pages/patientInfo/SearchPatientPage";
-
 import MyProfile from "./components/pages/myProfile.tsx";
 
 
@@ -45,9 +44,11 @@ function App() {
         <Route path = "/search_patient" element = {<SearchPatientPage />} />
         <Route path = "/doctorinfo/details" element = {<DocDetail/>}/>
         <Route path = "/doctorinfo/details/edit" element = {<DocEdit/>}/>
-        <Route path="manage_doctor" element={<CrudPage />} />
-        <Route path="manage_patient" element={<CrudPage />} />
-        <Route path="my_profile" element={<MyProfile />} />
+        {/* <Route path="manage_doctor" element={<CrudPage />} />
+        <Route path="manage_patient" element={<CrudPage />} /> */}
+        <Route path="/my_profile" element={<MyProfile />} />
+        <Route path="/search_patient/details" element={<PatientInfo />} />
+        
       </Routes>
     </>
   );

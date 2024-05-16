@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function SearchPatientPage() {
   const [data, setData] = useState([]);
@@ -9,7 +9,7 @@ export default function SearchPatientPage() {
   const navigate = useNavigate();
 
   function detailClick(val) {
-    navigate("/patientinfo/details", { replace: true, state: { val } });
+    navigate("/search_patient/details", { replace: true, state: { val } });
   }
 
   const [dummy_data, setDummyData] = useState([]);
@@ -103,17 +103,16 @@ export default function SearchPatientPage() {
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                {dummy_data.map((val) => (
+              <tbody>{dummy_data.map((val) => (
                   <tr
-                    key={val.d_id}
+                    key={val.p_id}
                     className="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
                   >
                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       <div className="flex items-center space-x-4">
                         <button
                           type="button"
-                          onClick={() => detailClick(val)}
+                          onClick={() => detailClick(val.p_id)}
                           className="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                         >
                           <svg
@@ -133,6 +132,7 @@ export default function SearchPatientPage() {
                         </button>
                       </div>
                     </td>
+                
                     {/* Data for each column */}
                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       <div className="flex items-center">
