@@ -33,14 +33,12 @@ router.get("/getStaffInfoByID/:id", (req, res) => {
                    'year_graduated', edu.year_graduated
                )
            ) AS educations,
-           CAST(
                JSON_OBJECT(
                    'fName', emergency_contact.fName,
                    'lName', emergency_contact.lName,
                    'email', emergency_contact.email,
                    'phone', emergency_contact.tel,
                    'address', emergency_contact.addresses
-               ) AS JSON
            ) AS emergency_contact
         FROM employee
         LEFT JOIN edu ON employee.id = edu.id
