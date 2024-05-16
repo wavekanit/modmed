@@ -15,14 +15,14 @@ type EcontactRegisProps = EcontactRegisData & {
   updateFields: (fields: Partial<EcontactRegisData>) => void;
 };
 
-export function EcontactRegis({
-    eConFirstName,
-    eConMiddleName,
-    eConLastName,
-    eConRelation,
-    eConTel,
-    eConEmail,
-    eConAddress,
+export function EmergencyRegis({
+  eConFirstName,
+  eConMiddleName,
+  eConLastName,
+  eConRelation,
+  eConTel,
+  eConEmail,
+  eConAddress,
   updateFields, // Add the missing prop here
 }: EcontactRegisProps) {
   return (
@@ -33,7 +33,7 @@ export function EcontactRegis({
         </label>
         <input
           type="text"
-          name="eConFirstName"
+          name="emergency.eConFirstName"
           value={eConFirstName}
           onChange={(e) => updateFields({ eConFirstName: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

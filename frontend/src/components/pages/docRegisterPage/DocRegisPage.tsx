@@ -4,7 +4,7 @@ import React from "react";
 import { FormEvent, useState } from "react";
 import { useMultistepForm } from "../../UseMultiForm";
 import { PersonalInfoRegis } from "./PersonalInfoRegis";
-import { EcontactRegis } from "./EmergencyRegis";
+import { EmergencyRegis } from "./EmergencyRegis";
 import { EducationalRegis } from "./EducationalRegis";
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -19,8 +19,10 @@ type FormData = {
   sex: string;
   addresses: string;
   tel: string;
+  email: string
+  pw: string
   nationality: string;
-  race: string;
+  race : string;
   religion: string;
   bloodType: string;
   department: string;
@@ -31,33 +33,29 @@ type FormData = {
     year: string;
     sepecificField: string;
   }[];
-  email: string;
-  password: string;
-  confirmPassword: string;
 };
 
+const INITIAL_DATA: FormData = {
+  fName: "",
+  mName: "",
+  lName: "",
+  idNumber: "",
+  DOB: new Date,
+  sex: "",
+  addresses: "",
+  tel: "",
+  email: "",
+  pw: "",
+  nationality: "",
+  race: "",
+  religion: "",
+  bloodType: "",
+  department: "",
+  license_id: "",
+  education: [{ degree: "", institute: "", year: "", sepecificField: "" }],
+};
 
 export default function StaffRegisPage({}: Props) {
-  const INITIAL_DATA: FormData = {
-    fName: "",
-    mName: "",
-    lName: "",
-    idNumber: "",
-    DOB: new Date,
-    sex: "",
-    addresses: "",
-    tel: "",
-    nationality: "",
-    race: "",
-    religion: "",
-    bloodType: "",
-    department: "",
-    license_id: "",
-    education: [{ degree: "", institute: "", year: "", sepecificField: "" }],
-    email: "",
-    password: "",
-    confirmPassword: "",
-  };
   const [data, setData] = React.useState<FormData>(INITIAL_DATA);
   const navigate = useNavigate();
 
@@ -75,20 +73,20 @@ export default function StaffRegisPage({}: Props) {
   }
   const { step, isFirstStep, isLastStep, back, next } = useMultistepForm([
     <PersonalInfoRegis {...data} updateFields={updateFields} />,
-    <EcontactRegis {...data} updateFields={updateFields} />,
+    <EmergencyRegis {...data} updateFields={updateFields} />,
     <EducationalRegis {...data} updateFields={updateFields} />,
   ]);
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    if(data.password !== data.confirmPassword){
-      alert("Password and Confirm Password do not match");
-      setData((prevData) => ({
-        ...prevData,
-        password: "",
-        confirmPassword: ""
-      }));
-      return;
-    }
+    // if(data.pw !== data.confirmPassword){
+    //   alert("Password and Confirm Password do not match");
+    //   setData((prevData) => ({
+    //     ...prevData,
+    //     password: "",
+    //     confirmPassword: ""
+    //   }));
+    //   return;
+    // }
     if (!isLastStep) return next();
     alert("Successful Account Creation");
   }
