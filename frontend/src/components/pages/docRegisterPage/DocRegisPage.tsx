@@ -1,66 +1,73 @@
+//docRegis
+
 import React from "react";
 import { FormEvent, useState } from "react";
-import { useMultistepForm } from "../UseMultiForm";
-import { PersonalInfoRegis } from "./patientRegisterPage/PersonalInfoRegis";
-import { EcontactRegis } from "./patientRegisterPage/EmergencyRegis";
-import { AllergyRegis } from "./patientRegisterPage/AllergyRegis";
+import { useMultistepForm } from "../../UseMultiForm";
+import { PersonalInfoRegis } from "./PersonalInfoRegis";
+import { EcontactRegis } from "./EmergencyRegis";
+import { EducationalRegis } from "./EducationalRegis";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 type Props = {};
 
 type FormData = {
-  firstName: string;
-  middleName: string;
-  lastName: string;
+  fName: string;
+  mName: string;
+  lName: string;
   idNumber: string;
   DOB: Date;
   sex: string;
-  address: string;
+  addresses: string;
   tel: string;
-  email: string;
   nationality: string;
   race: string;
   religion: string;
   bloodType: string;
-  eConFirstName: string;
-  eConMiddleName: string;
-  eConLastName: string;
-  eConRelation: string;
-  eConTel: string;
-  eConEmail: string;
-  eConAddress: string;
-  allergy: {
-    type: string;
-    allergen: string;
-    status: number;
+  department: string;
+  license_id: string;
+  education: {
+    degree: string;
+    institute: string;
+    year: string;
+    sepecificField: string;
   }[];
+  email: string;
+  password: string;
+  confirmPassword: string;
 };
 
-const INITIAL_DATA: FormData = {
-  firstName: "",
-  middleName: "",
-  lastName: "",
-  idNumber: "",
-  DOB: new Date(),
-  sex: "",
-  address: "",
-  tel: "",
-  email: "",
-  nationality: "",
-  race: "",
-  religion: "",
-  bloodType: "",
-  eConFirstName: "",
-  eConMiddleName: "",
-  eConLastName: "",
-  eConRelation: "",
-  eConTel: "",
-  eConEmail: "",
-  eConAddress: "",
-  allergy: [{ type: "", allergen: "", status: 0 }],
-};
 
-export default function PatientRegisPage({}: Props) {
+export default function StaffRegisPage({}: Props) {
+  const INITIAL_DATA: FormData = {
+    fName: "",
+    mName: "",
+    lName: "",
+    idNumber: "",
+    DOB: new Date,
+    sex: "",
+    addresses: "",
+    tel: "",
+    nationality: "",
+    race: "",
+    religion: "",
+    bloodType: "",
+    department: "",
+    license_id: "",
+    education: [{ degree: "", institute: "", year: "", sepecificField: "" }],
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
   const [data, setData] = React.useState<FormData>(INITIAL_DATA);
+  const navigate = useNavigate();
+
+  function goBack(bool) {
+    if(bool) {
+      alert("Successful Docter Insertion !");
+      navigate("/manage_doctor");
+    }
+  }
+
   function updateFields(fields: Partial<FormData>) {
     setData((prev) => {
       return { ...prev, ...fields };
@@ -69,13 +76,23 @@ export default function PatientRegisPage({}: Props) {
   const { step, isFirstStep, isLastStep, back, next } = useMultistepForm([
     <PersonalInfoRegis {...data} updateFields={updateFields} />,
     <EcontactRegis {...data} updateFields={updateFields} />,
-    <AllergyRegis {...data} updateFields={updateFields} />,
+    <EducationalRegis {...data} updateFields={updateFields} />,
   ]);
   function onSubmit(e: FormEvent) {
     e.preventDefault();
+    if(data.password !== data.confirmPassword){
+      alert("Password and Confirm Password do not match");
+      setData((prevData) => ({
+        ...prevData,
+        password: "",
+        confirmPassword: ""
+      }));
+      return;
+    }
     if (!isLastStep) return next();
-    alert("Successful Inserting Patient Infomation");
+    alert("Successful Account Creation");
   }
+
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -89,18 +106,10 @@ export default function PatientRegisPage({}: Props) {
               >
                 {step}
                 <div className="my-2 flex justify-between">
-                  {isFirstStep ? (
+                  {!isFirstStep && (
                     <button
                       className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2 mx-2"
                       type="button"
-                      disabled
-                    >
-                      Back
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      className="w-1/2 text-white bg-green-600 hover:bg-primary-700 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-2 mx-2"
                       onClick={() => {
                         back();
                       }}
@@ -115,6 +124,7 @@ export default function PatientRegisPage({}: Props) {
                         : "bg-blue-600 hover:bg-blue-700"
                     }  font-medium rounded-lg text-sm px-5 py-2.5 text-center my-2 mx-2`}
                     type="submit"
+                    onClick={() => isLastStep ? goBack(1) : goBack(0)}
                   >
                     {isLastStep ? "Finish" : "Next"}
                   </button>

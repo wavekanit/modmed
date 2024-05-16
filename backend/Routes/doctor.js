@@ -35,58 +35,71 @@ db.connect( (error) => {
 // }
 
 
-router.get("/docInfo", (req, res) => {
-    db.query("SELECT * FROM employee", (error, result) => {
+router.get("/getDocList/:id?", (req, res) => {
+    const id = req.params.id;
+    let query = "SELECT * FROM employee WHERE role_name = 'doctor'";
+    let params = [];
+
+    if (id) {
+        query += " AND id = ?";
+        params.push(id);
+    }
+
+    db.query(query, params, (error, result) => {
         if(error){
-            console.log(error)
+            console.log(error);
+            res.status(500).send("Internal Server Error");
         } else {
-            console.log(result)
-            res.send(result)
+            console.log(result);
+            res.send(result);
         }
     });
 });
 
-// function getAlreadExistEmerInfo(fName, lName){
-//     return new Promise((resolve, reject) => {
-//         db.query("SELECT * FROM emergency_contact WHERE fName = ? AND lName = ?", [fName, lName], (error, result) => {
-//             if(error){
-//                 console.log(error);
-//                 reject(error);
-//             } else {
-//                 resolve(result);
-//             }
-//         });
-//     });
-// }
 
-// function insertEmergencyContact(emergency){
-//     return new Promise((resolve, reject) => {
-//         db.query("INSERT INTO emergency_contact (fName, mName, lName, tel, addresses, email) VALUES (?,?,?,?,?,?)", [emergency.fName, emergency.mName, emergency.lName, emergency.tel, emergency.address, emergency.email], (error, result) => {
-//             if(error){
-//                 console.log(error)
-//                 reject(error);
-//             } else {
-//                 console.log("Emergency Contact Inserted")
-//                 resolve(result);
-//             }
-//         });
-//     });
-// }
 
-// function insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, e_id, relation, department, license_id){
-//     return new Promise((resolve, reject) => {
-//         console.log(DOB);
-//         db.query("INSERT INTO doctor (fName, mName, lName, idNumber,DOB, sex, addresses, tel, email, nationality,race, religion, bloodType, e_id, relation, department, license_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, e_id, relation, department, license_id], (error, result) => {
-//             if(error){
-//                 console.log(error)
-//                 reject(error);
-//             } else {
-//                 console.log("Doctor Inserted")
-//                 resolve(result);
-//             }
-//         });
-//     });
-// }
+function getAlreadExistEmerInfo(emergency){
+    const {fName, mName, lName, tel, address, email} = emergency;
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM emergency_contact WHERE fName = ? AND lName = ?", [fName, lName], (error, result) => {
+            if(error){
+                console.log(error);
+                reject(error);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+}
+
+function insertEmergencyContact(emergency){
+    return new Promise((resolve, reject) => {
+        db.query("INSERT INTO emergency_contact (fName, mName, lName, tel, addresses, email) VALUES (?,?,?,?,?,?)", [emergency.fName, emergency.mName, emergency.lName, emergency.tel, emergency.address, emergency.email], (error, result) => {
+            if(error){
+                console.log(error)
+                reject(error);
+            } else {
+                console.log("Emergency Contact Inserted")
+                resolve(result);
+            }
+        });
+    });
+}
+
+function insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion, bloodType, emer_id, relation, role_name, d_license, d_department){
+    return new Promise((resolve, reject) => {
+        console.log(DOB);
+        db.query("INSERT INTO employee (fName, mName, lName, idNumber, DOB, sex, addresses, tel, email, pw, nationality, race, religion, bloodType, e_id, relation, role_name, d_license_id, d_department) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion, bloodType, emer_id, relation,role_name, d_license, d_department], (error, result) => {
+            if(error){
+                console.log(error)
+                reject(error);
+            } else {
+                console.log("Doctor Inserted")
+                resolve(result);
+            }
+        });
+    });
+}
 
 // function insertDocEdu(d_id, d_edu){
 //     return new Promise((resolve, reject) => {
@@ -119,39 +132,41 @@ router.get("/docInfo", (req, res) => {
 // }
 
 
-// router.post("/insertDocInfo", async (req, res) => {
-//     const { fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion,bloodType, emergency, relation, department, license_id, d_edu, password} = req.body;
-//     console.log("========================================= START ==============================================");
-//     console.log("First Name " + fName);
-//     console.log("DOB " + DOB);
-//     var emer_id;
-//     try {
-//         const alreadyDoc = await getAlreadExistEmerInfo(emergency.fName, emergency.lName);
-//         if(alreadyDoc.length != 0){
-//             // res.send(alreadyDoc[0]);
-//             emer_id = alreadyDoc[0].e_id;
-//             console.log("ALREADY EXIST EMERGENCY CONTACT");
-//             console.log(alreadyDoc[0].e_id);
-//         }else{
-//             const result = await insertEmergencyContact(emergency);
-//             console.log(result.insertId);
-//             emer_id = result.insertId;
-//         }
-//         const result = await insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, emer_id, relation, department, license_id);
-//         console.log(result);
-//         const d_id = result.insertId;
-//         const result2 = await insertDocEdu(d_id, d_edu);
-//         console.log(result2);
-//         const result3 = await insertDocAcc(d_id, email, password);
-//         console.log(result3);
-//         res.send("Success");
-//     } catch (error) {
-//         console.log(error);
-//         res.send("Failed to insert doctor");
-//     }
+router.post("/addDoc", async (req, res) => {
+    const {info} = req.body;
+    const { fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion,bloodType, emergency, relation, role_name, d_license, d_department} = info;
+    console.log("========================================= START ==============================================");
+    console.log("First Name " + fName);
+    console.log("DOB " + DOB);
+    console.log("Relation " + bloodType);
+    var emer_id;
+    try {
+        const alreadyDoc = await getAlreadExistEmerInfo(emergency);
+        if(alreadyDoc.length != 0){
+            // res.send(alreadyDoc[0]);
+            emer_id = alreadyDoc[0].e_id;
+            console.log("ALREADY EXIST EMERGENCY CONTACT");
+            console.log(alreadyDoc[0].e_id);
+        }else{
+            const result = await insertEmergencyContact(emergency);
+            console.log(result.insertId);
+            emer_id = result.insertId;
+        }
+        const result = await insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion, bloodType, emer_id, relation, role_name, d_license, d_department);
+        console.log(result);
+        // const d_id = result.insertId;
+        // const result2 = await insertDocEdu(d_id, d_edu);
+        // console.log(result2);
+        // const result3 = await insertDocAcc(d_id, email, password);
+        // console.log(result3);
+        res.send("Success");
+    } catch (error) {
+        console.log(error);
+        res.send("Failed to insert doctor");
+    }
     
 
-// });
+});
 
 
 
