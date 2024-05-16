@@ -1,11 +1,11 @@
-//docRegis
+//docEdit
 
 import React from "react";
 import { FormEvent, useState } from "react";
 import { useMultistepForm } from "../UseMultiForm";
-import { PersonalInfoRegis } from "./docRegisterPage/PersonalInfoRegis";
-import { EcontactRegis } from "./patientRegisterPage/EmergencyRegis";
-import { EducationalRegis } from "./docRegisterPage/EducationalRegis";
+import { PersonalInfoEdit } from "./docEditInfo/PersonalInfoEdit";
+import { EcontactEdit } from "./docEditInfo/EmergencyEdit";
+import { EducationalEdit } from "./docEditInfo/EducationalEdit";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 type Props = {};
@@ -36,35 +36,61 @@ type FormData = {
   confirmPassword: string;
 };
 
-const INITIAL_DATA: FormData = {
-  fName: "",
-  mName: "",
-  lName: "",
-  idNumber: "",
-  DOB: new Date,
-  sex: "",
-  addresses: "",
-  tel: "",
-  nationality: "",
-  race: "",
-  religion: "",
-  bloodType: "",
-  department: "",
-  license_id: "",
-  education: [{ degree: "", institute: "", year: "", sepecificField: "" }],
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
+
+// const INITIAL_DATA: FormData = {
+//   fName: "",
+//   mName: "",
+//   lName: "",
+//   idNumber: "",
+//   DOB: new Date,
+//   sex: "",
+//   addresses: "",
+//   tel: "",
+//   nationality: "",
+//   race: "",
+//   religion: "",
+//   bloodType: "",
+//   department: "",
+//   license_id: "",
+//   education: [{ degree: "", institute: "", year: "", sepecificField: "" }],
+//   email: "",
+//   password: "",
+//   confirmPassword: "",
+// };
 
 export default function StaffRegisPage({}: Props) {
-  const [data, setData] = React.useState<FormData>(INITIAL_DATA);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const val = location.state.val;
+  const INITIAL_DATA: FormData = {
+    fName: val.fName,
+    mName: val.mName,
+    lName: val.lName,
+    idNumber: val.idNumber,
+    DOB: new Date,
+    sex: val.sex,
+    addresses: val.adress,
+    tel: "",
+    nationality: "",
+    race: "",
+    religion: "",
+    bloodType: "",
+    department: "",
+    license_id: "",
+    education: [{ degree: "", institute: "", year: "", sepecificField: "" }],
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
+  const [data, setData] = React.useState<FormData>(INITIAL_DATA);
+  
+  console.log(val);
 
   function goBack(bool) {
     if(bool) {
-      alert("Successful Docter Insertion !");
-      navigate("/doctorinfo");
+      alert("Successful Docter Editing !");
+      navigate("/doctorinfo/details" , {replace: true, state: {val}});
     }
   }
 
@@ -74,9 +100,9 @@ export default function StaffRegisPage({}: Props) {
     });
   }
   const { step, isFirstStep, isLastStep, back, next } = useMultistepForm([
-    <PersonalInfoRegis {...data} updateFields={updateFields} />,
-    <EcontactRegis {...data} updateFields={updateFields} />,
-    <EducationalRegis {...data} updateFields={updateFields} />,
+    <PersonalInfoEdit {...data} updateFields={updateFields} />,
+    <EcontactEdit {...data} updateFields={updateFields} />,
+    <EducationalEdit {...data} updateFields={updateFields} />,
   ]);
   function onSubmit(e: FormEvent) {
     e.preventDefault();
