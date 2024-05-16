@@ -102,11 +102,12 @@ CREATE TABLE patient
 
 CREATE TABLE patient_allergy
 (
+  allergy_id     INTEGER      NOT NULL AUTO_INCREMENT,
   p_id           INTEGER      NOT NULL,
   type_allergy   VARCHAR (25) NOT NULL,
   allergy        VARCHAR (100) NOT NULL,
   status_allergy TINYINT      NOT NULL,
-  PRIMARY KEY (p_id, type_allergy, allergy)
+  PRIMARY KEY (allergy_id)
 );
 
 CREATE TABLE roles
