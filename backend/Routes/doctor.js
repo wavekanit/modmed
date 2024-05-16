@@ -20,8 +20,6 @@ db.connect( (error) => {
 });
 
 
-// part of inserting doctor information as register
-
 router.get("/getDocList/:id?", (req, res) => {
     const id = req.params.id;
     let query = "SELECT * FROM employee WHERE role_name = 'doctor'";
