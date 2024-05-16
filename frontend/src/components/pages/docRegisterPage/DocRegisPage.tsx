@@ -4,9 +4,9 @@ import React from "react";
 import { FormEvent, useState } from "react";
 import { useMultistepForm } from "../../UseMultiForm";
 import { PersonalInfoRegis } from "./PersonalInfoRegis";
-import { EcontactRegis } from "./EmergencyRegis";
+import { EmergencyRegis } from "./EmergencyRegis";
 import { EducationalRegis } from "./EducationalRegis";
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 
 type Props = {};
 
@@ -19,50 +19,53 @@ type FormData = {
   sex: string;
   addresses: string;
   tel: string;
+  email: string;
+  pw: string;
   nationality: string;
   race: string;
   religion: string;
   bloodType: string;
   department: string;
   license_id: string;
+  emergencyContact: {
+    fName: string;
+    lName: string;
+  };
   education: {
     degree: string;
     institute: string;
     year: string;
     sepecificField: string;
   }[];
-  email: string;
-  password: string;
-  confirmPassword: string;
 };
 
+const INITIAL_DATA: FormData = {
+  fName: "",
+  mName: "",
+  lName: "",
+  idNumber: "",
+  DOB: new Date(),
+  sex: "",
+  addresses: "",
+  tel: "",
+  email: "",
+  pw: "",
+  nationality: "",
+  race: "",
+  religion: "",
+  bloodType: "",
+  department: "",
+  license_id: "",
+  education: [{ degree: "", institute: "", year: "", sepecificField: "" }],
+  emergencyContact: { fName: "", lName: "" },
+};
 
 export default function StaffRegisPage({}: Props) {
-  const INITIAL_DATA: FormData = {
-    fName: "",
-    mName: "",
-    lName: "",
-    idNumber: "",
-    DOB: new Date,
-    sex: "",
-    addresses: "",
-    tel: "",
-    nationality: "",
-    race: "",
-    religion: "",
-    bloodType: "",
-    department: "",
-    license_id: "",
-    education: [{ degree: "", institute: "", year: "", sepecificField: "" }],
-    email: "",
-    password: "",
-    confirmPassword: "",
-  };
   const [data, setData] = React.useState<FormData>(INITIAL_DATA);
   const navigate = useNavigate();
 
   function goBack(bool) {
-    if(bool) {
+    if (bool) {
       alert("Successful Docter Insertion !");
       navigate("/manage_doctor");
     }
@@ -75,20 +78,20 @@ export default function StaffRegisPage({}: Props) {
   }
   const { step, isFirstStep, isLastStep, back, next } = useMultistepForm([
     <PersonalInfoRegis {...data} updateFields={updateFields} />,
-    <EcontactRegis {...data} updateFields={updateFields} />,
+    <EmergencyRegis {...data} updateFields={updateFields} />,
     <EducationalRegis {...data} updateFields={updateFields} />,
   ]);
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    if(data.password !== data.confirmPassword){
-      alert("Password and Confirm Password do not match");
-      setData((prevData) => ({
-        ...prevData,
-        password: "",
-        confirmPassword: ""
-      }));
-      return;
-    }
+    // if(data.pw !== data.confirmPassword){
+    //   alert("Password and Confirm Password do not match");
+    //   setData((prevData) => ({
+    //     ...prevData,
+    //     password: "",
+    //     confirmPassword: ""
+    //   }));
+    //   return;
+    // }
     if (!isLastStep) return next();
     alert("Successful Account Creation");
   }
@@ -124,7 +127,7 @@ export default function StaffRegisPage({}: Props) {
                         : "bg-blue-600 hover:bg-blue-700"
                     }  font-medium rounded-lg text-sm px-5 py-2.5 text-center my-2 mx-2`}
                     type="submit"
-                    onClick={() => isLastStep ? goBack(1) : goBack(0)}
+                    onClick={() => (isLastStep ? goBack(1) : goBack(0))}
                   >
                     {isLastStep ? "Finish" : "Next"}
                   </button>
