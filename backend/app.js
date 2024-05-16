@@ -89,6 +89,19 @@ app.post("/login", (req, res) => {
     });
 });
 
+app.get("/testEmail", (req, res) => {
+    const {email} = req.body
+    console.log(email);
+    db.query("SELECT * FROM employee WHERE email = ?", [email], (error, result) => {
+        if(error){
+            console.log(error);
+            res.send("Internal Server Error");
+        } else {
+            res.send(result);
+        }
+    });
+});
+
 
 
 app.listen(3000, () => {
