@@ -2,10 +2,10 @@
 
 import React from "react";
 import { FormEvent, useState } from "react";
-import { useMultistepForm } from "../UseMultiForm";
-import { PersonalInfoEdit } from "./docEditInfo/PersonalInfoEdit";
-import { EcontactEdit } from "./docEditInfo/EmergencyEdit";
-import { EducationalEdit } from "./docEditInfo/EducationalEdit";
+import { useMultistepForm } from "../../UseMultiForm";
+import { PersonalInfoEdit } from "./PersonalInfoEdit";
+import { EcontactEdit } from "./EmergencyEdit";
+import { EducationalEdit } from "./EducationalEdit";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 type Props = {};
@@ -68,7 +68,7 @@ export default function StaffRegisPage({}: Props) {
     mName: val.mName,
     lName: val.lName,
     idNumber: val.idNumber,
-    DOB: new Date,
+    DOB: new Date(val.DOB),
     sex: val.sex,
     addresses: val.adress,
     tel: "",
@@ -90,7 +90,7 @@ export default function StaffRegisPage({}: Props) {
   function goBack(bool) {
     if(bool) {
       alert("Successful Docter Editing !");
-      navigate("/doctorinfo/details" , {replace: true, state: {val}});
+      navigate("/manage_doctor/details" , {replace: true, state: {val}});
     }
   }
 
