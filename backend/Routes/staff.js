@@ -15,25 +15,25 @@ db.connect( (error) => {
     if(error){
         console.log(error)
     } else {
-        console.log("MySQL Connected")
+        console.log("Staff Connected")
     }
 });
 
 
 
-function getRegInfo(r_id){
-    return new Promise((resolve, reject) => {
-        db.query("SELECT * FROM register WHERE r_id = ?", [r_id], (error, result) => {
-            if(error){
-                console.log(error);
-                reject(error);
-            } else {
-                resolve(result);
-            }
-        });
-    });
-}
+// function getRegInfo(r_id){
+//     return new Promise((resolve, reject) => {
+//         db.query("SELECT * FROM register WHERE r_id = ?", [r_id], (error, result) => {
+//             if(error){
+//                 console.log(error);
+//                 reject(error);
+//             } else {
+//                 resolve(result);
+//             }
+//         });
+//     });
+// }
 
 
 module.exports = router
-module.exports = getRegInfo
+// module.exports = getRegInfo

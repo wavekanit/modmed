@@ -39,6 +39,10 @@ function App() {
         <Route path = "/doctorinfo" element = {<DocInfo/>}/>
         {/* <Route path = "/doctorinfo/details" element = {<DocDetail/>}/> */}
         {/* <Route path = "/doctorinfo/details/edit" element = {<DocEdit/>}/> */}
+        <Route path = "/doctorinfo/details" element = {<DocDetail/>}/>
+        <Route path = "/doctorinfo/details/edit" element = {<DocEdit/>}/>
+        <Route path="manage_doctor" element={<CrudPage />} />
+        <Route path="manage_patient" element={<CrudPage />} />
       </Routes>
     </>
   );
