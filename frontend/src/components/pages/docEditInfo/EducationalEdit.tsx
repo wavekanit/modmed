@@ -10,11 +10,11 @@ type EducationalData = {
   }[];
 };
 
-type PersonalInfoEditProps = EducationalData & {
+type EducationEditProps = EducationalData & {
   updateFields: (fields: Partial<EducationalData>) => void;
 };
 
-export function EducationalEdit(props: PersonalInfoEditProps) {
+export function EducationalEdit(props: EducationEditProps) {
   const [data, setData] = React.useState<EducationalData>(props);
 
   const handleInputChange = (
