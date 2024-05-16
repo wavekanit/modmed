@@ -13,6 +13,7 @@ import EditInfoPage from "./components/pages/crudStep/EditInfoPage.tsx";
 import DocInfo from "./components/pages/docInfo/DoctorInfoPage.tsx";
 import DocDetail from "./components/pages/docInfo/doctorDetailPage.tsx";
 import DocEdit from "./components/pages/docEditInfo/DocEditInfoPage";
+import MyProfile from "./components/pages/myProfile.tsx";
 
 function App() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -43,7 +44,7 @@ function App() {
         <Route path = "/doctorinfo/details/edit" element = {<DocEdit/>}/>
         <Route path="manage_doctor" element={<CrudPage />} />
         <Route path="manage_patient" element={<CrudPage />} />
-        {/* <Route path="my_profile" element={<MyProfile .>} /> */}
+        <Route path="my_profile" element={<MyProfile />} />
       </Routes>
     </>
   );
