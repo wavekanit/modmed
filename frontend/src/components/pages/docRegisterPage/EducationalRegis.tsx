@@ -7,10 +7,10 @@ type EducationalData = {
     institute: string;
     year: string;
     sepecificField: string;
-  }[];
+  }[];EducationalData 
 };
 
-type PersonalInfoRegisProps = EducationalData & {
+type PersonalInfoRegisProps = & {
   updateFields: (fields: Partial<EducationalData>) => void;
 };
 
