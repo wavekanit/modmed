@@ -21,6 +21,7 @@ db.connect((error) => {
 });
 
 
+
 router.get("/getAttendance/:id", (req, res) => {
     const sqlStatement = `
         SELECT 
