@@ -88,21 +88,19 @@ router.get("/getPatient/:search", (req, res) => {
 router.get("/getPatientInfo/:id", (req, res) => {
     const sqlStatement = `
     SELECT patient.*, 
-       JSON_ARRAYAGG(
-           JSON_OBJECT(
+        JSON_ARRAYAGG 
+            ( JSON_OBJECT (
                'type_allergy', patient_allergy.type_allergy,
                'allergy', patient_allergy.allergy,
                'status', patient_allergy.status_allergy
            )
        ) AS allergies,
-       CAST(
-           JSON_OBJECT(
+           JSON_OBJECT (
                'fName', emergency_contact.fName,
                'lName', emergency_contact.lName,
                'email', emergency_contact.email,
                'phone', emergency_contact.tel,
                'address', emergency_contact.addresses
-           ) AS JSON
        ) AS emergency_contact
         FROM patient
         LEFT JOIN patient_allergy ON patient.p_id = patient_allergy.p_id

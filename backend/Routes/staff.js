@@ -24,8 +24,8 @@ db.connect( (error) => {
 router.get("/getStaffInfoByID/:id", (req, res) => {
     const sqlStatement = `
         SELECT employee.id, employee.fName, employee.mName, employee.lName, employee.idNumber, employee.DOB, employee.sex, employee.addresses, employee.tel, employee.email, employee.nationality, employee.race, employee.religion, employee.bloodType, employee.relation, employee.role_name, employee.d_license_id, employee.d_department,
-           JSON_ARRAYAGG(
-               JSON_OBJECT(
+           JSON_ARRAYAGG (
+               JSON_OBJECT (
                    'level_edu', edu.level_edu,
                    'diploma', edu.diploma,
                    'institute', edu.institute,
@@ -33,7 +33,7 @@ router.get("/getStaffInfoByID/:id", (req, res) => {
                    'year_graduated', edu.year_graduated
                )
            ) AS educations,
-               JSON_OBJECT(
+               JSON_OBJECT (
                    'fName', emergency_contact.fName,
                    'lName', emergency_contact.lName,
                    'email', emergency_contact.email,
