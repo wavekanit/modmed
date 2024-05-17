@@ -10,7 +10,7 @@ export default function clockInStatus() {
         async function fetchData() {
             try {
                 console.log("Start fetching data from API")
-                const response = await axios.get('http://localhost:3000/api/getStaffInfoByID/' + id);
+                const response = await axios.get('http://localhost:3000/api/getAttendance/' + id);
                 console.log(response)
                 setDummyData(response.data);
             }
@@ -47,29 +47,29 @@ export default function clockInStatus() {
                   </th>
                 </tr>
               </thead>
-              <tbody>{dummy_data.map((val) => (
+              <tbody>{dummy_data.map((item, index) => (
                   <tr
-                    key={val.p_id}
+                    key={index}
                     className="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">             
                     {/* Data for each column */}
                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       <div className="flex items-center">
-                        <th>17/5/2024</th>
+                        <th>{new Date(item.clock_in).toLocaleDateString('en-GB')}</th>
                       </div>
                     </td>
                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       <div className="flex items-center">
-                        <td>7:00</td>
+                        <td>{new Date(item.clock_in).toLocaleTimeString('en-GB')}</td>
                       </div>
                     </td>
                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       <div className="flex items-center">
-                        <td>18:00</td>
+                        <td>{new Date(item.clock_out).toLocaleDateString('en-GB') === new Date(item.clock_in).toLocaleDateString('en-GB') ? "" : (new Date(item.clock_out).toLocaleDateString('en-GB')) } {new Date(item.clock_out).toLocaleTimeString('en-GB')}</td>
                       </div>
                     </td>
                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       <div className="flex items-center">
-                        <td>11</td>
+                        <td>{item.hours_work}</td>
                       </div>
                     </td>                    
                   </tr>

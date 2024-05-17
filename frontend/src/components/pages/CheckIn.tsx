@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import moment from "moment-timezone";
 
 type Props = {};
 
@@ -38,7 +39,8 @@ export default function CheckIn({}: Props) {
     }
   };
 
-  const toDay = new Date().toISOString().slice(0, 10);
+  // const toDay = new Date().toISOString().slice(0, 10);
+  const toDay = moment().tz("Asia/Bangkok").format("YYYY-MM-DD");
 
   return (
     <>
