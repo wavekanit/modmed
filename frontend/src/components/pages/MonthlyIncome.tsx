@@ -61,7 +61,7 @@ export default function MonthlyIncome() {
             </div>
         </div>
 
-        <h1 className="text-2xl font-normal text-center">Monthly income history for {fName} {lName}</h1>
+        <h1 className="text-2xl font-normal text-center">Previous History</h1>
 
         <div className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
             <div className="mx-auto max-w-screen-2xl px-4 lg:px-12">
