@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const mysql = require("mysql")
 const dotenv = require("dotenv");
+const moment = require("moment");
 dotenv.config({ path: "./.env" });
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -21,16 +22,30 @@ db.connect( (error) => {
 
 
 router.get("/getAttendance/:id", (req, res) => {
-    const sqlStatement = "SELECT clock_in, clock_out, CAST((TIMEDIFF(clock_out,clock_in)/3600.0) AS SIGNED) AS hours_work FROM `attendance` WHERE id = ?;";
+    const sqlStatement = `
+        SELECT 
+            clock_in, 
+            clock_out, 
+            TIME_TO_SEC(TIMEDIFF(clock_out, clock_in)) / 3600 AS hours_work 
+        FROM attendance 
+        WHERE id = ?;
+    `;
     db.query(sqlStatement, [req.params.id], (error, result) => {
-        if(error){
+        if (error) {
             console.log(error);
             res.status(500).send("Internal Server Error");
         } else {
-            res.send(result);
+            const formattedResult = result.map(row => ({
+                ...row,
+                clock_in: moment(row.clock_in).format('YYYY-MM-DD HH:mm:ss'),
+                clock_out: moment(row.clock_out).format('YYYY-MM-DD HH:mm:ss'),
+                hours_work: parseFloat(row.hours_work).toFixed(0) // formatting hours_work to 2 decimal places
+            }));
+            res.send(formattedResult);
         }
     });
 });
+
 
 router.get("/getStaffInfoByID/:id", (req, res) => {
     const sqlStatement = `
