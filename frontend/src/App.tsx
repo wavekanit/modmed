@@ -13,10 +13,11 @@ import DocDetail from "./components/pages/docInfo/doctorDetailPage.tsx";
 import DocEdit from "./components/pages/docEditInfo/DocEditInfoPage";
 import PatientInfo from "./components/pages/patientInfo/PatientInfoPage";
 import CheckIn from "./components/pages/CheckIn";
+import Income from "./components/pages/reportAll/Income";
 
 import SearchPatientPage from "./components/pages/patientInfo/SearchPatientPage";
 import MyProfile from "./components/pages/myProfile.tsx";
-import ClockInHistory from "./components/pages/ClockInHistory.tsx"
+import ClockInHistory from "./components/pages/ClockInHistory.tsx";
 
 function App() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -43,15 +44,16 @@ function App() {
         {/* <Route path = "/doctorinfo" element = {<DocInfo/>}/> */}
         {/* <Route path = "/doctorinfo/details" element = {<DocDetail/>}/> */}
         {/* <Route path = "/doctorinfo/details/edit" element = {<DocEdit/>}/> */}
-        <Route path = "/search_patient" element = {<SearchPatientPage />} />
-        <Route path = "/doctorinfo/details" element = {<DocDetail/>}/>
-        <Route path = "/doctorinfo/details/edit" element = {<DocEdit/>}/>
+        <Route path="/search_patient" element={<SearchPatientPage />} />
+        <Route path="/doctorinfo/details" element={<DocDetail />} />
+        <Route path="/doctorinfo/details/edit" element={<DocEdit />} />
         {/* <Route path="manage_doctor" element={<CrudPage />} />
         <Route path="manage_patient" element={<CrudPage />} /> */}
         <Route path="/my_profile" element={<MyProfile />} />
         <Route path="/search_patient/details" element={<PatientInfo />} />
         <Route path="/checkIn" element={<CheckIn />} />
         <Route path="/clockIn_history" element={<ClockInHistory />} />
+        <Route path="/income" element={<Income />} />
       </Routes>
     </>
   );
