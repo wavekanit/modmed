@@ -20,6 +20,17 @@ db.connect( (error) => {
 });
 
 
+router.get("/getAttendance/:id", (req, res) => {
+    const sqlStatement = "SELECT clock_in, clock_out, CAST((TIMEDIFF(clock_out,clock_in)/3600.0) AS SIGNED) AS hours_work FROM `attendance` WHERE id = ?;";
+    db.query(sqlStatement, [req.params.id], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send(result);
+        }
+    });
+});
 
 router.get("/getStaffInfoByID/:id", (req, res) => {
     const sqlStatement = `
