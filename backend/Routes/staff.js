@@ -12,8 +12,8 @@ const db = mysql.createConnection({
     port: process.env.DB_PORT
 });
 
-db.connect( (error) => {
-    if(error){
+db.connect((error) => {
+    if (error) {
         console.log(error)
     } else {
         console.log("Staff Connected")
@@ -72,8 +72,8 @@ router.get("/getStaffInfoByID/:id", (req, res) => {
         LEFT JOIN emergency_contact ON employee.id = emergency_contact.e_id
         GROUP BY employee.id HAVING employee.id = ?;
     `;
-    db.query(sqlStatement , [req.params.id], (error, result) => {
-        if(error){
+    db.query(sqlStatement, [req.params.id], (error, result) => {
+        if (error) {
             console.log(error);
             res.status(500).send("Internal Server Error");
         } else {
@@ -88,6 +88,41 @@ router.get("/getStaffInfoByID/:id", (req, res) => {
     });
 });
 
+router.get("/getMonthlyIncome/:id", (req, res) => {
+    const sqlStatement1 = `
+        SELECT YEAR(clock_in) AS year,
+        MONTH(clock_in) AS month,
+        FLOOR(SUM(TIME_TO_SEC(TIMEDIFF(clock_out, clock_in)) / 3600)) AS hours_worked,
+        FLOOR(SUM(TIME_TO_SEC(TIMEDIFF(clock_out, clock_in)) / 3600)) * roles.income_base AS income
+        FROM
+            attendance
+        JOIN
+            employee ON attendance.id = employee.id
+        JOIN
+            roles ON employee.role_name = roles.role_name
+        WHERE
+            employee.id = ?
+        GROUP BY
+            YEAR(clock_in),
+            MONTH(clock_in);
+    `;
+
+    db.query(sqlStatement1, [req.params.id], (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            const formattedResult = result.map(row => ({
+                ...row,
+                year: row.year,
+                month: row.month,
+                hours_worked: parseInt(row.hours_worked), // formatting hours_worked to 2 decimal places
+                income: parseInt(row.income) // formatting income to 2 decimal places
+            }));
+            res.send(formattedResult);
+        }
+    });
+});
 
 
 module.exports = router

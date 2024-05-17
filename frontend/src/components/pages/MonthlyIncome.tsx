@@ -11,7 +11,7 @@ export default function MonthlyIncome() {
         async function fetchData() {
             try {
                 console.log("Start fetching data from API")
-                const response = await axios.get('http://localhost:3000/api/getAttendance/' + id);
+                const response = await axios.get('http://localhost:3000/api/getMonthlyIncome/' + id);
                 console.log(response)
                 setDummyData(response.data);
             }
@@ -22,6 +22,17 @@ export default function MonthlyIncome() {
         fetchData();
     }, [])
 
+    let hours_thisMonth = 0;
+    let income_thisMonth = 0;
+    let key =0;
+    let date = new Date();
+    dummy_data.map((item, index) => {
+        key = index;
+        if (item.month == date.getMonth() + 1) {
+            hours_thisMonth += item.hours_worked;
+            income_thisMonth += item.income;
+        }
+    })
 
     // const str = 
     return <>
@@ -31,19 +42,19 @@ export default function MonthlyIncome() {
 
                 <div className="stat">
                     <div className="stat-title">Number of Cases</div>
-                    <div className="stat-value">23</div>
+                    <div className="stat-value">WAIT FOR DEV</div>
                     <div className="stat-desc"></div>
                 </div>
 
                 <div className="stat">
                     <div className="stat-title">Current Income</div>
-                    <div className="stat-value">4,200</div>
+                    <div className="stat-value">{income_thisMonth}</div>
                     <div className="stat-desc">Baht</div>
                 </div>
 
                 <div className="stat">
                     <div className="stat-title">Total Hours Worked</div>
-                    <div className="stat-value">72</div>
+                    <div className="stat-value">{hours_thisMonth}</div>
                     <div className="stat-desc">Hours</div>
                 </div>
 
@@ -80,22 +91,22 @@ export default function MonthlyIncome() {
                                 {/* Data for each column */}
                                 <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div className="flex items-center">
-                                        <th>April 2024</th>
+                                        <th>{item.month}-{item.year}</th>
                                     </div>
                                 </td>
                                 <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div className="flex items-center">
-                                        <td>45</td>
+                                        <td>WATING for FUTURE DEVELOPMENT</td>
                                     </div>
                                 </td>
                                 <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div className="flex items-center">
-                                        <td>560</td>
+                                        <td>{item.hours_worked}</td>
                                     </div>
                                 </td>
                                 <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div className="flex items-center">
-                                        <td>87,000</td>
+                                        <td>{item.income}</td>
                                     </div>
                                 </td>
                             </tr>
