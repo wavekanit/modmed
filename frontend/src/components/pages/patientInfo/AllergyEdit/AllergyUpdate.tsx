@@ -22,53 +22,80 @@ export default function AllergyUpdate() {
     const navigate = useNavigate();
 
     const submit = async (e: React.FormEvent) => {
-            e.preventDefault();
-            console.log("data : ",data);
-            try {
-                const response = await axios.post("http://localhost:3000/api/updatePatientAllergies", {
-                    allergy_id: data.allergy_id,
-                    type_allergy: data.type_allergy,
-                    allergy: data.allergy,
-                    status_allergy: data.status_allergy,
-                });
-                alert(response.data);
-                // alert("Success");
-            } catch (error) {
-                console.error(error);
-            } finally {
-                navigate("/search_patient/details", { replace: true, state: { val: val}});
-            }
-        };
+        e.preventDefault();
+        console.log("data : ", data);
+        try {
+            const response = await axios.post("http://localhost:3000/api/updatePatientAllergies", {
+                allergy_id: data.allergy_id,
+                type_allergy: data.type_allergy,
+                allergy: data.allergy,
+                status_allergy: data.status_allergy,
+            });
+            alert(response.data);
+            // alert("Success");
+        } catch (error) {
+            console.error(error);
+        } finally {
+            navigate("/search_patient/details", { replace: true, state: { val: val } });
+        }
+    };
 
     return (
         <>
-            <FormWrapper title="แก้ไขข้อมูลการแพ้ยา">
-                <form onSubmit={submit}>
-                    <div className="form-group">
-                        <label>สิ่งที่แพ้</label>
-                        <input  type="text" 
-                                className="form-control" 
-                                name="allergy" 
-                                value={data.allergy} 
-                                onChange={(e) => {
-                                    setData({...data, allergy: e.target.value});
-                                    console.log("data: ", data);
-                                }} />
+            <form className="mx-auto w-1/2" onSubmit={submit}>
+                <FormWrapper title="Allergy Update">
+                    <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
+                            Type
+                        </label>
+                        <select
+                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            name="type_allergy"
+                            value={data.type_allergy}
+                            onChange={(e) => {
+                                setData({ ...data, type_allergy: e.target.value });
+                                console.log("data: ", data);
+                            }}>
+                            <option value="">Select</option>
+                            <option value="food">food</option>
+                            <option value="Medication">drug</option>
+                            <option value="phd">symptom</option>
+                        </select>
+
                     </div>
-                    <div className="form-group">
-                        <label>ประเภทการแพ้</label>
-                        <input  type="text" 
-                                className="form-control" 
-                                name="status_allergy" 
-                                value={data.status_allergy} 
-                                onChange={(e) => {
-                                    setData({...data, status_allergy: e.target.value});
-                                    // console.log("data: ", data);
-                                }} />
+                    <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
+                            Allergy
+                        </label>
+                        <input type="text"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            name="allergy"
+                            value={data.allergy}
+                            onChange={(e) => {
+                                setData({ ...data, allergy: e.target.value });
+                                console.log("data: ", data);
+                            }} />
                     </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                    <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
+                            Status
+                        </label>
+                        <select
+                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            name="status"
+                            value={data.status_allergy}
+                            onChange={(e) => {
+                                setData({ ...data, status_allergy: e.target.value });
+                            }}
+                        >
+                            <option value={0}>0</option>
+                            <option value={1}>1</option>
+                        </select>
+
+                    </div>
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </FormWrapper>
             </form>
-        </FormWrapper>
-    </>
-  )
+        </>
+    )
 }

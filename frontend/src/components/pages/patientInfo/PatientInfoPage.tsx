@@ -14,6 +14,7 @@ export default function PatientInfoPage() {
   function goBack() {
     navigate("/search_patient");
   }
+  
   return (
     <>
       <div className='flex flex-wrap justify-between my-3 mx-10'>

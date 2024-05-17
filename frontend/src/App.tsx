@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage";
 import StaffRegisPage from "./components/pages/docRegisterPage/DocRegisPage";
-import PatientRegisPage from "./components/pages/patientRegisterPage/PatientRegisPage";
+// import PatientRegisPage from "./components/pages/patientRegisterPage/PatientRegisPage";
 // import CrudPage from "./components/pages/CrudPage";
 // import AddInfo from "./components/pages/crudStep/AddInfoPage.tsx";
 // import EditInfoPage from "./components/pages/crudStep/EditInfoPage.tsx";
@@ -17,6 +17,7 @@ import AllergyUpdate from "./components/pages/patientInfo/AllergyEdit/AllergyUpd
 import SearchPatientPage from "./components/pages/patientInfo/SearchPatientPage";
 import MyProfile from "./components/pages/myProfile.tsx";
 import ClockInHistory from "./components/pages/ClockInHistory.tsx"
+import InsertCureHist from "./components/pages/patientInfo/CureInsert/CureInsert.tsx";
 
 function App() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -53,6 +54,7 @@ function App() {
         <Route path="/checkIn" element={<CheckIn />} />
         <Route path="/clockIn_history" element={<ClockInHistory />} />
         <Route path="/search_patient/details/allergy_update" element={<AllergyUpdate />} />
+        <Route path="/search_patient/details/cure_insert" element={<InsertCureHist />} />
       </Routes>
     </>
   );
