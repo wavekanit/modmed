@@ -105,7 +105,9 @@ router.get("/getMonthlyIncome/:id", (req, res) => {
             employee.id = ?
         GROUP BY
             YEAR(clock_in),
-            MONTH(clock_in);
+            MONTH(clock_in)
+        ORDER BY
+            clock_in DESC;
     `;
 
     db.query(sqlStatement1, [req.params.id], (error, result) => {
