@@ -30,6 +30,12 @@ export default function AllergyInfo(props: { p_id: number }) {
     console.log("dummy_data:", dummy_data);
   }, [dummy_data]);
 
+  function handleCheckboxChange(index: number, value: string) {
+    const newData = [...dummy_data];
+    newData[index].status_allergy = value === '1' ? '0' : '1';
+    setDummyData(newData);
+  }
+
   function goEdit(val) {
     navigate("/search_patient/details/allergy_update" , {replace : true, state: {val: val}});
   }
@@ -41,7 +47,7 @@ export default function AllergyInfo(props: { p_id: number }) {
         </div>
         <div className='flex flex-wrap justify-right items-right w-full h-full m-3 ml-10'>
             <ul className='w-full'>
-            {dummy_data.map((data) => (
+            {dummy_data.map((data, index) => (
                 <li key={data.allergy_id} className='w-full mb-4'>
                 <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                     <div className="card mx-auto my-3 w-full py-3 px-5 bg-grey dark:bg-grey-500 relative sm:rounded-lg">
@@ -68,6 +74,17 @@ export default function AllergyInfo(props: { p_id: number }) {
                             </svg>
                         Edit
                         </button>
+                        <label className="inline-flex items-center cursor-pointer mt-2">
+                            <input 
+                                    type="checkbox" 
+                                    value={data.status_allergy} 
+                                    className="sr-only peer" 
+                                    checked={data.status_allergy === '1'}
+                                    onChange={() => handleCheckboxChange(index, data.status_allergy)} 
+                                />
+                            <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-1 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                            <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">{data.status_allergy === '1' ? 'Infected' : 'Not Infected'}</span>
+                        </label>
                     </div>
                 </div>
                </li>
