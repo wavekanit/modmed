@@ -5,95 +5,65 @@ type Props = {};
 
 export default function CheckIn({}: Props) {
   const [email, setEmail] = useState("");
-  const [apiData, setApiData] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [currentTime, setCurrentTime] = useState(
+    new Date().toLocaleTimeString()
+  );
+
+  useEffect(() => {}, [email]);
 
   useEffect(() => {
-    setApiData("");
-    setError("");
-  }, [email]);
+    const timer = setInterval(() => {
+      setCurrentTime(new Date().toLocaleTimeString());
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   const checkIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-
+    console.log(email);
     try {
-      const response = await axios.get("http://localhost:3000/testEmail", {
-        params: { email: email },
+      const response = await axios.post("http://localhost:3000/testEmail", {
+        email,
+        toDay,
+        currentTime,
       });
-      console.log(response.data);
-      alert(response.data[0]);
-      setApiData(response.data);
-
-      // Display the data
-      const data = response.data[0];
-      const {
-        fName,
-        lName,
-        idNumber,
-        DOB,
-        sex,
-        addresses,
-        tel,
-        email1,
-        pw,
-        nationality,
-        race,
-        religion,
-        bloodType,
-        e_id,
-        relation,
-        role_name,
-        d_license_id,
-        d_department,
-        quit_date,
-      } = data;
-      const formattedDOB = new Date(DOB).toLocaleDateString();
-
-      console.log("First Name:", fName);
-      console.log("Last Name:", lName);
-      console.log("ID Number:", idNumber);
-      console.log("Date of Birth:", formattedDOB);
-      console.log("Sex:", sex);
-      console.log("Address:", addresses);
-      console.log("Telephone:", tel);
-      console.log("Email:", email);
-      console.log("Password:", pw);
-      console.log("Nationality:", nationality);
-      console.log("Race:", race);
-      console.log("Religion:", religion);
-      console.log("Blood Type:", bloodType);
-      console.log("Employee ID:", e_id);
-      console.log("Relation:", relation);
-      console.log("Role Name:", role_name);
-      console.log("Doctor License ID:", d_license_id);
-      console.log("Doctor Department:", d_department);
-      console.log("Quit Date:", quit_date);
+      alert(response.data);
+      setEmail("");
     } catch (error) {
       console.error(error);
-      setError("Failed to fetch data. Please try again.");
     } finally {
-      setLoading(false);
     }
   };
 
+  const toDay = new Date().toISOString().slice(0, 10);
+
   return (
-    <div>
+    <>
       <form onSubmit={checkIn}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <button type="submit" disabled={!email || loading}>
-          {loading ? "Checking..." : "Check Innnsjodojsvojn"}
-        </button>
+        <div className="hero min-h-screen bg-base-200">
+          <div className="hero-content text-center">
+            <div className="max-w-md">
+              <h1 className="text-5xl font-bold br-4 my-4">Hello there</h1>
+              <h1 className="text-4xl">Today is {toDay}</h1>
+              <h1 className="text-3xl">Current time is {currentTime}</h1>
+              <input
+                type="email"
+                placeholder="EMAIL"
+                className="input input-bordered w-full max-w-xs br-4 my-4"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <button className="btn btn-primary" type="submit">
+                check-in
+              </button>
+            </div>
+          </div>
+        </div>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {apiData && <p>{apiData}</p>}
-    </div>
+    </>
   );
 }
