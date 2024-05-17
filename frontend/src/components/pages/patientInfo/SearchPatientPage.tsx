@@ -38,7 +38,7 @@ export default function SearchPatientPage() {
                   className="grow"
                   placeholder="Search"
                   value={searching}
-                  onChange={(e) => setSearching(e.target.value)}
+                  onChange={(e) => {setSearching(e.target.value), SearchClick()}}
                 />
                 <button
                   className="btn bg-blue-500 w-16 text-xs text-white mx-2"
