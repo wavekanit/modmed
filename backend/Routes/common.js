@@ -19,6 +19,29 @@ db.connect( (error) => {
     }
 });
 
+router.get("/getAllRoom", (req,res)=>{
+    const sqlStatement = `
+    SELECT
+        room.room_id,
+        room.p_id,
+        patient.fName,
+        patient.lName
+    FROM
+        room
+    LEFT JOIN
+        patient ON room.p_id = patient.p_id;
+`
+    db.query(sqlStatement, (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+
 router.get("/getEmer/:id", (req,res)=>{
 
     db.query("SELECT * FROM emergency_contact WHERE e_id = ?", [req.params.id], (error, result) => {

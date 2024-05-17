@@ -26,7 +26,7 @@ export default function CheckIn({}: Props) {
     e.preventDefault();
     console.log(email);
     try {
-      const response = await axios.post("http://localhost:3000/testEmail", {
+      const response = await axios.post("http://localhost:3000/CheckIn", {
         email,
         toDay,
         currentTime,
