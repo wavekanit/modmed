@@ -139,7 +139,7 @@ export default function Income({}: Props) {
               <div className="stats stats-vertical lg:stats-horizontal shadow">
                 <div className="stat">
                   <div className="stat-title">Income</div>
-                  <div className="stat-value">31K</div>
+                  <div className="stat-value">0</div>
                   <div className="stat-desc">Jan 1st - Feb 1st</div>
                 </div>
 
@@ -151,7 +151,7 @@ export default function Income({}: Props) {
 
                 <div className="stat">
                   <div className="stat-title">Profit</div>
-                  <div className="stat-value">1,200</div>
+                  <div className="stat-value">0</div>
                   <div className="stat-desc">↘︎ 90 (14%)</div>
                 </div>
               </div>
