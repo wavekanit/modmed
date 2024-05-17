@@ -58,10 +58,10 @@ export default function PatientInfoPage() {
         </ul>
       </div> */}
       <div className='my-3 mx-20 display: flex justify-content: space-between;'>
-        <div className='mx-auto w-1/2 m-2 sm:rounded-lg bg-blue-900 flex justify-left items-left'>
+        <div className='mx-auto w-1/2 m-2'>
           <PersonalInfo p_id={p_id}/>
         </div>
-        <div className='mx-auto w-2/5 h-4/5 m-2 sm:rounded-lg bg-blue-900 flex justify-right items-right'>
+        <div className='mx-auto w-2/5 h-4/5 m-2'>
           <AllergyInfo p_id={p_id}/>
         </div>
       </div>
