@@ -166,8 +166,8 @@ app.get("/getExpenseByMonthYear/:month/:year", (req, res) => {
     const query = `
     SELECT
         e.role_name,
-        SUM(TIMESTAMPDIFF(SECOND, a.clock_in, a.clock_out) / 3600) AS total_hour,
-        SUM(TIMESTAMPDIFF(SECOND, a.clock_in, a.clock_out) / 3600) * r.income_base AS expense
+        FLOOR(SUM(TIMESTAMPDIFF(SECOND, a.clock_in, a.clock_out) / 3600)) AS total_hour,
+        FLOOR(SUM(TIMESTAMPDIFF(SECOND, a.clock_in, a.clock_out)) / 3600) * r.income_base AS expense
     FROM
         attendance a
     JOIN
