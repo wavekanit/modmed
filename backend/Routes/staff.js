@@ -28,7 +28,8 @@ router.get("/getAttendance/:id", (req, res) => {
             clock_out, 
             TIME_TO_SEC(TIMEDIFF(clock_out, clock_in)) / 3600 AS hours_work 
         FROM attendance 
-        WHERE id = ?;
+        WHERE id = ?
+        ORDER BY clock_in DESC;
     `;
     db.query(sqlStatement, [req.params.id], (error, result) => {
         if (error) {
