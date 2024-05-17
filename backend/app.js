@@ -16,6 +16,7 @@ dotenv.config({ path: "./.env" });
 const app = express();
 const bodyParser = require("body-parser");
 const { mainModule } = require("process");
+const { get } = require("http");
 app.use(bodyParser.json());
 
 const corsOptions = {
@@ -89,17 +90,72 @@ app.post("/login", (req, res) => {
     });
 });
 
-app.get("/testEmail", (req, res) => {
-    const {email} = req.body
-    console.log(email);
-    db.query("SELECT * FROM employee WHERE email = ?", [email], (error, result) => {
-        if(error){
-            console.log(error);
-            res.send("Internal Server Error");
-        } else {
-            res.send(result);
-        }
+
+function getIdByEmail(email){
+    const query = "SELECT * FROM employee WHERE email = ?";
+    return new Promise((resolve, reject) => {
+        db.query(query, [email], (error, result) => {
+            if(error){
+                console.log(error);
+                reject(error);
+            } else {
+                resolve(result);
+            }
+        });
     });
+}
+
+app.post("/testEmail", async(req, res) => {
+    const {email,toDay, currentTime} = req.body
+    console.log(email);
+    try{
+        const getId = await getIdByEmail(email);
+        if(getId.length != 0){
+            const id = getId[0].id;
+            const name = getId[0].fName + " " + getId[0].lName;
+            const query = "SELECT * FROM attendance WHERE id = ? AND clock_out IS NULL"
+            db.query(query, [getId[0].id], (error, result) => {
+                if(error){
+                    console.log(error);
+                    res.send("Internal Server Error");
+                } else {
+                    const dateTime = new Date(toDay + " " + currentTime);
+                    if(result.length != 0){
+                        const query = "UPDATE attendance SET clock_out = ? WHERE id = ? AND clock_out IS NULL"
+                        
+                        db.query(query, [dateTime, id], (error, result) => {
+                            if(error){
+                                console.log(error);
+                                res.send("Internal Server Error");
+                            } else {
+                                console.log("Checked Out");
+                                res.send(`${name} Checked Out`);
+                            }
+                        });
+                    }else{
+                        const query = "INSERT INTO attendance (id, clock_in) VALUES (?,?)"
+                        db.query(query, [id, dateTime], (error, result) => {
+                            if(error){
+                                console.log(error);
+                                res.send("Internal Server Error");
+                            } else {
+                                console.log("Checked In");
+                                console.log("Checked In");
+                                res.send(`${name} Checked In`);
+                            }
+                        });
+                    }
+                        
+                }
+            });
+
+        }else{
+            res.send("User Not Found");
+        }
+    }catch(error){
+        console.log(error);
+        res.send("Internal Server Error");
+    }
 });
 
 

@@ -14,7 +14,7 @@ export default function SearchPatientPage() {
 
   const [dummy_data, setDummyData] = useState([]);
 
-  // ...
+  // .
 
   async function SearchClick() {
     try {
