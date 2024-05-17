@@ -25,32 +25,32 @@ export default function MonthlyIncome() {
 
     // const str = 
     return <>
-        <h1 class="text-3xl font-bold text-center">Monthly income for {fName} {lName}</h1>
-        <div class="text-center">
-            <div class="stats stats-vertical lg:stats-horizontal shadow">
+        <h1 className="text-3xl font-bold text-center">Monthly income for {fName} {lName}</h1>
+        <div className="text-center">
+            <div className="stats stats-vertical lg:stats-horizontal shadow">
 
-                <div class="stat">
-                    <div class="stat-title">Number of Cases</div>
-                    <div class="stat-value">23</div>
-                    <div class="stat-desc"></div>
+                <div className="stat">
+                    <div className="stat-title">Number of Cases</div>
+                    <div className="stat-value">23</div>
+                    <div className="stat-desc"></div>
                 </div>
 
-                <div class="stat">
-                    <div class="stat-title">Current Income</div>
-                    <div class="stat-value">4,200</div>
-                    <div class="stat-desc">Baht</div>
+                <div className="stat">
+                    <div className="stat-title">Current Income</div>
+                    <div className="stat-value">4,200</div>
+                    <div className="stat-desc">Baht</div>
                 </div>
 
-                <div class="stat">
-                    <div class="stat-title">Total Hours Worked</div>
-                    <div class="stat-value">72</div>
-                    <div class="stat-desc">Hours</div>
+                <div className="stat">
+                    <div className="stat-title">Total Hours Worked</div>
+                    <div className="stat-value">72</div>
+                    <div className="stat-desc">Hours</div>
                 </div>
 
             </div>
         </div>
 
-        <h1 class="text-2xl font-normal text-center">Monthly income history for {fName} {lName}</h1>
+        <h1 className="text-2xl font-normal text-center">Monthly income history for {fName} {lName}</h1>
 
         <div className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
             <div className="mx-auto max-w-screen-2xl px-4 lg:px-12">

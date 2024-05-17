@@ -13,7 +13,7 @@ import DocDetail from "./components/pages/docInfo/doctorDetailPage.tsx";
 import DocEdit from "./components/pages/docEditInfo/DocEditInfoPage";
 import PatientInfo from "./components/pages/patientInfo/PatientInfoPage";
 import CheckIn from "./components/pages/CheckIn";
-import Income from "./components/pages/reportAll/Income";
+import Income from "./components/pages/reportAll/Income.tsx";
 
 import SearchPatientPage from "./components/pages/patientInfo/SearchPatientPage";
 import MyProfile from "./components/pages/myProfile.tsx";
