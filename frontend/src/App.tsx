@@ -17,6 +17,7 @@ import CheckIn from "./components/pages/CheckIn";
 import SearchPatientPage from "./components/pages/patientInfo/SearchPatientPage";
 import MyProfile from "./components/pages/myProfile.tsx";
 import ClockInHistory from "./components/pages/ClockInHistory.tsx"
+import MonthlyIncome from "./components/pages/MonthlyIncome.tsx"
 
 function App() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -52,6 +53,7 @@ function App() {
         <Route path="/search_patient/details" element={<PatientInfo />} />
         <Route path="/checkIn" element={<CheckIn />} />
         <Route path="/clockIn_history" element={<ClockInHistory />} />
+        <Route path="/monthly_income" element={<MonthlyIncome />} />
       </Routes>
     </>
   );
