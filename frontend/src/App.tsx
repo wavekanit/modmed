@@ -14,11 +14,12 @@ import DocEdit from "./components/pages/docEditInfo/DocEditInfoPage";
 import PatientInfo from "./components/pages/patientInfo/PatientInfoPage";
 import CheckIn from "./components/pages/CheckIn";
 import Income from "./components/pages/reportAll/Income.tsx";
+import RoomBooking from "./components/pages/roomManage/RoomBooking";
 
 import SearchPatientPage from "./components/pages/patientInfo/SearchPatientPage";
 import MyProfile from "./components/pages/myProfile.tsx";
 import ClockInHistory from "./components/pages/ClockInHistory.tsx";
-import MonthlyIncome from "./components/pages/MonthlyIncome.tsx"
+import MonthlyIncome from "./components/pages/MonthlyIncome.tsx";
 
 function App() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -56,6 +57,7 @@ function App() {
         <Route path="/clockIn_history" element={<ClockInHistory />} />
         <Route path="/income" element={<Income />} />
         <Route path="/monthly_income" element={<MonthlyIncome />} />
+        <Route path="/roomBooking" element={<RoomBooking />} />
       </Routes>
     </>
   );

@@ -107,7 +107,7 @@ function getIdByEmail(email){
     });
 }
 
-app.post("/testEmail", async(req, res) => {
+app.post("/CheckIn", async(req, res) => {
     const {email,toDay, currentTime} = req.body
     console.log(email);
     try{
