@@ -175,9 +175,11 @@ app.get("/getExpenseByMonthYear/:month/:year", (req, res) => {
     JOIN
         roles r ON e.role_name = r.role_name
     WHERE
-        a.clock_out IS NOT NULL
+        a.clock_out IS NOT NULL AND
+        YEAR(a.clock_in) = ? AND MONTH(a.clock_in) = ?
     GROUP BY
         e.role_name;
+
 
     `;
     db.query(query, [year, month], (error, result) => {

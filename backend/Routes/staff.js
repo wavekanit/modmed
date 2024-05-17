@@ -91,23 +91,27 @@ router.get("/getStaffInfoByID/:id", (req, res) => {
 
 router.get("/getMonthlyIncome/:id", (req, res) => {
     const sqlStatement1 = `
-        SELECT YEAR(clock_in) AS year,
+    SELECT 
+        YEAR(clock_in) AS year,
         MONTH(clock_in) AS month,
         FLOOR(SUM(TIME_TO_SEC(TIMEDIFF(clock_out, clock_in)) / 3600)) AS hours_worked,
         FLOOR(SUM(TIME_TO_SEC(TIMEDIFF(clock_out, clock_in)) / 3600)) * roles.income_base AS income
-        FROM
-            attendance
-        JOIN
-            employee ON attendance.id = employee.id
-        JOIN
-            roles ON employee.role_name = roles.role_name
-        WHERE
-            employee.id = ?
-        GROUP BY
-            YEAR(clock_in),
-            MONTH(clock_in)
-        ORDER BY
-            clock_in DESC;
+    FROM
+        attendance
+    JOIN
+        employee ON attendance.id = employee.id
+    JOIN
+        roles ON employee.role_name = roles.role_name
+    WHERE
+        employee.id = ?
+    GROUP BY
+        YEAR(clock_in),
+        MONTH(clock_in),
+        roles.income_base
+    ORDER BY
+        YEAR(clock_in) DESC,
+        MONTH(clock_in) DESC;
+
     `;
 
     db.query(sqlStatement1, [req.params.id], (error, result) => {
