@@ -11,6 +11,11 @@ type Role = {
   expense: number;
 };
 
+type Case = {
+    department_name: string;
+    number_of_cases: number;
+}
+
 export default function Income({ }: Props) {
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 
@@ -24,6 +29,8 @@ export default function Income({ }: Props) {
   };
   const [minYear, setMinYear] = useState<number | null>(null);
   const [maxYear, setMaxYear] = useState<number | null>(null);
+
+  let cases;
 
   const getMinMaxYearApi = async () => {
     try {
@@ -53,53 +60,33 @@ export default function Income({ }: Props) {
   }, [minYear, maxYear]);
 
   const [role, setRole] = useState<Role[]>([]);
-  const [expense, setExpense] = useState<number | null>(0);
-  const [income, setIncome] = useState<number | null>(0);
+  const [numCase, setNumCase] = useState<Case[]>([]);
 
-  const getOutcome = async (month: number | null, year: number | null) => {
+  const getNumber = async (month: number | null, year: number | null) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/getExpenseByMonthYear/${month}/${year}`
+        `http://localhost:3000/api/getNumberOfCases/${month}/${year}`
       );
       const data = await response.json();
-      setRole(data);
-      var expense_temp = 0;
-      for (let i = 0; i < data.length; i++) {
-        expense_temp += data[i].expense;
-      }
-      setExpense(expense_temp);
-      console.log(role);
-    } catch (error) {
-      console.error("Error fetching data from API:", error);
-    }
-  };
-
-  const getIncome = async (month: number | null, year: number | null) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/getTotalIncome/${month}/${year}`
-      );
-      const data = await response.json();
-      setIncome(data[0].medical_fee);
       console.log(data);
+      setNumCase(data);
+      console.log(data[0].department_name + " " + data[0].number_of_cases);
     } catch (error) {
       console.error("Error fetching data from API:", error);
     }
   };
 
   useEffect(() => {
-    getOutcome(selectedMonth, selectedYear);
-    getIncome(selectedMonth, selectedYear);
-  }, [selectedMonth, selectedYear]);
+    getNumber(selectedMonth, selectedYear);
+    }, [selectedMonth, selectedYear]);
 
-  const getProfit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const getNumberOfCases = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(selectedMonth, selectedYear);
-    getIncome(selectedMonth, selectedYear);
-    getOutcome(selectedMonth, selectedYear);
+    getNumber(selectedMonth, selectedYear);
   };
 
-  const profit = income - expense;
+  console.log(cases);
 
   return (
     <>
@@ -114,8 +101,8 @@ export default function Income({ }: Props) {
               </ul>
             </div>
 
-            <h1 className="text-5xl font-bold">Performance Summary</h1>
-            <form onSubmit={getProfit}>
+            <h1 className="text-5xl font-bold">Cases Summary</h1>
+            <form onSubmit={getNumberOfCases}>
               <div className="my-5">
                 <div>
                   <h2 className="text-2xl">Select Month</h2>
@@ -154,36 +141,17 @@ export default function Income({ }: Props) {
                 </button> */}
               </div>
             </form>
-            <div className="stats text-primary-content border-4 border-sky-200 shadow-lg">
-              <div className="stats stats-vertical lg:stats-horizontal shadow">
-                {role.map((r) => (
-                  <div className="stat" key={r.role_name}>
-                    <div className="stat-title">{r.role_name}</div>
-                    <div className="stat-value">{r.expense}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <br />
             <div className="stats text-primary-content border-4 border-sky-400 shadow-lg my-2">
               <div className="stats stats-vertical lg:stats-horizontal shadow">
+              {numCase.map((item) => (
                 <div className="stat">
-                  <div className="stat-title">Income</div>
-                  <div className="stat-value">{income}</div>
-                  <div className="stat-desc">Baht</div>
+                  <div className="stat-title">{item.department_name}</div>
+                  <div className="stat-value">{item.number_of_cases}</div>
+                  <div className="stat-desc">Cases</div>
                 </div>
-
-                <div className="stat">
-                  <div className="stat-title">Expense</div>
-                  <div className="stat-value">{expense}</div>
-                  <div className="stat-desc">Baht</div>
-                </div>
-
-                <div className="stat">
-                  <div className="stat-title">Profit</div>
-                  <div className={`stat-value ${profit > 0 ? 'text-green-400' : 'text-red-500'}`}>{profit}</div>
-                  <div className="stat-desc">Baht</div>
-                </div>
+                    
+                ))}
+                
               </div>
             </div>
             <br />
