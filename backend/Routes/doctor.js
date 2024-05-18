@@ -68,10 +68,10 @@ function insertEmergencyContact(emergency){
     });
 }
 
-function insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion, bloodType, emer_id, relation, role_name, d_license, d_department){
+function insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion, bloodType, emer_id, relation, role_name, d_license, d_department_id){
     return new Promise((resolve, reject) => {
         console.log(DOB);
-        db.query("INSERT INTO employee (fName, mName, lName, idNumber, DOB, sex, addresses, tel, email, pw, nationality, race, religion, bloodType, e_id, relation, role_name, d_license_id, d_department) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion, bloodType, emer_id, relation,role_name, d_license, d_department], (error, result) => {
+        db.query("INSERT INTO employee (fName, mName, lName, idNumber, DOB, sex, addresses, tel, email, pw, nationality, race, religion, bloodType, e_id, relation, role_name, d_license_id, d_department_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion, bloodType, emer_id, relation,role_name, d_license, d_department_id], (error, result) => {
             if(error){
                 console.log(error)
                 reject(error);
@@ -99,10 +99,23 @@ function insertDocEdu(d_id, d_edu){
     });
 }
 
+function getAlreadExistEmerInfo(emergency){
+    const {fName, mName, lName, tel, address, email} = emergency;
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM emergency_contact WHERE fName = ? AND lName = ?", [fName, lName], (error, result) => {
+            if(error){
+                console.log(error);
+                reject(error);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+}
 
 router.post("/addDoc", async (req, res) => {
     const {info, edu} = req.body;
-    const { fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion,bloodType, emergency, relation, role_name, d_license, d_department} = info;
+    const { fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion,bloodType, emergency, relation, role_name, d_license, d_department_id} = info;
     console.log("========================================= START ==============================================");
     console.log("First Name " + fName);
     console.log("DOB " + DOB);
@@ -120,7 +133,7 @@ router.post("/addDoc", async (req, res) => {
             console.log(result.insertId);
             emer_id = result.insertId;
         }
-        const result = await insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion, bloodType, emer_id, relation, role_name, d_license, d_department);
+        const result = await insertDocInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion, bloodType, emer_id, relation, role_name, d_license, d_department_id);
         console.log(result);
         const d_id = result.insertId;
         const result2 = await insertDocEdu(d_id, edu);
@@ -130,8 +143,6 @@ router.post("/addDoc", async (req, res) => {
         console.log(error);
         res.send("Failed to insert doctor");
     }
-    
-
 });
 
 router.post("/updateDoctorInfo", (req, res) => {

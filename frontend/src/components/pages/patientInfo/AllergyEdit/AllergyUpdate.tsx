@@ -39,6 +39,10 @@ export default function AllergyUpdate() {
         }
     };
 
+    function goBack() {
+        navigate("/search_patient/details", { replace: true, state: { val: val } });
+    }
+
     return (
         <>
             <form className="mx-auto w-1/2" onSubmit={submit}>
@@ -92,6 +96,7 @@ export default function AllergyUpdate() {
 
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="button" className="btn m-5 flex mx-auto" onClick={goBack}>Back</button>
                 </FormWrapper>
             </form>
         </>

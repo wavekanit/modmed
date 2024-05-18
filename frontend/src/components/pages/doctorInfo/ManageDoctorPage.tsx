@@ -3,27 +3,26 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function ManageDoctorPage() {
-  const [data, setData] = useState([]);
   const [searching, setSearching] = useState("");
 
   const navigate = useNavigate();
 
-  function detailClick(val) {
+  function detailClick(val : any) {
     navigate("/manage_doctor/details", { replace: true, state: { val } });
   }
 
   const [dummy_data, setDummyData] = useState([]);
 
-  // .
+  async function SearchClick(searching: string) {
+    setSearching(searching);
+    if (searching === "") {} else {
+            try {
+              const response = await axios.get(`http://localhost:3000/api/getDoctor/${searching}`);
+              setDummyData(response.data);
+            } catch (error) {
+              console.error("Error fetching data from API:", error);
+            }
 
-  async function SearchClick() {
-    try {
-      const response = await axios.get(
-        `http://localhost:3000/api/getDoctor/${searching}`
-      );
-      setDummyData(response.data);
-    } catch (error) {
-      console.error("Error fetching data from API:", error);
     }
   }
 
@@ -43,9 +42,9 @@ export default function ManageDoctorPage() {
                   className="grow"
                   placeholder="Search"
                   value={searching}
-                  onChange={(e) => {setSearching(e.target.value), console.log(searching)}}
+                  onChange={(e) => {SearchClick(e.target.value)}}
                 />
-                <button
+                {/* <button
                   className="btn bg-blue-500 w-16 text-xs text-white mx-2"
                   onClick={SearchClick}
                 >
@@ -61,7 +60,7 @@ export default function ManageDoctorPage() {
                       clipRule="evenodd"
                     />
                   </svg>
-                </button>
+                </button> */}
                 <button
                   type="button"
                   onClick={addDoctor}

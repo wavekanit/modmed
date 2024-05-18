@@ -18,7 +18,7 @@ export default function PatientInfoPage() {
   
   return (
     <>
-        <div className='overflow-y-auto overflow-x-hidden w-5/6 h-full p-2 '>
+        <div className='overflow-y-auto mx-auto overflow-x-hidden w-2/3 h-full '>
             <PersonalInfo id={id}/>
         </div>
       <button className='btn flex mx-auto' onClick={goBack}>Back</button>

@@ -14,6 +14,7 @@ type AllergyData = {
 export default function insertAllergy() {
     const location = useLocation();
     const value = location.state.val;
+    const val = value;
 
     const NewAllergy: AllergyData = {
         p_id: value,
@@ -42,6 +43,10 @@ export default function insertAllergy() {
         } finally {
             navigate("/search_patient/details", { replace: true, state: { val: value } });
         }
+    }
+
+    function goBack() {
+        navigate("/search_patient/details", { replace: true, state: { val: val } });
     }
 
     return (
@@ -101,7 +106,8 @@ export default function insertAllergy() {
                         </select>
 
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn flex mx-auto btn-primary">Submit</button>
+                    <button type="button" className="btn m-5 flex mx-auto" onClick={goBack}>Back</button>
                 </FormWrapper>
             </form>
     </>
