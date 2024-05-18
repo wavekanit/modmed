@@ -7,7 +7,7 @@ type EducationalData = {
     institute: string;
     year: string;
     sepecificField: string;
-  }[];EducationalData 
+  }[];
 };
 
 type PersonalInfoRegisProps = & {

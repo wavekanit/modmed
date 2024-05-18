@@ -61,7 +61,7 @@ router.get("/getStaffInfoByID/:id", (req, res) => {
                    'year_graduated', edu.year_graduated
                )
            ) AS educations,
-               JSON_OBJECT(
+               JSON_OBJECT (
                    'fName', emergency_contact.fName,
                    'lName', emergency_contact.lName,
                    'email', emergency_contact.email,

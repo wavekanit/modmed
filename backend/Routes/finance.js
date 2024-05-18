@@ -19,6 +19,30 @@ db.connect( (error) => {
     }
 });
 
+router.post("/makePayment", (req, res) => {
+    const sqlStatement = `
+    UPDATE cure_history
+    SET 
+        progress_status = 0,
+        date_finished = CASE 
+                        WHEN date_finished IS NULL THEN ?
+                        ELSE date_finished
+                        END
+    WHERE 
+        p_id = ? 
+        AND progress_status = 1;
+
+    `;
+    db.query(sqlStatement, [req.body.date, req.body.p_id], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Payment Made");
+        }
+    });
+});
+
 router.get("/getPatientPayment/:search", (req, res) => {
     const {search} = req.params;
     const sqlStatement = `
@@ -29,14 +53,22 @@ router.get("/getPatientPayment/:search", (req, res) => {
         p.lName, 
         p.tel, 
         p.idNumber,
-        e.fName,
-        e.lName,
-        e.d_license_id,
+        e.fName AS e_fName, 
+        e.lName AS e_lName, 
+        e.d_license_id, 
         d.department_name,
+        c.date_cure,
+        c.date_finished,
+        DATEDIFF(c.date_finished, c.date_cure) AS days,
+        (DATEDIFF(c.date_finished, c.date_cure) + 1) * 1000 AS cost
     FROM 
         patient p
     JOIN 
         cure_history c ON p.p_id = c.p_id
+    JOIN
+        employee e ON c.d_id = e.id
+    JOIN
+        department d ON e.d_department_id = d.department_id
     WHERE 
         c.progress_status = 1 
         AND (p.fName LIKE ? OR p.mName LIKE ? OR p.lName LIKE ? OR p.tel LIKE ? OR p.idNumber LIKE ?);
@@ -96,11 +128,14 @@ router.get("/getTotalIncome/:month/:year", (req, res) => {
     SELECT 
         YEAR(date_cure) AS year,
         MONTH(date_cure) AS month,
-        SUM((DATEDIFF(date_finished, date_cure)+1))*1000 AS medical_fee
+        SUM((DATEDIFF(date_finished, date_cure) + 1) * 1000) AS medical_fee
     FROM
         cure_history
     WHERE
         progress_status = 0 AND YEAR(date_cure) = ? AND MONTH(date_cure) = ?
+    GROUP BY 
+        year, month;
+
     `;
     db.query(query, [year, month], (error, result) => {
         if(error){
