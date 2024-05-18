@@ -5,6 +5,7 @@ export default function MonthlyIncome() {
     const fName = JSON.parse(localStorage.getItem("fName") || '""');
     const lName = JSON.parse(localStorage.getItem("lName") || '""');
     const id = localStorage.getItem("id");
+    const role_name = JSON.parse(localStorage.getItem("role_name") || '""');
     const [dummy_data, setDummyData] = useState([]);
 
     useEffect(() => {
@@ -40,11 +41,12 @@ export default function MonthlyIncome() {
         <div className="text-center">
             <div className="stats stats-vertical lg:stats-horizontal shadow">
 
-                <div className="stat">
+                {role_name === "doctor" ?
+                    <div className="stat">
                     <div className="stat-title">Number of Cases</div>
                     <div className="stat-value">WAIT FOR DEV</div>
                     <div className="stat-desc"></div>
-                </div>
+                </div> : ""}
 
                 <div className="stat">
                     <div className="stat-title">Current Income</div>
