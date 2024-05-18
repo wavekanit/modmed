@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 export default function CureHistory(props: { p_id: number }) {
   const { p_id } = props;
-  console.log("p_id:", p_id);
   const navigate = useNavigate();
   const [dummy_data, setDummyData] = useState([]);
 
@@ -26,9 +25,7 @@ export default function CureHistory(props: { p_id: number }) {
     }
   }, [p_id]);
 
-  useEffect(() => {
-    console.log("dummy_data:", dummy_data);
-  }, [dummy_data]);
+  useEffect(() => {}, [dummy_data]);
 
   function insertCure(val) {
     navigate("/search_patient/details/cure_insert", { replace: true, state: { val: val } });

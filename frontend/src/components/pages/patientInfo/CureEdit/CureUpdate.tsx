@@ -25,13 +25,14 @@ export default function CureUpdate() {
 
     const navigate = useNavigate();
 
-    const date = new Date(data.date_cure);
-    const formattedDate = date.toISOString().slice(0, 19).replace('T', ' ');
-
+    
     const submit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("data: ",data);
-        console.log("formattedDate: ",formattedDate);
+        
+        const date = new Date(data.date_cure);
+        const adjustedDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
+        const formattedDate = adjustedDate.toISOString().slice(0, 19).replace('T', ' ');
+
         try {
             const response = await axios.post("http://localhost:3000/api/updateCure", {
                 p_id: data.p_id,
