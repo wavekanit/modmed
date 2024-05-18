@@ -23,7 +23,7 @@ router.get("/getPatientInProgress", (req, res) => {
     const sqlStatement = `
     SELECT p.p_id, p.fName, p.mName,  p.lName
     FROM patient p, cure_history c
-    WHERE p.p_id = c.p_id AND c.room_id IS NULL AND c.progress_status = 1
+    WHERE p.p_id = c.p_id AND c.room_id IS NULL AND c.progress_status = 1 AND c.date_finished IS NULL;
     `;
     db.query(sqlStatement, (error, result) => {
         if(error){

@@ -26,7 +26,7 @@ router.post("/removePatientFromRoom", (req, res) => {
             console.log(error);
             res.status(500).send("Internal Server Error");
         } else {
-            db.query("UPDATE cure_history SET room_id = NULL, date_finished = ? , progress_status = 0 WHERE p_id = ? AND progress_status = 1", [dateTime, p_id], (error, result) => {
+            db.query("UPDATE cure_history SET room_id = NULL, date_finished = ? WHERE p_id = ? AND progress_status = 1", [dateTime, p_id], (error, result) => {
                 if(error){
                     console.log(error);
                     res.status(500).send("Internal Server Error");

@@ -41,6 +41,21 @@ export default function CheckIn({}: Props) {
 
   // const toDay = new Date().toISOString().slice(0, 10);
   const toDay = moment().tz("Asia/Bangkok").format("YYYY-MM-DD");
+  const [sec, setSec] = useState(0);
+  const [min, setMin] = useState(0);
+  const [hour, setHour] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const date = new Date();
+      setSec(date.getSeconds());
+      setMin(date.getMinutes());
+      setHour(date.getHours());
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   return (
     <>
@@ -50,7 +65,28 @@ export default function CheckIn({}: Props) {
             <div className="max-w-md">
               <h1 className="text-5xl font-bold br-4 my-4">Hello there</h1>
               <h1 className="text-4xl">Today is {toDay}</h1>
-              <h1 className="text-3xl">Current time is {currentTime}</h1>
+              <div className="hero bg-base-200 my-2">
+                <div className="grid grid-flow-col gap-5 text-center auto-cols-max">
+                  <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
+                    <span className="countdown font-mono text-5xl">
+                      <span style={{ "--value": hour }}></span>
+                    </span>
+                    hours
+                  </div>
+                  <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
+                    <span className="countdown font-mono text-5xl">
+                      <span style={{ "--value": min }}></span>
+                    </span>
+                    min
+                  </div>
+                  <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
+                    <span className="countdown font-mono text-5xl">
+                      <span style={{ "--value": sec }}></span>
+                    </span>
+                    sec
+                  </div>
+                </div>
+              </div>
               <input
                 type="email"
                 placeholder="EMAIL"
