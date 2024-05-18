@@ -63,28 +63,30 @@ export default function RoomBooking({}: Props) {
                       ? `Patient Name: ${room.fName} ${room.lName}`
                       : "Empty"}
                   </p>
-                  {room.p_id ? (
-                    <button
-                      className="btn btn-error"
-                      onClick={() =>
-                        document.getElementById(room.room_id).close()
-                      }
-                    >
-                      Check Out
-                    </button>
-                  ) : (
-                    <>
-                      <input type="text" placeholder="Patient Name" />
+                  <div className="flex w-full gap-2 justify-center">
+                    {room.p_id ? (
                       <button
-                        className="btn btn-success"
+                        className="btn btn-error"
                         onClick={() =>
                           document.getElementById(room.room_id).close()
                         }
                       >
-                        Add Patient
+                        Check Out
                       </button>
-                    </>
-                  )}
+                    ) : (
+                      <>
+                        <input type="text" placeholder="Patient Name" />
+                        <button
+                          className="btn btn-success"
+                          onClick={() =>
+                            document.getElementById(room.room_id).close()
+                          }
+                        >
+                          Add Patient
+                        </button>
+                      </>
+                    )}
+                  </div>
                   <div className="modal-action">
                     <button
                       className="btn"
