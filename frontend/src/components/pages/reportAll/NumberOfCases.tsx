@@ -30,8 +30,6 @@ export default function Income({ }: Props) {
   const [minYear, setMinYear] = useState<number | null>(null);
   const [maxYear, setMaxYear] = useState<number | null>(null);
 
-  let cases;
-
   const getMinMaxYearApi = async () => {
     try {
       const response = await fetch("http://localhost:3000/getMinMaxYearProfit");
