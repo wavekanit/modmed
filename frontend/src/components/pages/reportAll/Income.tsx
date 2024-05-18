@@ -54,11 +54,12 @@ export default function Income({}: Props) {
 
   const [role, setRole] = useState<Role[]>([]);
   const [expense, setExpense] = useState<number | null>(0);
+  const [income, setIncome] = useState<number | null>(0);
 
   const getOutcome = async (month: number | null, year: number | null) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/getExpenseByMonthYear/${month}/${year}`
+        `http://localhost:3000/api/getExpenseByMonthYear/${month}/${year}`
       );
       const data = await response.json();
       setRole(data);
@@ -73,11 +74,27 @@ export default function Income({}: Props) {
     }
   };
 
+  const getIncome = async (month: number | null, year: number | null) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/getTotalIncome/${month}/${year}`
+      );
+      const data = await response.json();
+      setIncome(data[0].medical_fee);
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching data from API:", error);
+    }
+  };
+
   const getProfit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(selectedMonth, selectedYear);
+    getIncome(selectedMonth, selectedYear);
     getOutcome(selectedMonth, selectedYear);
   };
+
+  const profit = income - expense;
 
   return (
     <>
@@ -139,7 +156,7 @@ export default function Income({}: Props) {
               <div className="stats stats-vertical lg:stats-horizontal shadow">
                 <div className="stat">
                   <div className="stat-title">Income</div>
-                  <div className="stat-value">0</div>
+                  <div className="stat-value">{income}</div>
                   <div className="stat-desc">Jan 1st - Feb 1st</div>
                 </div>
 
@@ -151,7 +168,7 @@ export default function Income({}: Props) {
 
                 <div className="stat">
                   <div className="stat-title">Profit</div>
-                  <div className="stat-value">0</div>
+                  <div className={`stat-value ${profit > 0 ? 'text-green-400' : 'text-red-500'}`}>{profit}</div>
                   <div className="stat-desc">↘︎ 90 (14%)</div>
                 </div>
               </div>

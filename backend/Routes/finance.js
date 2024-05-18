@@ -90,6 +90,29 @@ router.get("/getExpenseByMonthYear/:month/:year", (req, res) => {
     });
 });
 
+router.get("/getTotalIncome/:month/:year", (req, res) => {
+    const {month, year} = req.params;
+    const query = `
+    SELECT 
+        YEAR(date_cure) AS year,
+        MONTH(date_cure) AS month,
+        SUM((DATEDIFF(date_finished, date_cure)+1))*1000 AS medical_fee
+    FROM
+        cure_history
+    WHERE
+        progress_status = 0 AND YEAR(date_cure) = ? AND MONTH(date_cure) = ?
+    `;
+    db.query(query, [year, month], (error, result) => {
+        if(error){
+            console.log(error);
+            res.send("Internal Server Error");
+        } else {
+            res.send(result);
+        }
+    });
+
+});
+
 router.get("/getMinMaxYearProfit", (req, res) => {
     const sqlStatement = `
         SELECT MIN(clock_in) AS min_year, MAX(clock_in) AS max_year
