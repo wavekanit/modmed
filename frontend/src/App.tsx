@@ -21,6 +21,7 @@ import MyProfile from "./components/pages/myProfile.tsx";
 import ClockInHistory from "./components/pages/reportAll/ClockInHistory.tsx";
 import MonthlyIncome from "./components/pages/reportAll/MonthlyIncome.tsx";
 import Payment from "./components/pages/payment/Payment.tsx";
+import NumberOfCases from "./components/pages/reportAll/NumberOfCases.tsx";
 
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
         <Route path="/monthly_income" element={<MonthlyIncome />} />
         <Route path="/roomBooking" element={<RoomBooking />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/cases_report" element={<NumberOfCases />} />
       </Routes>
     </>
   );

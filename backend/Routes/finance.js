@@ -133,4 +133,35 @@ router.get("/getMinMaxYearProfit", (req, res) => {
     });
 });
 
+router.get("/getNumberOfCases/:month/:year", (req, res) => {
+    const {month, year} = req.params;
+    const query = `
+    SELECT
+        YEAR(c.date_cure) AS year,
+        MONTH(c.date_cure) AS month,
+        d.department_name,
+        COUNT(*) AS number_of_cases
+    FROM
+        cure_history c
+    JOIN
+        employee e ON c.d_id = e.id
+    JOIN
+        department d ON e.d_department_id = d.department_id
+    WHERE
+        YEAR(date_cure) = ? AND
+        MONTH(date_cure) = ? AND
+        c.d_id = e.id AND e.d_department_id = d.department_id
+    GROUP BY
+        d.department_name;
+    `;
+    db.query(query, [year, month], (error, result) => {
+        if(error){
+            console.log(error);
+            res.send("Internal Server Error");
+        } else {
+            res.send(result);
+        }
+    });
+});
+
 module.exports = router
