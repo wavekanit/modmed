@@ -31,7 +31,7 @@ export default function PersonalInfo(props: { id: number }) {
   }, [dummy_data]);
 
   function goEdit(val) {
-    navigate("/search_doctor/details/doctor_update" , {replace : true, state: {val: val}});
+    navigate("/manage_doctor/details/doctor_update" , {replace : true, state: {val: val}});
   }
 
   return (

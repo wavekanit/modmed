@@ -9,7 +9,7 @@ export default function ManageDoctorPage() {
   const navigate = useNavigate();
 
   function detailClick(val) {
-    navigate("/search_doctor/details", { replace: true, state: { val } });
+    navigate("/manage_doctor/details", { replace: true, state: { val } });
   }
 
   const [dummy_data, setDummyData] = useState([]);
@@ -26,6 +26,11 @@ export default function ManageDoctorPage() {
       console.error("Error fetching data from API:", error);
     }
   }
+
+  function addDoctor() {
+    navigate("/manage_doctor/doctor_insert", { replace: true });
+  }
+
   return (
     <div>
       <div className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
@@ -59,6 +64,7 @@ export default function ManageDoctorPage() {
                 </button>
                 <button
                   type="button"
+                  onClick={addDoctor}
                   className="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
                 >
                   <svg
