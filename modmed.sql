@@ -74,7 +74,7 @@ CREATE TABLE employee
   relation     VARCHAR (50) NOT NULL,
   role_name        VARCHAR (50) NOT NULL,
   d_license_id VARCHAR (10) NULL    ,
-  d_department VARCHAR (50) NULL    ,
+  d_department_id INTEGER NULL    ,
   quit_date    DATETIME     NULL    ,
   PRIMARY KEY (id)
 );
@@ -122,6 +122,13 @@ CREATE TABLE room
   room_id VARCHAR (10) NOT NULL,
   p_id INTEGER      NULL    ,
   PRIMARY KEY (room_id)
+);
+
+CREATE TABLE department
+(
+  department_id   INTEGER      NOT NULL AUTO_INCREMENT,
+  department_name VARCHAR (50) NOT NULL,
+  PRIMARY KEY (department_id)
 );
 
 ALTER TABLE patient_allergy
@@ -173,6 +180,11 @@ ALTER TABLE room
   ADD CONSTRAINT FK_patient_TO_room
     FOREIGN KEY (p_id)
     REFERENCES patient (p_id);
+
+ALTER TABLE employee
+  ADD CONSTRAINT FK_department_TO_employee
+    FOREIGN KEY (d_department_id)
+    REFERENCES department (department_id);
         
       
 -- Insert dummies data to accounts
@@ -201,11 +213,11 @@ INSERT INTO patient (fName,lName,idNumber,DOB,sex,addresses,tel,email,nationalit
 
 INSERT INTO employee (fName, lName, idNumber, DOB, sex, addresses, tel, email, pw, nationality, race, religion, bloodType, e_id, relation, role_name, d_license_id, d_department)
     VALUES
-        ('Weera', 'Theeraphat', '3101100254685', '1940-02-09','Male', '13 Rama IX Rd., Bangkok', '0841234567', 'weera.t@modmed.com', '1234', 'Thai', 'Thai', 'Buddhist', 'A-', 1, 'Son', 'doctor','W74125', 'Bone'),
-        ('Phond', 'Phunchongharn', '3100111002352', '1982-09-30','Female', '126 Pracha Uthit Rd', '0562235467', 'phond.p@modmed.com', 'pp', 'Thai', 'Thai', 'Buddhist', 'A+', 4, 'Father', 'doctor', 'E41578', 'Eye'),
+        ('Weera', 'Theeraphat', '3101100254685', '1940-02-09','Male', '13 Rama IX Rd., Bangkok', '0841234567', 'weera.t@modmed.com', '1234', 'Thai', 'Thai', 'Buddhist', 'A-', 1, 'Son', 'doctor','W74125', 1),
+        ('Phond', 'Phunchongharn', '3100111002352', '1982-09-30','Female', '126 Pracha Uthit Rd', '0562235467', 'phond.p@modmed.com', 'pp', 'Thai', 'Thai', 'Buddhist', 'A+', 4, 'Father', 'doctor', 'E41578', 2),
         ('Acharee', 'Weerapong', '1104521345687', '1997-10-12','Female', 'Bangna, Bangkok', '0625526987', 'acharee.w@modmed.com', 'password', 'Thai', 'Thai', 'Buddhist', 'AB+', 5, 'Friend', 'finance',NULL,NULL),
         ('Chuchai', 'Wiwatana', '3100521245657', '1964-02-09','Male', 'Victory Monument', '0914567852', 'chuchai.w@modmed.com', '888', 'Thai', 'Thai', 'Buddhist', 'A-', 2, 'Son', 'register', NULL,NULL),
-        ('Sanan', 'Srakaew', '3887451243216', '1960-04-23','Male', 'Srakaew', '0865986542', 'sanan.s@modmed.com', 'qwerty', 'Thai', 'Thai', 'Buddhist', 'O+', 2, 'Son', 'doctor', 'H19374', 'Heart');
+        ('Sanan', 'Srakaew', '3887451243216', '1960-04-23','Male', 'Srakaew', '0865986542', 'sanan.s@modmed.com', 'qwerty', 'Thai', 'Thai', 'Buddhist', 'O+', 2, 'Son', 'doctor', 'H19374', 3);
 
 INSERT INTO edu (id, level_edu, diploma, institute, country, year_graduated)
     VALUES
@@ -237,9 +249,20 @@ INSERT INTO cure_history(p_id, date_cure, basic_symp, diag_result, methods, prog
         (1, '2024-05-12 15:30:00', "Fall in the restroom", "Leg Broken", "Get some cast", 1 ,1, NULL, NULL),
         (4, '2024-05-18 10:30:00', "Can see shorter", "Short-sighted", "Make an eyeglass", 1 ,2, NULL, NULL);
 
-INSERT INTO attendance(id, clock_in, clock_out)
+INSERT INTO attendance (id, clock_in, clock_out)
     VALUES
         (1, '2024-05-06 06:50:14', '2024-05-07 18:40:41'),
-        (2, '2024-05-06 07:00:14', '2024-05-06 17:00:10'),
         (1, '2024-05-07 07:41:47', '2024-05-07 20:14:40'),
-        (1, '2024-05-08 07:59:59', NULL);
+        (1, '2024-05-08 07:59:59', '2024-05-18 00:25:24'),
+        (2, '2024-04-16 08:17:18', '2024-04-16 16:17:18'),
+        (2, '2024-04-17 07:14:38', '2024-04-17 20:24:30'),
+        (2, '2024-04-30 08:56:29', '2024-04-30 23:56:29'),
+        (2, '2024-05-06 07:00:14', '2024-05-06 17:00:10'),
+        (2, '2024-05-17 21:34:32', '2024-05-17 21:34:48'),
+        (2, '2024-05-18 00:22:33', '2024-05-18 02:39:40'),
+        (2, '2024-05-18 15:53:37', NULL),
+        (4, '2024-05-18 17:42:07', '2024-05-18 21:14:42');
+
+INSERT INTO department (department_name)
+    VALUES
+        ('Bone'), ('Eye'), ('Heart'), ('Dental'), ('Skin'), ('Ear, Nose, Throat');
