@@ -98,7 +98,7 @@ export default function RoomBooking({}: Props) {
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content text-center">
           <div className="max-w-md">
-            <h1 className="text-5xl font-bold my-5">Room Manage</h1>
+            <h1 className="text-5xl font-bold my-5">Room Management</h1>
 
             <div className="h-56 grid grid-cols-4 gap-4 content-start ...">
               {roomArray.map((room) => (
