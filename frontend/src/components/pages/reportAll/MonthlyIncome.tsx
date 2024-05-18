@@ -75,9 +75,11 @@ export default function MonthlyIncome() {
                                 <th scope="col" className="p-4">
                                     Month
                                 </th>
-                                <th scope="col" className="p-4">
+                                
+                                {role_name === "doctor" ?
+                                    <th scope="col" className="p-4">
                                     Number of Cases
-                                </th>
+                                </th> : ""}
                                 <th scope="col" className="p-4">
                                     Total Hours Worked
                                 </th>
@@ -96,11 +98,12 @@ export default function MonthlyIncome() {
                                         <th>{item.month}-{item.year}</th>
                                     </div>
                                 </td>
+                               { role_name === "doctor" ?
                                 <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div className="flex items-center">
                                         <td>WATING for FUTURE DEVELOPMENT</td>
                                     </div>
-                                </td>
+                                </td>:""}
                                 <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div className="flex items-center">
                                         <td>{item.hours_worked}</td>
