@@ -19,6 +19,22 @@ db.connect( (error) => {
     }
 });
 
+router.get("/getPatientInProgress", (req, res) => {
+    const sqlStatement = `
+    SELECT p.p_id, p.fName, p.mName,  p.lName
+    FROM patient p, cure_history c
+    WHERE p.p_id = c.p_id AND c.room_id IS NULL AND c.progress_status = 1
+    `;
+    db.query(sqlStatement, (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send(result);
+        }
+    });
+});
+
 router.post("/updatePatientAllergies", (req, res) => {
     const {allergy_id, type_allergy, allergy, status_allergy} = req.body;
     db.query("UPDATE patient_allergy SET type_allergy = ?, allergy = ?, status_allergy = ? WHERE allergy_id = ?", [type_allergy, allergy, status_allergy, allergy_id], (error, result) => {
