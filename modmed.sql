@@ -231,7 +231,11 @@ INSERT INTO room (room_id)
 
 INSERT INTO cure_history(p_id, date_cure, basic_symp, diag_result, methods, progress_status, d_id, room_id, date_finished)
     VALUES
-        (1, '2024-05-08 12:30:00', "Backache", "Backbone Broken", "Give some adrinalines", 1 ,1, NULL, NULL);
+        (1, '2024-05-08 12:30:00', "Backache", "Backbone Broken", "Give some adrinalines", 1 ,1, NULL, NULL),
+        (2, '2024-05-09 13:30:00', "Stomache Problem", "Acid in tummy", "Give stomachic mixture", 1 ,1, NULL, NULL),
+        (3, '2024-05-09 18:20:00', "Have a seizure", "Cardiac Problem", "Send to ICU", 1 ,5, NULL, NULL),
+        (1, '2024-05-12 15:30:00', "Fall in the restroom", "Leg Broken", "Get some cast", 1 ,1, NULL, NULL),
+        (4, '2024-05-18 10:30:00', "Can see shorter", "Short-sighted", "Make an eyeglass", 1 ,2, NULL, NULL);
 
 INSERT INTO attendance(id, clock_in, clock_out)
     VALUES
