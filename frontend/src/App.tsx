@@ -20,6 +20,7 @@ import SearchPatientPage from "./components/pages/patientInfo/SearchPatientPage"
 import MyProfile from "./components/pages/myProfile.tsx";
 import ClockInHistory from "./components/pages/ClockInHistory.tsx";
 import MonthlyIncome from "./components/pages/MonthlyIncome.tsx";
+import Payment from "./components/pages/payment/Payment.tsx";
 
 function App() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -58,6 +59,7 @@ function App() {
         <Route path="/income" element={<Income />} />
         <Route path="/monthly_income" element={<MonthlyIncome />} />
         <Route path="/roomBooking" element={<RoomBooking />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </>
   );
