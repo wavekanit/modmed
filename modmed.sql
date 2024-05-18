@@ -195,6 +195,10 @@ INSERT INTO roles (role_name, income_base)
         ('register', 450),
         ('finance', 425);
 
+INSERT INTO department (department_name)
+    VALUES
+        ('Bone'), ('Eye'), ('Heart'), ('Dental'), ('Skin'), ('Ear, Nose, Throat');
+
 INSERT INTO emergency_contact (fName, lName, tel, addresses, email)
     VALUES
         ('Wongsatorn', 'Sungsila', '0875412653', '98/83 Bangna', 'wongsatorn.sung@local.com'),
@@ -211,7 +215,7 @@ INSERT INTO patient (fName,lName,idNumber,DOB,sex,addresses,tel,email,nationalit
         ('Jumpol', 'Polvichai', '3145258754234', '1980-07-04', 'Male', 'KMUTT, Bangkok', '0985745245','jumo@hotmail.com', 'Thai', 'Thai', 'Buddhist', 'O-', 2, 'Relative'),
         ('Noppakhao', 'Somsrichai', '3452122157859', '1954-04-04', 'Female','218 Pracha Uthit Rd, Bangkok', '0982385749', 'mas@hotmail.com', 'Thai', 'Thai', 'Muslim', 'B+',4,'Son');
 
-INSERT INTO employee (fName, lName, idNumber, DOB, sex, addresses, tel, email, pw, nationality, race, religion, bloodType, e_id, relation, role_name, d_license_id, d_department)
+INSERT INTO employee (fName, lName, idNumber, DOB, sex, addresses, tel, email, pw, nationality, race, religion, bloodType, e_id, relation, role_name, d_license_id, d_department_id)
     VALUES
         ('Weera', 'Theeraphat', '3101100254685', '1940-02-09','Male', '13 Rama IX Rd., Bangkok', '0841234567', 'weera.t@modmed.com', '1234', 'Thai', 'Thai', 'Buddhist', 'A-', 1, 'Son', 'doctor','W74125', 1),
         ('Phond', 'Phunchongharn', '3100111002352', '1982-09-30','Female', '126 Pracha Uthit Rd', '0562235467', 'phond.p@modmed.com', 'pp', 'Thai', 'Thai', 'Buddhist', 'A+', 4, 'Father', 'doctor', 'E41578', 2),
@@ -263,6 +267,3 @@ INSERT INTO attendance (id, clock_in, clock_out)
         (2, '2024-05-18 15:53:37', NULL),
         (4, '2024-05-18 17:42:07', '2024-05-18 21:14:42');
 
-INSERT INTO department (department_name)
-    VALUES
-        ('Bone'), ('Eye'), ('Heart'), ('Dental'), ('Skin'), ('Ear, Nose, Throat');

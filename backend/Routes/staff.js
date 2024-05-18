@@ -51,7 +51,7 @@ router.get("/getAttendance/:id", (req, res) => {
 
 router.get("/getStaffInfoByID/:id", (req, res) => {
     const sqlStatement = `
-        SELECT employee.id, employee.fName, employee.mName, employee.lName, employee.idNumber, employee.DOB, employee.sex, employee.addresses, employee.tel, employee.email, employee.nationality, employee.race, employee.religion, employee.bloodType, employee.relation, employee.role_name, employee.d_license_id, employee.d_department,
+        SELECT employee.id, employee.fName, employee.mName, employee.lName, employee.idNumber, employee.DOB, employee.sex, employee.addresses, employee.tel, employee.email, employee.nationality, employee.race, employee.religion, employee.bloodType, employee.relation, employee.role_name, employee.d_license_id, employee.d_department_id, department.department_name,
            JSON_ARRAYAGG(
                JSON_OBJECT(
                    'level_edu', edu.level_edu,
@@ -70,6 +70,7 @@ router.get("/getStaffInfoByID/:id", (req, res) => {
            ) AS emergency_contact
         FROM employee
         LEFT JOIN edu ON employee.id = edu.id
+        LEFT JOIN department ON employee.d_department_id = department.department_id
         LEFT JOIN emergency_contact ON employee.id = emergency_contact.e_id
         GROUP BY employee.id HAVING employee.id = ?;
     `;
