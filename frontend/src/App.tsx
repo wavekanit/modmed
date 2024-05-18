@@ -34,6 +34,7 @@ import MonthlyIncome from "./components/pages/reportAll/MonthlyIncome.tsx";
 import Payment from "./components/pages/payment/Payment.tsx";
 import NumberOfCases from "./components/pages/reportAll/NumberOfCases.tsx";
 import NumberOfStaff from "./components/pages/reportAll/NumberOfStaff.tsx";
+import IncomeAll from "./components/pages/reportAll/IncomeAll.tsx";
 
 
 
@@ -87,6 +88,7 @@ function App() {
         <Route path="/manage_doctor/doctor_insert" element={<InsertDoctor />} />
         <Route path="/cases_report" element={<NumberOfCases />} />
         <Route path="/staff_report" element={<NumberOfStaff />}/>
+        <Route path="/income_all" element = {<IncomeAll />}/>
       </Routes>
     </>
   );

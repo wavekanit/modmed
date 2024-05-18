@@ -224,4 +224,35 @@ router.get("/getNumberOfStaff/:month/:year", (req, res) => {
     });
 });
 
+router.get("/getSummaryOfIncome/:month/:year", (req, res) => {
+    const {month, year} = req.params;
+    const query = `
+    SELECT
+        e.id,
+        e.fName,
+        e.mName,
+        e.lName,
+        e.role_name,
+        FLOOR(SUM(TIME_TO_SEC(TIMEDIFF(a.clock_out, a.clock_in)) / 3600)) AS hours_worked,
+        FLOOR(SUM(TIME_TO_SEC(TIMEDIFF(a.clock_out, a.clock_in)) / 3600)) * r.income_base AS income
+    FROM
+        employee e
+    JOIN
+    	attendance a ON e.id = a.id
+    JOIN
+    	roles r ON e.role_name = r.role_name
+    WHERE YEAR(a.clock_in) = ? AND MONTH(a.clock_in) = ?
+    GROUP BY
+    	e.id;
+    `;
+    db.query(query, [year, month], (error, result) => {
+        if(error){
+            console.log(error);
+            res.send("Internal Server Error");
+        } else {
+            res.send(result);
+        }
+    });
+});
+
 module.exports = router
