@@ -10,23 +10,42 @@ type Props = {};
 export default function Payment({}: Props) {
   const [data, setData] = useState([]);
   const [searching, setSearching] = useState("");
+  const [updateFlag, setUpdateFlag] = useState(false);
 
   const navigate = useNavigate();
 
   const [patientList, setPatientList] = useState([]);
-
-  // .
 
   async function SearchClick() {
     try {
       const response = await axios.get(
         `http://localhost:3000/api/getPatientPayment/${searching}`
       );
+      console.log(response.data);
       setPatientList(response.data);
     } catch (error) {
       console.error("Error fetching data from API:", error);
     }
   }
+
+  const makePayment = async (p_id) => {
+    console.log(p_id);
+    const date = new Date().toISOString().split("T")[0];
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/api/makePayment`,
+        { p_id, date }
+      );
+      console.log(response.data);
+      alert(response.data);
+      setSearching("");
+      setUpdateFlag(!updateFlag);
+      SearchClick();
+    } catch (error) {
+      console.error("Error fetching data from API:", error);
+    }
+  };
+  useEffect(() => {}, [updateFlag]);
   return (
     <>
       <div>
@@ -63,8 +82,6 @@ export default function Payment({}: Props) {
               </div>
               <table className="table table-xs">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                  {/* item */}
-
                   <tr>
                     <th scope="col" className="p-4">
                       ID card
@@ -92,7 +109,6 @@ export default function Payment({}: Props) {
                       key={val.p_id}
                       className="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
-                      {/* Data for each column */}
                       <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <div className="flex items-center">
                           <th>{val.idNumber}</th>
@@ -144,16 +160,70 @@ export default function Payment({}: Props) {
                     <h3 className="font-bold text-lg">
                       Name: {val.fName} {val.mName} {val.lName}
                     </h3>
-                    <p className="py-4">Blood Type: {val.bloodType}</p>
-                    <div className="modal-action">
-                      <button
-                        className="btn"
-                        onClick={() => {
-                          document.getElementById(val.p_id).close();
-                        }}
-                      >
-                        Close
-                      </button>
+                    <div className="divider">Personal Information</div>
+                    <h3 className="text-1xl">ID card : {val.idNumber}</h3>
+                    <h3 className="text-1xl">Phone Number : {val.tel}</h3>
+                    <div className="divider">Doctor</div>
+                    <h3 className="text-1xl">
+                      Name : {val.e_fName} {val.e_lName}
+                    </h3>
+                    <h3 className="text-1xl">
+                      License ID : {val.d_license_id}
+                    </h3>
+                    <h3 className="text-1xl">
+                      Department : {val.department_name}
+                    </h3>
+                    <div className="divider">Cure Information</div>
+                    <h3 className="text-1xl">
+                      Start Date :{" "}
+                      {new Date(val.date_cure).toLocaleDateString()}
+                    </h3>
+                    <h3 className="text-1xl">
+                      End Date :{" "}
+                      {val.date_finished
+                        ? new Date(val.date_finished).toLocaleDateString()
+                        : new Date().toLocaleDateString()}
+                    </h3>
+                    <h3 className="text-1xl">
+                      Number of Day : {""}
+                      {val.date_finished
+                        ? val.days
+                        : Math.floor(
+                            (new Date().getTime() -
+                              new Date(val.date_cure).getTime()) /
+                              (1000 * 3600 * 24)
+                          )}
+                    </h3>
+                    <h3 className="text-1xl">
+                      Cost : {""}
+                      {val.date_finished
+                        ? val.cost
+                        : Math.floor(
+                            (new Date().getTime() -
+                              new Date(val.date_cure).getTime()) /
+                              (1000 * 3600 * 24)
+                          ) * 1000}
+                    </h3>
+                    <div>
+                      <div className="modal-action">
+                        <button
+                          className="btn btn-success"
+                          onClick={() => {
+                            makePayment(val.p_id);
+                            document.getElementById(val.p_id).close();
+                          }}
+                        >
+                          Pay
+                        </button>
+                        <button
+                          className="btn"
+                          onClick={() => {
+                            document.getElementById(val.p_id).close();
+                          }}
+                        >
+                          Close
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </dialog>
