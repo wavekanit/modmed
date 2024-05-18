@@ -169,6 +169,10 @@ ALTER TABLE cure_history
     FOREIGN KEY (room_id)
     REFERENCES room (room_id);
 
+ALTER TABLE room
+  ADD CONSTRAINT FK_patient_TO_room
+    FOREIGN KEY (p_id)
+    REFERENCES patient (p_id);
         
       
 -- Insert dummies data to accounts
