@@ -45,13 +45,15 @@ export default function Payment({}: Props) {
       console.error("Error fetching data from API:", error);
     }
   };
-  useEffect(() => {}, [updateFlag]);
+  useEffect(() => {
+    SearchClick();
+  }, [updateFlag]);
   return (
     <>
       <div>
         <div className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
           <div className="mx-auto max-w-screen-2xl px-4 lg:px-12">
-            <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+            <div className="bg-white dark:bg-gray-900 relative shadow-md sm:rounded-lg overflow-hidden">
               <div className="card mx-auto my-3 w-4/6 py-3 bg-white dark:bg-gray-800 relative sm:rounded-lg">
                 <div className="input w-4/6 input-bordered flex items-center mx-auto gap-2">
                   <input

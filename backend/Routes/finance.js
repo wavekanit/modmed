@@ -128,11 +128,14 @@ router.get("/getTotalIncome/:month/:year", (req, res) => {
     SELECT 
         YEAR(date_cure) AS year,
         MONTH(date_cure) AS month,
-        SUM((DATEDIFF(date_finished, date_cure)+1))*1000 AS medical_fee
+        SUM((DATEDIFF(date_finished, date_cure) + 1) * 1000) AS medical_fee
     FROM
         cure_history
     WHERE
         progress_status = 0 AND YEAR(date_cure) = ? AND MONTH(date_cure) = ?
+    GROUP BY 
+        year, month;
+
     `;
     db.query(query, [year, month], (error, result) => {
         if(error){
