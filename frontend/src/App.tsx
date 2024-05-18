@@ -22,6 +22,7 @@ import ClockInHistory from "./components/pages/ClockInHistory.tsx";
 import MonthlyIncome from "./components/pages/MonthlyIncome.tsx";
 import Payment from "./components/pages/payment/Payment.tsx";
 
+
 function App() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
   if (isLoggedIn === null) {
