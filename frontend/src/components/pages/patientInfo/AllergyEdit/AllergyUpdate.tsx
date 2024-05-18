@@ -95,7 +95,7 @@ export default function AllergyUpdate() {
                         </select>
 
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-primary flex mx-auto">Submit</button>
                     <button type="button" className="btn m-5 flex mx-auto" onClick={goBack}>Back</button>
                 </FormWrapper>
             </form>
