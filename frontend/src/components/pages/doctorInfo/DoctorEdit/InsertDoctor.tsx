@@ -38,7 +38,7 @@ type DocData = {
   relation: string;
   role_name: string;
   d_license_id: string;
-  d_department: string;
+  d_department_id: number;
   education: Education[];
 };
 
@@ -69,7 +69,7 @@ export default function InsertDoctor() {
     relation: '',
     role_name: '',
     d_license_id: '',
-    d_department: '',
+    d_department_id: 0,
     education: [{
       degree: '',
       institute: '',
@@ -113,9 +113,9 @@ export default function InsertDoctor() {
     console.log('data : ', data);
 
     const outputData = {
-      info: {
+    info: {
         fName: data.fName,
-        mName: data.mName,
+        mName: data.mName ? data.mName : null,
         lName: data.lName,
         idNumber: data.idNumber,
         DOB: data.DOB,
@@ -130,7 +130,7 @@ export default function InsertDoctor() {
         bloodType: data.bloodType,
         emergency: {
           fName: data.emergency.fName,
-          mName: data.emergency.mName,
+          mName: data.emergency.mName ? data.emergency.mName : null,
           lName: data.emergency.lName,
           tel: data.emergency.tel,
           address: data.emergency.addresses,
@@ -138,8 +138,8 @@ export default function InsertDoctor() {
         },
         relation: data.relation,
         role_name: data.role_name,
-        d_license: data.d_license_id,
-        d_department: data.d_department,
+        d_license: data.d_license_id ? data.d_license_id : null,
+        d_department_id: data.d_department_id,
       },
       edu: data.education.map((edu) => ({
         level_edu: edu.degree,
@@ -157,12 +157,12 @@ export default function InsertDoctor() {
     } catch (error) {
       console.error('Error:', error);
     } finally {
-      navigate('/search_doctor', { replace: true });
+      navigate('/manage_doctor', { replace: true });
     }
   };
 
   function goBack() {
-    navigate('/search_doctor', { replace: true });
+    navigate('/manage_doctor', { replace: true });
   }
 
   return (
@@ -303,15 +303,16 @@ export default function InsertDoctor() {
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
                 <select 
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    value={data.d_department}
-                    onChange={(e) => handleInputChange(e, 'd_department')}
+                    value={data.d_department_id}
+                    onChange={(e) => handleInputChange(e, 'd_department_id')}
                 >
-                    <option value="">Select department</option>
-                    <option value="Cardiology">Cardiology</option>
-                    <option value="Neurology">Neurology</option>
-                    <option value="Orthopedics">Orthopedics</option>
-                    <option value="Pediatrics">Pediatrics</option>
-                    <option value="Radiology">Radiology</option>
+                    <option value="0">Select department</option>
+                    <option value="1">Bone</option>
+                    <option value="2">Eye</option>
+                    <option value="3">Heart</option>
+                    <option value="4">Dental</option>
+                    <option value="5">Skin</option>
+                    <option value="6">Ear, Nose, Throat</option>
                 </select>
             </div>
           
