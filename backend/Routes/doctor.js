@@ -134,7 +134,17 @@ router.post("/addDoc", async (req, res) => {
 
 });
 
-
+router.post("/updateDoctorInfo", (req, res) => {
+    const {fName,mName,lName,idNumber,sex,id} = req.body;
+    db.query("UPDATE employee SET fName = ?, mName = ?, lName = ?, idNumber = ?, sex = ? WHERE id = ?", [fName, mName, lName, idNumber, sex, id], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Doctor Updated");
+        }
+    });
+});
 
 module.exports = router;
 // module.exports = getDocInfo

@@ -24,6 +24,8 @@ import AllergyInsert from "./components/pages/patientInfo/AllergyEdit/AllergyIns
 
 import ManageDoctorPage from "./components/pages/doctorInfo/ManageDoctorPage.tsx";
 import DoctorInfo from "./components/pages/doctorInfo/DoctorInfoPage.tsx";
+import UpdateDoctorInfo from "./components/pages/doctorInfo/DoctorEdit/UpdatePersonalInfo.tsx";
+import InsertDoctor from "./components/pages/doctorInfo/DoctorEdit/InsertDoctor.tsx";
 
 import Income from "./components/pages/reportAll/Income.tsx";
 import RoomBooking from "./components/pages/roomManage/RoomBooking";
@@ -74,12 +76,14 @@ function App() {
         <Route path="/search_patient/details/cure_insert" element={<InsertCureHist />} />
         <Route path="/search_patient/details/cure_update" element={<UpdateCureHist />} />
         <Route path="/manage_doctor" element={<ManageDoctorPage />} />
-        <Route path="/search_doctor/details" element={<DoctorInfo />} />
+        <Route path="/manage_doctor/details" element={<DoctorInfo />} />
+        <Route path="/manage_doctor/details/doctor_update" element={<UpdateDoctorInfo />} />
 
         <Route path="/income" element={<Income />} />
         <Route path="/monthly_income" element={<MonthlyIncome />} />
         <Route path="/roomBooking" element={<RoomBooking />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/manage_doctor/doctor_insert" element={<InsertDoctor />} />
         <Route path="/cases_report" element={<NumberOfCases />} />
       </Routes>
     </>
