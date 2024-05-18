@@ -25,7 +25,7 @@ export default function clockInStatus() {
   const lName = JSON.parse(localStorage.getItem("lName") || '""');
 
   return <>
-    <h1 class="text-3xl font-bold text-center">Clock history for {fName} {lName}</h1>
+    <h1 className="text-3xl font-bold text-center">Clock history for {fName} {lName}</h1>
     <div className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
       <div className="mx-auto max-w-screen-2xl px-4 lg:px-12">
         <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
