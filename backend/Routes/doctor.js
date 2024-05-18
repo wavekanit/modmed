@@ -41,21 +41,18 @@ router.get("/getDocList/:id?", (req, res) => {
     });
 });
 
-
-
-function getAlreadExistEmerInfo(emergency){
-    const {fName, mName, lName, tel, address, email} = emergency;
-    return new Promise((resolve, reject) => {
-        db.query("SELECT * FROM emergency_contact WHERE fName = ? AND lName = ?", [fName, lName], (error, result) => {
-            if(error){
-                console.log(error);
-                reject(error);
-            } else {
-                resolve(result);
-            }
-        });
-    });
-}
+router.get("/getDoctor/:search", (req, res) => {
+    const searchN = req.params.search;
+    db.query("SELECT * FROM employee WHERE role_name = 'doctor' AND (fName LIKE ? OR lName LIKE ?)", [`%${searchN}%`, `%${searchN}%`], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            console.log(result);
+            res.send(result);
+        }
+    });   
+});
 
 function insertEmergencyContact(emergency){
     return new Promise((resolve, reject) => {

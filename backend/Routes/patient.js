@@ -47,6 +47,29 @@ router.post("/updatePatientAllergies", (req, res) => {
     });
 });
 
+router.post("/addPatientAllergies", (req, res) => {
+    const {p_id, type_allergy, allergy, status_allergy} = req.body;
+    db.query("INSERT INTO patient_allergy (p_id, type_allergy, allergy, status_allergy) VALUES (?, ?, ?, ?)", [p_id, type_allergy, allergy, status_allergy], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Patient Updated");
+        }
+    });
+});
+
+router.post("/updateCure", (req, res) => {
+    const {p_id, date_cure, basic_symp, diag_result, methods} = req.body;
+    db.query("UPDATE cure_history SET basic_symp = ?, diag_result = ?, methods = ? WHERE p_id = ? AND date_cure = ?", [basic_symp, diag_result, methods, p_id, date_cure], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Patient Updated");
+        }
+    });
+});
 
 router.post("/addCure", (req, res) => {
     const {p_id, basic_symp, diag_result, methods, d_id, room_id} = req.body;
@@ -97,28 +120,25 @@ router.get("/getPatient/:search", (req, res) => {
             console.log(result);
             res.send(result);
         }
-    });
-    
+    }); 
 });
 
 router.get("/getPatientInfo/:id", (req, res) => {
     const sqlStatement = `
     SELECT patient.*, 
-       JSON_ARRAYAGG(
-           JSON_OBJECT(
+        JSON_ARRAYAGG 
+            ( JSON_OBJECT (
                'type_allergy', patient_allergy.type_allergy,
                'allergy', patient_allergy.allergy,
                'status', patient_allergy.status_allergy
            )
        ) AS allergies,
-       CAST(
-           JSON_OBJECT(
+           JSON_OBJECT (
                'fName', emergency_contact.fName,
                'lName', emergency_contact.lName,
                'email', emergency_contact.email,
                'phone', emergency_contact.tel,
                'address', emergency_contact.addresses
-           ) AS JSON
        ) AS emergency_contact
         FROM patient
         LEFT JOIN patient_allergy ON patient.p_id = patient_allergy.p_id

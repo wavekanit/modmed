@@ -2,14 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export default function SearchPatientPage() {
+export default function ManageDoctorPage() {
   const [data, setData] = useState([]);
   const [searching, setSearching] = useState("");
 
   const navigate = useNavigate();
 
   function detailClick(val) {
-    navigate("/search_patient/details", { replace: true, state: { val } });
+    navigate("/search_doctor/details", { replace: true, state: { val } });
   }
 
   const [dummy_data, setDummyData] = useState([]);
@@ -19,7 +19,7 @@ export default function SearchPatientPage() {
   async function SearchClick() {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/getPatient/${searching}`
+        `http://localhost:3000/api/getDoctor/${searching}`
       );
       setDummyData(response.data);
     } catch (error) {
@@ -38,7 +38,7 @@ export default function SearchPatientPage() {
                   className="grow"
                   placeholder="Search"
                   value={searching}
-                  onChange={(e) => {setSearching(e.target.value), SearchClick()}}
+                  onChange={(e) => {setSearching(e.target.value), console.log(searching)}}
                 />
                 <button
                   className="btn bg-blue-500 w-16 text-xs text-white mx-2"
@@ -105,14 +105,14 @@ export default function SearchPatientPage() {
               </thead>
               <tbody>{dummy_data.map((val) => (
                   <tr
-                    key={val.p_id}
+                    key={val.id}
                     className="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
                   >
                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       <div className="flex items-center space-x-4">
                         <button
                           type="button"
-                          onClick={() => detailClick(val.p_id)}
+                          onClick={() => detailClick(val.id)}
                           className="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                         >
                           <svg
@@ -136,7 +136,7 @@ export default function SearchPatientPage() {
                     {/* Data for each column */}
                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       <div className="flex items-center">
-                        <th>{val.d_id}</th>
+                        <th>{val.id}</th>
                       </div>
                     </td>
                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
