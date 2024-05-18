@@ -199,4 +199,29 @@ router.get("/getNumberOfCases/:month/:year", (req, res) => {
     });
 });
 
+router.get("/getNumberOfStaff/:month/:year", (req, res) => {
+    const {month, year} = req.params;
+    const query = `
+    SELECT
+        r.role_name,
+        COUNT(*) AS number_of_staff
+    FROM
+        employee e
+    JOIN
+        roles r ON e.role_name = r.role_name
+    WHERE
+        e.quit_date IS NULL OR (YEAR(e.quit_date) > ? OR (YEAR(e.quit_date) = ? AND MONTH(e.quit_date) >= ?))
+    GROUP BY
+        r.role_name;
+    `;
+    db.query(query, [year, year, month], (error, result) => {
+        if(error){
+            console.log(error);
+            res.send("Internal Server Error");
+        } else {
+            res.send(result);
+        }
+    });
+});
+
 module.exports = router

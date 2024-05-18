@@ -31,6 +31,7 @@ import RoomBooking from "./components/pages/roomManage/RoomBooking";
 import MonthlyIncome from "./components/pages/reportAll/MonthlyIncome.tsx";
 import Payment from "./components/pages/payment/Payment.tsx";
 import NumberOfCases from "./components/pages/reportAll/NumberOfCases.tsx";
+import NumberOfStaff from "./components/pages/reportAll/NumberOfStaff.tsx";
 
 
 
@@ -81,6 +82,7 @@ function App() {
         <Route path="/roomBooking" element={<RoomBooking />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/cases_report" element={<NumberOfCases />} />
+        <Route path="/staff_report" element={<NumberOfStaff />}/>
       </Routes>
     </>
   );
