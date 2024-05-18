@@ -27,10 +27,6 @@ export default function PersonalInfo(props: { p_id: number }) {
 
   useEffect(() => {}, [dummy_data]);
 
-  function goEdit(val) {
-    navigate("/search_patient/details/allergy_update" , {replace : true, state: {val: val}});
-  }
-
   return (
     <>
         <div className="bg-blue-500 text-white text-center py-4 px-2 rounded ml-10 w-full">

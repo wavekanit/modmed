@@ -21,6 +21,9 @@ import UpdateCureHist from "./components/pages/patientInfo/CureEdit/CureUpdate.t
 import AllergyUpdate from "./components/pages/patientInfo/AllergyEdit/AllergyUpdate.tsx";
 import AllergyInsert from "./components/pages/patientInfo/AllergyEdit/AllergyInsert.tsx";
 
+import ManageDoctorPage from "./components/pages/doctorInfo/ManageDoctorPage.tsx";
+import DoctorInfo from "./components/pages/doctorInfo/DoctorInfoPage.tsx";
+
 function App() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
   if (isLoggedIn === null) {
@@ -39,9 +42,9 @@ function App() {
         {/* <Route path = "/crud" element={<CrudPage />} />
         <Route path = "/Add" element={<AddInfo />} />
         <Route path = "/Edit" element={<EditInfoPage />} /> */}
-        <Route path="/manage_doctor" element={<DocInfo />} />
+        {/* <Route path="/manage_doctor" element={<DocInfo />} />
         <Route path="/manage_doctor/details" element={<DocDetail />} />
-        <Route path="/manage_doctor/details/edit" element={<DocEdit />} />
+        <Route path="/manage_doctor/details/edit" element={<DocEdit />} /> */}
         {/* <Route path = "manage_patient" element = {<CrudPage />} /> */}
         {/* <Route path = "/doctorinfo" element = {<DocInfo/>}/> */}
         {/* <Route path = "/doctorinfo/details" element = {<DocDetail/>}/> */}
@@ -59,6 +62,8 @@ function App() {
         <Route path="/search_patient/details/allergy_insert" element={<AllergyInsert />} />
         <Route path="/search_patient/details/cure_insert" element={<InsertCureHist />} />
         <Route path="/search_patient/details/cure_update" element={<UpdateCureHist />} />
+        <Route path="/manage_doctor" element={<ManageDoctorPage />} />
+        <Route path="/search_doctor/details" element={<DoctorInfo />} />
       </Routes>
     </>
   );

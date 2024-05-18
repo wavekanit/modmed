@@ -23,7 +23,7 @@ db.connect( (error) => {
 
 router.get("/getStaffInfoByID/:id", (req, res) => {
     const sqlStatement = `
-        SELECT employee.id, employee.fName, employee.mName, employee.lName, employee.idNumber, employee.DOB, employee.sex, employee.addresses, employee.tel, employee.email, employee.nationality, employee.race, employee.religion, employee.bloodType, employee.relation, employee.role_name, employee.d_license_id, employee.d_department,
+        SELECT employee.id, employee.fName, employee.mName, employee.lName, employee.idNumber, employee.DOB, employee.sex, employee.addresses, employee.tel, employee.email, employee.nationality, employee.race, employee.religion, employee.bloodType, employee.relation, employee.role_name, employee.d_license_id,
            JSON_ARRAYAGG (
                JSON_OBJECT (
                    'level_edu', edu.level_edu,

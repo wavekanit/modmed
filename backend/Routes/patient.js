@@ -104,8 +104,7 @@ router.get("/getPatient/:search", (req, res) => {
             console.log(result);
             res.send(result);
         }
-    });
-    
+    }); 
 });
 
 router.get("/getPatientInfo/:id", (req, res) => {
