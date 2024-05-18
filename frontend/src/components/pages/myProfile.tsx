@@ -38,7 +38,7 @@ export default function myProfile({ }: Props) {
                             <h3>Your email : {email}</h3>
                             <li>Your ID Number : {item.id} </li>
                             <li>Your doctor license number : {item.d_license_id}</li>
-                            <li>Your department : {item.d_department}</li>
+                            <li>Your department : {item.department_name}</li>
                             <li>Citizen ID Number : {item.idNumber}</li>
                             <li>First Name : {item.fName}</li>
                             <li>Middle Name : {item.mName != null ? item.mName : "-"}</li>

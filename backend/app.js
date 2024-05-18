@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql");
 const dotenv = require("dotenv");
 const cors = require('cors');
+const moment = require("moment");
 const {readdir, readdirSync} = require("fs");
 // const doctor = require("./Routes/doctor");
 // const staff = require("./Routes/staff");
@@ -17,6 +18,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const { mainModule } = require("process");
 const { get } = require("http");
+const exp = require("constants");
 app.use(bodyParser.json());
 
 const corsOptions = {
@@ -105,7 +107,7 @@ function getIdByEmail(email){
     });
 }
 
-app.post("/testEmail", async(req, res) => {
+app.post("/CheckIn", async(req, res) => {
     const {email,toDay, currentTime} = req.body
     console.log(email);
     try{
@@ -159,6 +161,63 @@ app.post("/testEmail", async(req, res) => {
 });
 
 
+app.get("/getExpenseByMonthYear/:month/:year", (req, res) => {
+    const {month, year} = req.params;
+    const query = `
+    SELECT
+        e.role_name,
+        FLOOR(SUM(TIMESTAMPDIFF(SECOND, a.clock_in, a.clock_out) / 3600)) AS total_hour,
+        FLOOR(SUM(TIMESTAMPDIFF(SECOND, a.clock_in, a.clock_out)) / 3600) * r.income_base AS expense
+    FROM
+        attendance a
+    JOIN
+        employee e ON a.id = e.id
+    JOIN
+        roles r ON e.role_name = r.role_name
+    WHERE
+        a.clock_out IS NOT NULL AND
+        YEAR(a.clock_in) = ? AND MONTH(a.clock_in) = ?
+    GROUP BY
+        e.role_name;
+
+
+    `;
+    db.query(query, [year, month], (error, result) => {
+        if(error){
+            console.log(error);
+            res.send("Internal Server Error");
+        } else {
+            const formattedResult = result.map(row => ({
+                ...row,
+                role_name: row.role_name,
+                total_hour: parseInt(row.total_hour),
+                expense: parseInt(row.expense)
+
+            }));
+            res.send(formattedResult);
+        }
+    });
+});
+
+app.get("/getMinMaxYearProfit", (req, res) => {
+    const sqlStatement = `
+        SELECT MIN(clock_in) AS min_year, MAX(clock_in) AS max_year
+        FROM attendance;
+    `;
+    db.query(sqlStatement, (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            const formattedResult = result.map(row => ({
+                ...row,
+                min_year: moment(row.min_year).format('YYYY'),
+                max_year: moment(row.max_year).format('YYYY')
+            }));
+            res.send(formattedResult);
+        }
+    });
+});
 
 app.listen(3000, () => {
     console.log("Server started on PORT 3000")
