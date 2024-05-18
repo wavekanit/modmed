@@ -16,7 +16,7 @@ import CheckIn from "./components/pages/CheckIn";
 
 import SearchPatientPage from "./components/pages/patientInfo/SearchPatientPage";
 import MyProfile from "./components/pages/myProfile.tsx";
-import ClockInHistory from "./components/pages/ClockInHistory.tsx"
+import ClockInHistory from "./components/pages/reportAll/ClockInHistory.tsx"
 import InsertCureHist from "./components/pages/patientInfo/CureEdit/CureInsert.tsx";
 import UpdateCureHist from "./components/pages/patientInfo/CureEdit/CureUpdate.tsx";
 import AllergyUpdate from "./components/pages/patientInfo/AllergyEdit/AllergyUpdate.tsx";
@@ -28,7 +28,6 @@ import DoctorInfo from "./components/pages/doctorInfo/DoctorInfoPage.tsx";
 import Income from "./components/pages/reportAll/Income.tsx";
 import RoomBooking from "./components/pages/roomManage/RoomBooking";
 
-import ClockInHistory from "./components/pages/reportAll/ClockInHistory.tsx";
 import MonthlyIncome from "./components/pages/reportAll/MonthlyIncome.tsx";
 import Payment from "./components/pages/payment/Payment.tsx";
 
