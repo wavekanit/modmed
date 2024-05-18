@@ -31,8 +31,7 @@ export default function AllergyUpdate() {
                 allergy: data.allergy,
                 status_allergy: data.status_allergy,
             });
-            alert(response.data);
-            // alert("Success");
+            alert("Success");
         } catch (error) {
             console.error(error);
         } finally {
@@ -56,10 +55,9 @@ export default function AllergyUpdate() {
                                 setData({ ...data, type_allergy: e.target.value });
                                 console.log("data: ", data);
                             }}>
-                            <option value="">Select</option>
-                            <option value="food">food</option>
-                            <option value="Medication">drug</option>
-                            <option value="phd">symptom</option>
+                            <option value="food">Food</option>
+                            <option value="drug">Drug</option>
+                            <option value="symptom">Symptom</option>
                         </select>
 
                     </div>
@@ -88,8 +86,8 @@ export default function AllergyUpdate() {
                                 setData({ ...data, status_allergy: e.target.value });
                             }}
                         >
-                            <option value={0}>0</option>
-                            <option value={1}>1</option>
+                            <option value={0}>Inactive</option>
+                            <option value={1}>Active</option>
                         </select>
 
                     </div>

@@ -31,6 +31,29 @@ router.post("/updatePatientAllergies", (req, res) => {
     });
 });
 
+router.post("/addPatientAllergies", (req, res) => {
+    const {p_id, type_allergy, allergy, status_allergy} = req.body;
+    db.query("INSERT INTO patient_allergy (p_id, type_allergy, allergy, status_allergy) VALUES (?, ?, ?, ?)", [p_id, type_allergy, allergy, status_allergy], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Patient Updated");
+        }
+    });
+});
+
+router.post("/updateCure", (req, res) => {
+    const {p_id, date_cure, basic_symp, diag_result, methods} = req.body;
+    db.query("UPDATE cure_history SET basic_symp = ?, diag_result = ?, methods = ? WHERE p_id = ? AND date_cure = ?", [basic_symp, diag_result, methods, p_id, date_cure], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Patient Updated");
+        }
+    });
+});
 
 router.post("/addCure", (req, res) => {
     const {p_id, basic_symp, diag_result, methods, d_id, room_id} = req.body;

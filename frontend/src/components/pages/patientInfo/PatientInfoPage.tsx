@@ -25,7 +25,7 @@ export default function PatientInfoPage() {
           <AllergyInfo p_id={p_id}/>
         </div>
       </div>
-        <div className='overflow-y-auto overflow-x-hidden w-full sm:w-5/6 p-2 sm:rounded-lg mx-auto'>
+        <div className='overflow-y-auto overflow-x-hidden w-full sm:w-5/6 p-2 h-80 sm:rounded-lg mx-auto'>
           <CureHistory p_id={p_id}/>
         </div>
       <button className='btn flex mx-auto' onClick={goBack}>Back</button>

@@ -19,7 +19,8 @@ type CureData = {
 export default function insertCureHist() {
     const location = useLocation();
     const value = location.state.val;
-    const d_id = localStorage.getItem("d_id");
+    const d_id = localStorage.getItem("id");
+    console.log("d_id: ", d_id);
 
     const NewCure: CureData = {
         p_id: value,
@@ -49,7 +50,7 @@ export default function insertCureHist() {
                 methods: data.methods,
                 progress_status: data.progress_status,
                 d_id: data.d_id,
-                room_id: data.room_id,
+                room_id: null,
                 date_finished: data.date_finished,
             });
             alert("success");
@@ -60,12 +61,16 @@ export default function insertCureHist() {
         }
     }
 
+    function goBack() {
+        navigate("/search_patient/details", { replace: true, state: { val: value } });
+    }
+
     return (
         <>
           <div className="mx-auto w-1/2">
             <FormWrapper title="Insert Cure History">
                 <form onSubmit={submit}>
-                    <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
+                    {/* <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                           Date
                         </label>
@@ -78,7 +83,7 @@ export default function insertCureHist() {
                                     console.log("data: ", data);
                                 }}
                                 />
-                    </div>
+                    </div> */}
                     <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                           Basic Symptom
@@ -118,7 +123,7 @@ export default function insertCureHist() {
                                     console.log("data: ", data);
                                 }} />
                     </div>
-                    <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
+                    {/* <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                           Progress Status
                         </label>
@@ -130,12 +135,11 @@ export default function insertCureHist() {
                                 setData({...data, progress_status: parseInt(e.target.value)});
                                 console.log("data: ", data);
                             }} >
-                            <option value="">Select</option>
                             <option value="1">Infected</option>
                             <option value="0">Cured</option>
                         </select>
-                    </div>
-                    <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
+                    </div> */}
+                    {/* <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                           Doctor ID
                         </label>
@@ -147,8 +151,8 @@ export default function insertCureHist() {
                                     setData({...data, d_id: parseInt(e.target.value)});
                                     console.log("data: ", data);
                                 }} />
-                    </div>
-                    <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
+                    </div> */}
+                    {/* <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                           Room ID
                         </label>
@@ -160,8 +164,8 @@ export default function insertCureHist() {
                                     setData({...data, room_id: parseInt(e.target.value)});
                                     console.log("data: ", data);
                                 }} />
-                    </div>
-                    <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
+                    </div> */}
+                    {/* <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                           Date Finished
                         </label>
@@ -173,8 +177,9 @@ export default function insertCureHist() {
                                     setData({...data, date_finished: e.target.value});
                                     console.log("data: ", data);
                                 }} />
-                    </div>
+                    </div> */}
                 <button type="submit" className="btn btn-primary m-5 flex mx-auto">Submit</button>
+                <button type="button" className="btn m-5 flex mx-auto" onClick={goBack}>Back</button>
             </form>
         </FormWrapper>
         </div>

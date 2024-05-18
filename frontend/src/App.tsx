@@ -13,11 +13,13 @@ import DocDetail from "./components/pages/docInfo/doctorDetailPage.tsx";
 import DocEdit from "./components/pages/docEditInfo/DocEditInfoPage";
 import PatientInfo from "./components/pages/patientInfo/PatientInfoPage";
 import CheckIn from "./components/pages/CheckIn";
-import AllergyUpdate from "./components/pages/patientInfo/AllergyEdit/AllergyUpdate.tsx";
 import SearchPatientPage from "./components/pages/patientInfo/SearchPatientPage";
 import MyProfile from "./components/pages/myProfile.tsx";
 import ClockInHistory from "./components/pages/ClockInHistory.tsx"
-import InsertCureHist from "./components/pages/patientInfo/CureInsert/CureInsert.tsx";
+import InsertCureHist from "./components/pages/patientInfo/CureEdit/CureInsert.tsx";
+import UpdateCureHist from "./components/pages/patientInfo/CureEdit/CureUpdate.tsx";
+import AllergyUpdate from "./components/pages/patientInfo/AllergyEdit/AllergyUpdate.tsx";
+import AllergyInsert from "./components/pages/patientInfo/AllergyEdit/AllergyInsert.tsx";
 
 function App() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -54,7 +56,9 @@ function App() {
         <Route path="/checkIn" element={<CheckIn />} />
         <Route path="/clockIn_history" element={<ClockInHistory />} />
         <Route path="/search_patient/details/allergy_update" element={<AllergyUpdate />} />
+        <Route path="/search_patient/details/allergy_insert" element={<AllergyInsert />} />
         <Route path="/search_patient/details/cure_insert" element={<InsertCureHist />} />
+        <Route path="/search_patient/details/cure_update" element={<UpdateCureHist />} />
       </Routes>
     </>
   );
