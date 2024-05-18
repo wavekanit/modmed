@@ -18,8 +18,8 @@ import RoomBooking from "./components/pages/roomManage/RoomBooking";
 
 import SearchPatientPage from "./components/pages/patientInfo/SearchPatientPage";
 import MyProfile from "./components/pages/myProfile.tsx";
-import ClockInHistory from "./components/pages/ClockInHistory.tsx";
-import MonthlyIncome from "./components/pages/MonthlyIncome.tsx";
+import ClockInHistory from "./components/pages/reportAll/ClockInHistory.tsx";
+import MonthlyIncome from "./components/pages/reportAll/MonthlyIncome.tsx";
 
 function App() {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
