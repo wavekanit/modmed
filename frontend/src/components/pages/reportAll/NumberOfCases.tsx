@@ -84,7 +84,7 @@ export default function Income({ }: Props) {
     getNumber(selectedMonth, selectedYear);
   };
 
-  console.log(cases);
+  // console.log(cases);
 
   return (
     <>
