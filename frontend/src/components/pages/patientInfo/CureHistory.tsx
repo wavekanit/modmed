@@ -34,22 +34,31 @@ export default function CureHistory(props: { p_id: number }) {
     navigate("/search_patient/details/cure_update", { replace: true, state: { val: val } });
   }
 
+  function convertDate(beforeDate : String) {
+    const date = new Date(String(beforeDate)); // Convert beforeDate to a string
+    const adjustedDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
+    const formattedDate = adjustedDate.toISOString().slice(0, 19).replace('T', ' ');
+    return(
+      <div className="text-sm text-white">Date : {formattedDate}</div>
+    );
+  }
+
   return (
     <>
-      <div className="bg-blue-500 text-white text-center py-4 px-2 rounded ml-10 w-full">
-        Cure History of -- {p_id} --
+      <div className="bg-blue-500 text-3xl font-bold text-white text-center py-4 px-2 rounded ml-10 w-full">
+        Cure History
       </div>
       <div className='flex flex-wrap justify-right items-right w-full h-full m-3 ml-10'>
         <ul className='w-full'>
-          {dummy_data.map((data) => (
-            <li key={data.p_id} className='w-full mb-4'>
+          {dummy_data.map((data, index) => (
+            <li key={index} className='w-full mb-4'>
               <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                 <div className="card mx-auto my-3 w-full py-3 px-5 bg-grey dark:bg-grey-500 relative sm:rounded-lg">
                   <div className="flex flex-col">
-                    <div className="text-lg font-bold text-white ">P_ID : {data.p_id}</div>
-                    <div className="text-sm">Date : {data.date_cure}</div>
-                    <div className="text-sm">Symptom : {data.basic_symp}</div>
-                    <div className="text-sm">Status : {data.progress_status}</div>
+                    <div className="text-lg font-bold text-white ">Cure Index : {index+1}</div>
+                    {convertDate(data.date_cure)}
+                    <div className="text-sm text-white">Symptom : {data.basic_symp}</div>
+                    <div className="text-sm text-white">Status : {data.progress_status}</div>
                   </div>
                   <button
                         type="button"

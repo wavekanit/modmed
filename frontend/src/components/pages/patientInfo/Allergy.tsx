@@ -30,7 +30,7 @@ export default function AllergyInfo(props: { p_id: number }) {
 
   async function handleCheckboxChange(index: number, value: string) {
     const newData = [...dummy_data];
-    newData[index].status_allergy = value === '1' ? '0' : '1';
+    newData[index].status_allergy = value === 1 ? 0 : 1;
     setDummyData(newData);
 
     try {
@@ -56,8 +56,8 @@ export default function AllergyInfo(props: { p_id: number }) {
 
   return (
     <>
-        <div className="bg-blue-500 text-white text-center py-4 px-2 rounded ml-10 w-full">
-            Allergy this is Info of -- {p_id} --
+        <div className="bg-blue-500 font-bold text-3xl text-white text-center py-4 px-2 rounded ml-10 w-full">
+            Allergy Info
         </div>
         <div className='flex flex-wrap justify-right items-right w-full h-full m-3 ml-10'>
             <ul className='w-full'>
@@ -66,9 +66,9 @@ export default function AllergyInfo(props: { p_id: number }) {
                 <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                     <div className="card mx-auto my-3 w-full py-3 px-5 bg-grey dark:bg-grey-500 relative sm:rounded-lg">
                         <div className="flex flex-col">
-                        <div className="text-lg font-bold text-white ">ALLERGY_ID : {data.allergy_id}</div>
-                        <div className="text-sm">Type : {data.type_allergy}</div>
-                        <div className="text-sm">Allergy : {data.allergy}</div>
+                        <div className="text-lg font-bold text-white ">ALLERGY ID : {data.allergy_id}</div>
+                        <div className="text-sm text-white">Type : {data.type_allergy}</div>
+                        <div className="text-sm text-white">Allergy : {data.allergy}</div>
                         </div>
  
                     <button
@@ -89,15 +89,17 @@ export default function AllergyInfo(props: { p_id: number }) {
                         Edit
                         </button>
                         <label className="inline-flex items-center cursor-pointer mt-2">
-                            <input 
-                                    type="checkbox" 
-                                    value={data.status_allergy} 
-                                    className="sr-only peer" 
-                                    checked={data.status_allergy === '1'}
-                                    onChange={() => handleCheckboxChange(index, data.status_allergy)} 
-                                />
-                            <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-1 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                            <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">{data.status_allergy === '1' ? 'Infected' : 'Not Infected'}</span>
+                          <input 
+                            type="checkbox" 
+                            value={data.status_allergy} 
+                            className="sr-only peer" 
+                            checked={data.status_allergy === 1}
+                            onChange={() => {
+                              handleCheckboxChange(index, data.status_allergy);
+                            }} 
+                          />
+                          <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-1 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                          <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">{data.status_allergy === 1 ? 'Infected' : 'Not Infected'}</span>
                         </label>
                     </div>
                 </div>
