@@ -29,8 +29,8 @@ export default function PersonalInfo(props: { p_id: number }) {
 
   return (
     <>
-        <div className="bg-blue-500 text-white text-center py-4 px-2 rounded ml-10 w-full">
-            PersonalInfo of -- {p_id} --
+        <div className="bg-blue-500 text-white font-bold text-3xl text-center py-4 px-2 rounded ml-10 w-full">
+            Personal Info
         </div>
         <div className='flex flex-wrap justify-right items-right w-full h-full m-3 ml-10'>
             <ul className='w-full'>
@@ -39,9 +39,20 @@ export default function PersonalInfo(props: { p_id: number }) {
                 <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                     <div className="card mx-auto my-3 w-full py-3 px-5 bg-grey dark:bg-grey-500 relative sm:rounded-lg">
                         <div className="flex flex-col">
-                        <div className="text-lg font-bold text-white ">P_ID : {data.p_id}</div>
-                        <div className="text-sm">First Name : {data.fName}</div>
-                        <div className="text-sm">Last Name : {data.lName}</div>
+                        <div className="text-lg font-bold text-white ">Patient ID : {data.p_id}</div>
+                        <div className="text-sm text-white">First Name : {data.fName}</div>
+                        <div className="text-sm text-white">Middle Name : {data.mName}</div>
+                        <div className="text-sm text-white">Last Name : {data.lName}</div>
+                        <div className="text-sm text-white">ID Number : {data.idNumber}</div>
+                        <div className="text-sm text-white">Sex : {data.sex}</div>
+                        <div className="text-sm text-white">Address : {data.addresses}</div>
+                        <div className="text-sm text-white">Tel : {data.tel}</div>
+                        <div className="text-sm text-white">Email : {data.email}</div>
+                        <div className="text-sm text-white">Nationality : {data.nationality}</div>
+                        <div className="text-sm text-white">Race : {data.race}</div>
+                        <div className="text-sm text-white">Religion : {data.religion}</div>
+                        <div className="text-sm text-white">Blood Type : {data.bloodType}</div>
+
                         </div>
                     </div>
                 </div>
