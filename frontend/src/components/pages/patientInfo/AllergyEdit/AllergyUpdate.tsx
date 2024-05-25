@@ -16,6 +16,8 @@ export default function AllergyUpdate() {
     const location = useLocation();
     const value = location.state.val;
     const val = value.p_id;
+    const role = localStorage.getItem("role_name");
+    console.log("value: ", val);
 
     const [data, setData] = useState<AllergyData>(value);
 
@@ -35,12 +37,20 @@ export default function AllergyUpdate() {
         } catch (error) {
             console.error(error);
         } finally {
+            if (role === `"register"`) {
+                navigate("/manage_patient/details", { replace: true, state: { val: val } });
+            } else {
             navigate("/search_patient/details", { replace: true, state: { val: val } });
+            }
         }
     };
 
     function goBack() {
-        navigate("/search_patient/details", { replace: true, state: { val: val } });
+        if (role === `"register"`) {
+            navigate("/manage_patient/details", { replace: true, state: { val: value } });
+        } else {
+        navigate("/search_patient/details", { replace: true, state: { val: value } });
+        }
     }
 
     return (

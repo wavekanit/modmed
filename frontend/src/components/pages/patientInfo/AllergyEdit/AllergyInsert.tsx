@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import FormWrapper from "../../FormWrapper";
-import axios, { all } from 'axios';
+import axios from 'axios';
 
 type AllergyData = {
     p_id: number;
@@ -14,7 +14,8 @@ type AllergyData = {
 export default function insertAllergy() {
     const location = useLocation();
     const value = location.state.val;
-    const val = value;
+    const role = localStorage.getItem("role_name");
+    console.log("value: ", value);
 
     const NewAllergy: AllergyData = {
         p_id: value,
@@ -41,12 +42,21 @@ export default function insertAllergy() {
         } catch (error) {
             console.error(error);
         } finally {
+            if (role === `"register"`) {
+                navigate("/manage_patient/details", { replace: true, state: { val: value } });
+            } else {
             navigate("/search_patient/details", { replace: true, state: { val: value } });
+            }
         }
     }
 
     function goBack() {
-        navigate("/search_patient/details", { replace: true, state: { val: val } });
+        if (role === `"register"`) {
+            console.log("register go back");
+            navigate("/manage_patient/details", { replace: true, state: { val: value } });
+        } else {
+        navigate("/search_patient/details", { replace: true, state: { val: value } });
+        }
     }
 
     return (
@@ -65,7 +75,6 @@ export default function insertAllergy() {
                             value={data.type_allergy}
                             onChange={(e) => {
                                 setData({ ...data, type_allergy: e.target.value });
-                                console.log("data: ", data);
                             }}
                             required
                         >
@@ -86,7 +95,6 @@ export default function insertAllergy() {
                             value={data.allergy}
                             onChange={(e) => {
                                 setData({ ...data, allergy: e.target.value });
-                                console.log("data: ", data);
                             }} 
                             required/>
                     </div>

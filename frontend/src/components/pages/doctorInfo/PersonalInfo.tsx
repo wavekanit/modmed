@@ -71,7 +71,7 @@ export default function PersonalInfo(props: { id: number }) {
                                         <div>Religion : {data.religion}</div>
                                         <div>Blood Type : {data.bloodType}</div>
                                         <div className="bg-grey-950">
-                                            <span className="font-bold text-4xl text-red-500">Emergency Contact </span>
+                                            <span className="font-bold text-4xl text-red-500">Emergency Contact</span>
                                             <div>
                                                 <div>Name : {data.emergency_contact.fName} {data.emergency_contact.lName} ({data.emergency_contact.phone})</div>
                                                 <div>Email : {data.emergency_contact.email}</div>
