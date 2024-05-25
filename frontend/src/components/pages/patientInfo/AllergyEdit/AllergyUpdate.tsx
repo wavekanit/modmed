@@ -47,9 +47,9 @@ export default function AllergyUpdate() {
 
     function goBack() {
         if (role === `"register"`) {
-            navigate("/manage_patient/details", { replace: true, state: { val: value } });
+            navigate("/manage_patient/details", { replace: true, state: { val: val } });
         } else {
-        navigate("/search_patient/details", { replace: true, state: { val: value } });
+        navigate("/search_patient/details", { replace: true, state: { val: val } });
         }
     }
 
