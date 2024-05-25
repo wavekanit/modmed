@@ -23,14 +23,14 @@ db.connect((error) => {
 router.get("/getStaff/:search", (req, res) => {
     const searchN = req.params.search;
     db.query("SELECT * FROM employee WHERE role_name != 'doctor' AND (fName LIKE ? OR lName LIKE ?)", [`%${searchN}%`, `%${searchN}%`], (error, result) => {
-        if(error){
+        if (error) {
             console.log(error);
             res.status(500).send("Internal Server Error");
         } else {
             console.log(result);
             res.send(result);
         }
-    });   
+    });
 });
 
 router.get("/getAttendance/:id", (req, res) => {
@@ -60,9 +60,9 @@ router.get("/getAttendance/:id", (req, res) => {
 });
 
 router.post("/updateStaffInfo", (req, res) => {
-    const {fName,mName,lName,idNumber,sex,id} = req.body;
+    const { fName, mName, lName, idNumber, sex, id } = req.body;
     db.query("UPDATE employee SET fName = ?, mName = ?, lName = ?, idNumber = ?, sex = ? WHERE id = ?", [fName, mName, lName, idNumber, sex, id], (error, result) => {
-        if(error){
+        if (error) {
             console.log(error);
             res.status(500).send("Internal Server Error");
         } else {
@@ -112,6 +112,32 @@ router.get("/getStaffInfoByID/:id", (req, res) => {
     });
 });
 
+router.get("/getNumberCase/:id", (req, res) => {
+    const sqlStatement = `
+        SELECT 
+            YEAR(date_cure) AS year,
+            MONTH(date_cure) AS month,
+            COUNT(*) AS number_case
+        FROM cure_history
+        WHERE d_id = ?
+        GROUP BY
+            MONTH(date_cure),
+            YEAR(date_cure)
+        ORDER BY
+            YEAR(date_cure) DESC,
+            MONTH(date_cure) DESC;
+
+    `;
+    db.query(sqlStatement, [req.params.id], (error, result) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send(result);
+        }
+    });
+})
+
 router.get("/getMonthlyIncome/:id", (req, res) => {
     const sqlStatement1 = `
     SELECT 
@@ -137,11 +163,45 @@ router.get("/getMonthlyIncome/:id", (req, res) => {
 
     `;
 
+    const sqlStatement2 = `
+    SELECT
+	    YEAR(date_cure) AS year,
+        MONTH(date_cure) AS month,
+	    COUNT(*) AS number_case    
+    FROM
+	    cure_history    
+    WHERE d_id = ?
+    GROUP BY
+	    YEAR(date_cure),
+        MONTH(date_cure)
+    ORDER BY
+	    YEAR(date_cure) DESC,
+        MONTH(date_cure) DESC;
+    `;
+
     db.query(sqlStatement1, [req.params.id], (error, result) => {
         if (error) {
             console.log(error);
             res.status(500).send("Internal Server Error");
         } else {
+            // db.query(sqlStatement2, [req.params.id], (error, result2) => {
+            //     if (error) {
+            //         console.log(error);
+            //         res.status(500).send("Internal Server Error");
+            //     } else {
+            //         const formattedResult = result.map(row => ({
+            //             ...row,
+            //             year: row.year,
+            //             month: row.month,
+            //             hours_worked: parseInt(row.hours_worked), // formatting hours_worked to 2 decimal places
+            //             income: parseInt(row.income), // formatting income to 2 decimal places
+            //             // number_case: result2.filter(row2 => row2.year_cure === row.year && row2.month_cure === row.month).length
+                        
+            //         }));
+            //         const final_result = [...formattedResult, ...result2];
+            //         res.send(final_result);
+            //     }
+            // });
             const formattedResult = result.map(row => ({
                 ...row,
                 year: row.year,
