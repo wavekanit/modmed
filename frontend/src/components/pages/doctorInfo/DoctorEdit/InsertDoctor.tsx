@@ -16,6 +16,7 @@ type Education = {
   degree: string;
   institute: string;
   year: string;
+  country: string;
   sepecificField: string;
 };
 
@@ -74,6 +75,7 @@ export default function InsertDoctor() {
       degree: '',
       institute: '',
       year: '',
+      country: '',
       sepecificField: ''
     }],
   };
@@ -98,7 +100,7 @@ export default function InsertDoctor() {
   const addEducation = () => {
     setData({
       ...data,
-      education: [...data.education, { degree: '', institute: '', year: '', sepecificField: '' }],
+      education: [...data.education, { degree: '', institute: '', year: '', sepecificField: '', country: ''}],
     });
   };
   const removeEducation = (index) => {
@@ -145,7 +147,7 @@ export default function InsertDoctor() {
         level_edu: edu.degree,
         diploma: edu.sepecificField,
         institute: edu.institute,
-        country: 'Thailand', // Assuming country is always Thailand
+        country: edu.country,
         year_graduated: edu.year,
       })),
     };
@@ -374,10 +376,10 @@ export default function InsertDoctor() {
                 />
               </div>
               <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year</label>
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
                 <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  value={edu.year}
-                  onChange={(e) => handleEducationChange(e, index, 'year')}
+                  value={edu.country}
+                  onChange={(e) => handleEducationChange(e, index, 'country')}
                 />
               </div>
               <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -385,6 +387,13 @@ export default function InsertDoctor() {
                 <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   value={edu.sepecificField}
                   onChange={(e) => handleEducationChange(e, index, 'sepecificField')}
+                />
+              </div>
+              <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year</label>
+                <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value={edu.year}
+                  onChange={(e) => handleEducationChange(e, index, 'year')}
                 />
               </div>
               <button type="button" onClick={() => removeEducation(index)} className="text-red-500 mt-2">Remove</button>
