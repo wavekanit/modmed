@@ -36,6 +36,11 @@ import NumberOfCases from "./components/pages/reportAll/NumberOfCases.tsx";
 import NumberOfStaff from "./components/pages/reportAll/NumberOfStaff.tsx";
 import IncomeAll from "./components/pages/reportAll/IncomeAll.tsx";
 
+import ManageStaffPage from "./components/pages/staffInfo/ManageStaffPage.tsx";
+import StaffInfo from "./components/pages/staffInfo/StaffInfoPage.tsx";
+import UpdateStaffInfo from "./components/pages/staffInfo/StaffEdit/UpdatePersonalInfo.tsx";
+import InsertStaff from "./components/pages/staffInfo/StaffEdit/InsertStaff.tsx";
+
 
 
 function App() {
@@ -63,20 +68,20 @@ function App() {
         {/* <Route path = "/doctorinfo" element = {<DocInfo/>}/> */}
         {/* <Route path = "/doctorinfo/details" element = {<DocDetail/>}/> */}
         {/* <Route path = "/doctorinfo/details/edit" element = {<DocEdit/>}/> */}
-        <Route path="/search_patient" element={<SearchPatientPage />} />
         <Route path="/doctorinfo/details" element={<DocDetail />} />
         <Route path="/doctorinfo/details/edit" element={<DocEdit />} />
-        {/* <Route path="manage_doctor" element={<CrudPage />} />
-        <Route path="manage_patient" element={<CrudPage />} /> */}
+
         <Route path="/my_profile" element={<MyProfile />} />
         <Route path="/search_patient/details" element={<PatientInfo />} />
         <Route path="/checkIn" element={<CheckIn />} />
         <Route path="/clockIn_history" element={<ClockInHistory />} />
 
+        <Route path="/search_patient" element={<SearchPatientPage />} />
         <Route path="/search_patient/details/allergy_update" element={<AllergyUpdate />} />
         <Route path="/search_patient/details/allergy_insert" element={<AllergyInsert />} />
         <Route path="/search_patient/details/cure_insert" element={<InsertCureHist />} />
         <Route path="/search_patient/details/cure_update" element={<UpdateCureHist />} />
+
         <Route path="/manage_doctor" element={<ManageDoctorPage />} />
         <Route path="/manage_doctor/details" element={<DoctorInfo />} />
         <Route path="/manage_doctor/details/doctor_update" element={<UpdateDoctorInfo />} />
@@ -89,6 +94,11 @@ function App() {
         <Route path="/cases_report" element={<NumberOfCases />} />
         <Route path="/staff_report" element={<NumberOfStaff />}/>
         <Route path="/income_all" element = {<IncomeAll />}/>
+
+        <Route path="/manage_staff" element={<ManageStaffPage />} />
+        <Route path="/manage_staff/details" element={<StaffInfo />} />
+        <Route path="/manage_staff/details/staff_update" element={<UpdateStaffInfo />} />
+        <Route path="/manage_staff/staff_insert" element={<InsertStaff />} />
       </Routes>
     </>
   );
