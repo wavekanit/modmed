@@ -341,5 +341,29 @@ router.post("/addStaffEducation", (req, res) => {
     });
 });
 
+router.post("/updateStaffInfo", (req, res) => {
+    const {fName,mName,lName,idNumber,DOB,sex,addresses,tel,nationality,race,religion,email,id} = req.body;
+    db.query("UPDATE employee SET fName = ?, mName = ?, lName = ?, idNumber = ?, DOB = ?, sex = ?, addresses = ?,tel = ?, nationality = ?,race = ?, religion = ?, bloodType = ?, email = ? WHERE id = ?", [fName,mName,lName,idNumber,DOB,sex,addresses,tel,nationality,race,religion,email,id], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Doctor Updated");
+        }
+    });
+});
+
+router.post("/delStaffEducation", (req, res) => {
+    const {id, level_edu, diploma} = req.body;
+    db.query("DELETE FROM edu WHERE id = ? AND level_edu = ? AND diploma = ?", [id, level_edu, diploma], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Education Deleted");
+        }
+    });
+});
+
 module.exports = router
 // module.exports = getRegInfo

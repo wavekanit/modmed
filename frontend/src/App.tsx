@@ -48,7 +48,7 @@ import StaffInfo from "./components/pages/staffInfo/StaffInfoPage.tsx";
 import UpdateStaffInfo from "./components/pages/staffInfo/StaffEdit/UpdatePersonalInfo.tsx";
 import InsertStaff from "./components/pages/staffInfo/StaffEdit/InsertStaff.tsx";
 import UpdateStaffEducation from "./components/pages/staffInfo/StaffEdit/UpdateEducation.tsx";
-// import InsertStaffEducation from "./components/pages/staffInfo/StaffEdit/InsertEducation.tsx";
+import InsertStaffEducation from "./components/pages/staffInfo/StaffEdit/InsertEducation.tsx";
 
 
 
@@ -96,8 +96,8 @@ function App() {
         <Route path="/manage_doctor" element={<ManageDoctorPage />} />
         <Route path="/manage_doctor/details" element={<DoctorInfo />} />
         <Route path="/manage_doctor/details/doctor_update" element={<UpdateDoctorInfo />} />
-        <Route path="/manage_doctor/doctor_insert/education_update" element={<UpdateDocEducation />} />
-        <Route path="/manage_doctor/doctor_insert/education_insert" element={<InsertDocEducation />} />
+        <Route path="/manage_doctor/details/education_update" element={<UpdateDocEducation />} />
+        <Route path="/manage_doctor/details/education_insert" element={<InsertDocEducation />} />
 
         <Route path="/income" element={<Income />} />
         <Route path="/monthly_income" element={<MonthlyIncome />} />
@@ -110,10 +110,10 @@ function App() {
 
         <Route path="/manage_staff" element={<ManageStaffPage />} />
         <Route path="/manage_staff/details" element={<StaffInfo />} />
-        <Route path="/manage_staff/details/staff_update" element={<UpdateStaffInfo />} />
         <Route path="/manage_staff/staff_insert" element={<InsertStaff />} />
+        <Route path="/manage_staff/details/staff_update" element={<UpdateStaffInfo />} />
         <Route path="/manage_staff/details/education_update" element={<UpdateStaffEducation />} />
-        {/* <Route path="/manage_staff/details/education_insert" element={<InsertStaffEducation />} /> */}
+        <Route path="/manage_staff/details/education_insert" element={<InsertStaffEducation />} />
 
         <Route path="/manage_patient" element={<ManagePatientPage />} />
         <Route path="/manage_patient/details" element={<PatientInfoStaff />} />

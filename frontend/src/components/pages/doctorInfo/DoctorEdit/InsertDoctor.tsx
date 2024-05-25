@@ -276,9 +276,17 @@ export default function InsertDoctor() {
                 >
                     <option value="">Select blood type</option>
                     <option value="A">A</option>
+                    <option value="A-">A-</option>
+                    <option value="A+">A+</option>
                     <option value="B">B</option>
+                    <option value="B-">B-</option>
+                    <option value="B+">B+</option>
                     <option value="AB">AB</option>
+                    <option value="AB-">AB-</option>
+                    <option value="AB+">AB+</option>
                     <option value="O">O</option>
+                    <option value="O-">O-</option>
+                    <option value="O+">O+</option>
                 </select>
             </div>
           <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
