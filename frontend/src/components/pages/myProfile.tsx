@@ -1,12 +1,11 @@
 import axios from "axios";
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 import { FormEvent, useState, useEffect } from "react";
 
-export default function myProfile({ }: Props) {
+export default function myProfile() {
     const fName = JSON.parse(localStorage.getItem("fName") || '""');
     const lName = JSON.parse(localStorage.getItem("lName") || '""');
-    const roleName = JSON.parse(localStorage.getItem("role_name") || '""');
     const email = JSON.parse(localStorage.getItem("email") || '""');
     const id = localStorage.getItem("id");
     const [dummy_data, setDummyData] = useState([]);
@@ -26,103 +25,70 @@ export default function myProfile({ }: Props) {
         fetchData();
     }, [])
 
-    if (roleName === "doctor") {
+    const navigate = useNavigate();
+
+    function changePassword() {
+        navigate("/my_profile/change_password", { replace: true, state: { val : id } });
+    }
+
         return <>
             {/* {console.log(val)} */}
-            <div class="card lg:card-side bg-base-100 shadow-xl">
-                <figure><img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album" /></figure>
-                <div class="card-body">
-                    {dummy_data.map((item, index) => (
-                        <div key={index}>
-                            <h2 class="card-title">Welcome to your profile! Dr. {fName} {lName}</h2>
-                            <h3>Your email : {email}</h3>
-                            <li>Your ID Number : {item.id} </li>
-                            <li>Your doctor license number : {item.d_license_id}</li>
-                            <li>Your department : {item.department_name}</li>
-                            <li>Citizen ID Number : {item.idNumber}</li>
-                            <li>First Name : {item.fName}</li>
-                            <li>Middle Name : {item.mName != null ? item.mName : "-"}</li>
-                            <li>Last Name : {item.lName}</li>
-                            <li>Date of Birth : {new Date(item.DOB).getDate()}/{new Date(item.DOB).getMonth() + 1}/{new Date(item.DOB).getFullYear()}</li>
-                            <li>Sex : {item.sex}</li>
-                            <li>Address : {item.addresses}</li>
-                            <li>Telephone Number : {item.tel}</li>
-                            <li>Nationality : {item.nationality}</li>
-                            <li>Race : {item.race}</li>
-                            <li>Religion : {item.religion}</li>
-                            <li>Blood Type : {item.bloodType}</li>
-                            <li class="shadow-xl bg-red-950"><span className="font-bold text-4xl text-red-500">Emergency Contact </span>
-                                <ul>
-                                    <li>Name : {item.emergency_contact.fName} {item.emergency_contact.lName} ({item.emergency_contact.phone})</li>
-                                    <li>Email : {item.emergency_contact.email}</li>
-                                    <li>Address : {item.emergency_contact.address}</li>
-                                    <li>Relationship : {item.relation}</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-bold text-xl">Educational History</span>
-                                <ul>
-                                    {item.educations.map((education, index2) => (
-                                        <li key={index2}>
-                                            {education.diploma}, {education.institute}, {education.country} ({education.year_graduated})
-                                        </li>
+            <p className="card-title text-5xl text-white font-bold mt-5 mb-3 bg-blue-900 rounded-md p-3 w-3/5 mx-auto">Welcome to your profile! {fName} {lName}</p>
+            <div className="card lg:card-side bg-base-100 shadow-xl w-3/5 mx-auto">
+                <div className="card-body">
+                    {dummy_data.map((item : any, index) => (
+                        <div key={index} className='flex justify-between'>
+                            <div className="mx-auto">
+                                <h2 className="font-bold text-4xl text-white mb-3 bg-blue-900 rounded-md p-1 px-10">Personal Information</h2>
+                                <li className="text-white text-lg">Email : {email}</li>
+                                <li className="text-white text-lg">ID : {item.id} </li>
+                                {
+                                item.d_license_id ? 
+                                <>
+                                    <li className="text-lg text-white">Doctor license number : {item.d_license_id}</li> 
+                                    <li className="text-lg text-white">Department : {item.department_name}</li>
+                                </>
+                                : null
+                                }
+
+                                <li className="text-lg text-white">Citizen ID Number : {item.idNumber}</li>
+                                <li className="text-lg text-white">First Name : {item.fName}</li>
+                                <li className="text-lg text-white">Middle Name : {item.mName != null ? item.mName : "-"}</li>
+                                <li className="text-lg text-white">Last Name : {item.lName}</li>
+                                <li className="text-lg text-white">Date of Birth : {new Date(item.DOB).getDate()}/{new Date(item.DOB).getMonth() + 1}/{new Date(item.DOB).getFullYear()}</li>
+                                <li className="text-lg text-white">Sex : {item.sex}</li>
+                                <li className="text-lg text-white">Address : {item.addresses}</li>
+                                <li className="text-lg text-white">Telephone Number : {item.tel}</li>
+                                <li className="text-lg text-white">Nationality : {item.nationality}</li>
+                                <li className="text-lg text-white">Race : {item.race}</li>
+                                <li className="text-lg text-white">Religion : {item.religion}</li>
+                                <li className="text-lg text-white">Blood Type : {item.bloodType}</li>
+                            </div>
+                            <div className="mx-auto">
+
+                                <h2 className="font-bold text-4xl text-white mb-3 bg-red-900 rounded-md p-1 px-10 mx-auto w-4/5">Emergency Contact</h2>
+                                <li className="text-lg text-white">Name : {item.emergency_contact.fName} {item.emergency_contact.lName} ({item.emergency_contact.phone})</li>
+                                <li className="text-lg text-white">Email : {item.emergency_contact.email}</li>
+                                <li className="text-lg text-white">Address : {item.emergency_contact.address}</li>
+                                <li className="text-lg text-white">Relationship : {item.relation}</li>
+                                
+
+                                <h2 className="font-bold text-4xl text-white mb-3 mt-5 bg-green-900 rounded-md p-1 px-8 mx-auto w-4/5">Educational History</h2>
+                                    {item.educations.map((education : any, index2 : number) => (
+                                        <div key={index2}>
+                                            <li className="text-lg text-white">{education.diploma}, {education.institute}, {education.country} ({education.year_graduated})</li>
+                                        </div>
                                     ))}
-                                </ul>
-                            </li>
+                            
+                        </div>
                         </div>
 
                     ))}
-
                 </div>
             </div>
+            <button className="btn w-1/10 flex mx-auto my-5" onClick={changePassword}>
+                Change Password
+            </button>
         </>
     }
-    else {
-        return <>
-            {/* {console.log(val)} */}
-            <div class="card lg:card-side bg-base-100 shadow-xl">
-                <figure><img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album" /></figure>
-                <div class="card-body">
-                    {dummy_data.map((item, index) => (
-                        <div key={index}>
-                            <h2 class="card-title">Welcome to your profile! {fName} {lName}</h2>
-                            <h3>Your email : {email}</h3>
-                            <li>Your ID Number : {item.id} </li>
-                            <li>Citizen ID Number : {item.idNumber}</li>
-                            <li>First Name : {item.fName}</li>
-                            <li>Middle Name : {item.mName != null ? item.mName : "-"}</li>
-                            <li>Last Name : {item.lName}</li>
-                            <li>Date of Birth : {new Date(item.DOB).getDate()}/{new Date(item.DOB).getMonth() + 1}/{new Date(item.DOB).getFullYear()}</li>
-                            <li>Sex : {item.sex}</li>
-                            <li>Address : {item.addresses}</li>
-                            <li>Telephone Number : {item.tel}</li>
-                            <li>Nationality : {item.nationality}</li>
-                            <li>Race : {item.race}</li>
-                            <li>Religion : {item.religion}</li>
-                            <li>Blood Type : {item.bloodType}</li>
-                            <li class="shadow-xl bg-red-950"><span className="font-bold text-4xl text-red-500">Emergency Contact </span>
-                                <ul>
-                                    <li>Name : {item.emergency_contact.fName} {item.emergency_contact.lName} ({item.emergency_contact.phone})</li>
-                                    <li>Email : {item.emergency_contact.email}</li>
-                                    <li>Address : {item.emergency_contact.address}</li>
-                                    <li>Relationship : {item.relation}</li>
-                                </ul>
-                            </li>
-                            <li><span class="font-bold text-xl">Educational History</span>
-                                <ul>
-                                    {item.educations.map((education, index2) => (
-                                        <li key={index2}>
-                                            {education.diploma}, {education.institute}, {education.country} ({education.year_graduated})
-                                        </li>
-                                    ))}
-                                </ul>
-                            </li>
-                        </div>
-
-                    ))}
-
-                </div>
-            </div>
-        </>
-    }
-}
 

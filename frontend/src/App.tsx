@@ -17,6 +17,7 @@ import PatientInfoStaff from "./components/pages/patientInfo/PatientInfoPageForS
 
 import SearchPatientPage from "./components/pages/patientInfo/SearchPatientPage";
 import MyProfile from "./components/pages/myProfile.tsx";
+import ChangePassword from "./components/pages/changePassword.tsx";
 import ClockInHistory from "./components/pages/reportAll/ClockInHistory.tsx"
 import InsertCureHist from "./components/pages/patientInfo/CureEdit/CureInsert.tsx";
 import UpdateCureHist from "./components/pages/patientInfo/CureEdit/CureUpdate.tsx";
@@ -25,8 +26,6 @@ import AllergyInsert from "./components/pages/patientInfo/AllergyEdit/AllergyIns
 import InsertPatient from "./components/pages/patientInfo/PatientEdit/InsertPatient.tsx";
 import UpdatePatientInfo from "./components/pages/patientInfo/PatientEdit/UpdatePersonalInfo.tsx";
 import ManagePatientPage from "./components/pages/patientInfo/ManagePatientPage.tsx";
-
-
 
 import ManageDoctorPage from "./components/pages/doctorInfo/ManageDoctorPage.tsx";
 import DoctorInfo from "./components/pages/doctorInfo/DoctorInfoPage.tsx";
@@ -79,6 +78,7 @@ function App() {
         <Route path="/doctorinfo/details/edit" element={<DocEdit />} />
 
         <Route path="/my_profile" element={<MyProfile />} />
+        <Route path="/my_profile/change_password" element={<ChangePassword />} />
         <Route path="/search_patient/details" element={<PatientInfo />} />
         <Route path="/checkIn" element={<CheckIn />} />
         <Route path="/clockIn_history" element={<ClockInHistory />} />
