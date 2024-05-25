@@ -20,7 +20,18 @@ db.connect((error) => {
     }
 });
 
-
+router.get("/getStaff/:search", (req, res) => {
+    const searchN = req.params.search;
+    db.query("SELECT * FROM employee WHERE role_name != 'doctor' AND (fName LIKE ? OR lName LIKE ?)", [`%${searchN}%`, `%${searchN}%`], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            console.log(result);
+            res.send(result);
+        }
+    });   
+});
 
 router.get("/getAttendance/:id", (req, res) => {
     const sqlStatement = `
@@ -48,6 +59,17 @@ router.get("/getAttendance/:id", (req, res) => {
     });
 });
 
+router.post("/updateStaffInfo", (req, res) => {
+    const {fName,mName,lName,idNumber,sex,id} = req.body;
+    db.query("UPDATE employee SET fName = ?, mName = ?, lName = ?, idNumber = ?, sex = ? WHERE id = ?", [fName, mName, lName, idNumber, sex, id], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Doctor Updated");
+        }
+    });
+});
 
 router.get("/getStaffInfoByID/:id", (req, res) => {
     const sqlStatement = `
@@ -132,6 +154,96 @@ router.get("/getMonthlyIncome/:id", (req, res) => {
     });
 });
 
+function insertEmergencyContact(emergency){
+    return new Promise((resolve, reject) => {
+        db.query("INSERT INTO emergency_contact (fName, mName, lName, tel, addresses, email) VALUES (?,?,?,?,?,?)", [emergency.fName, emergency.mName, emergency.lName, emergency.tel, emergency.address, emergency.email], (error, result) => {
+            if(error){
+                console.log(error)
+                reject(error);
+            } else {
+                console.log("Emergency Contact Inserted")
+                resolve(result);
+            }
+        });
+    });
+}
+
+function insertStaffInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion, bloodType, emer_id, relation, role_name){
+    return new Promise((resolve, reject) => {
+        console.log(DOB);
+        db.query("INSERT INTO employee (fName, mName, lName, idNumber, DOB, sex, addresses, tel, email, pw, nationality, race, religion, bloodType, e_id, relation, role_name) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion, bloodType, emer_id, relation,role_name], (error, result) => {
+            if(error){
+                console.log(error)
+                reject(error);
+            } else {
+                console.log("Staff Inserted")
+                resolve(result);
+            }
+        });
+    });
+}
+
+function insertStaffEdu(d_id, d_edu){
+    return new Promise((resolve, reject) => {
+        for (let i = 0; i < d_edu.length; i++) {
+            db.query("INSERT INTO edu (id, level_edu, diploma, institute, country, year_graduated) VALUES (?, ?, ?, ?, ?, ?)", [d_id, d_edu[i].level_edu, d_edu[i].diploma, d_edu[i].institute, d_edu[i].country, d_edu[i].year_graduated], (error, result) => {
+                if(error){
+                    console.log(error)
+                    reject(error);
+                } else {
+                    console.log("Staff Education Inserted")
+                    resolve(result);
+                }
+            });
+        }
+    });
+}
+
+function getAlreadExistEmerInfo(emergency){
+    const {fName, mName, lName, tel, address, email} = emergency;
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM emergency_contact WHERE fName = ? AND lName = ?", [fName, lName], (error, result) => {
+            if(error){
+                console.log(error);
+                reject(error);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+}
+
+router.post("/addStaff", async (req, res) => {
+    const {info, edu} = req.body;
+    const { fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion,bloodType, emergency, relation, role_name} = info;
+    console.log("========================================= START ==============================================");
+    console.log("First Name " + fName);
+    console.log("DOB " + DOB);
+    console.log("Relation " + bloodType);
+    var emer_id;
+    try {
+        const alreadyDoc = await getAlreadExistEmerInfo(emergency);
+        if(alreadyDoc.length != 0){
+            // res.send(alreadyDoc[0]);
+            emer_id = alreadyDoc[0].e_id;
+            console.log("ALREADY EXIST EMERGENCY CONTACT");
+            console.log(alreadyDoc[0].e_id);
+        }else{
+            const result = await insertEmergencyContact(emergency);
+            console.log(result.insertId);
+            emer_id = result.insertId;
+        }
+        const result = await insertStaffInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, pw, nationality, race, religion, bloodType, emer_id, relation, role_name);
+        console.log(result);
+        const id = result.insertId;
+        const result2 = await insertStaffEdu(id, edu);
+        console.log(result2);
+        res.send("Success");
+    } catch (error) {
+        console.log(error);
+        res.send("Failed to insert doctor");
+    }
+});
 
 module.exports = router
 // module.exports = getRegInfo

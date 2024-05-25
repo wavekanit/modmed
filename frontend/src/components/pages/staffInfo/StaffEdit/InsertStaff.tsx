@@ -37,8 +37,6 @@ type DocData = {
   emergency: EmergencyContact;
   relation: string;
   role_name: string;
-  d_license_id: string;
-  d_department_id: number;
   education: Education[];
 };
 
@@ -68,8 +66,6 @@ export default function InsertDoctor() {
     },
     relation: '',
     role_name: '',
-    d_license_id: '',
-    d_department_id: 0,
     education: [{
       degree: '',
       institute: '',
@@ -110,7 +106,6 @@ export default function InsertDoctor() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('data : ', data);
 
     const outputData = {
     info: {
@@ -137,9 +132,7 @@ export default function InsertDoctor() {
           email: data.emergency.email,
         },
         relation: data.relation,
-        role_name: 'doctor',
-        d_license: data.d_license_id ? data.d_license_id : null,
-        d_department_id: data.d_department_id,
+        role_name: data.role_name,
       },
       edu: data.education.map((edu) => ({
         level_edu: edu.degree,
@@ -151,23 +144,22 @@ export default function InsertDoctor() {
     };
 
     try {
-      const response = await axios.post('http://localhost:3000/api/addDoc', outputData);
-      console.log('Response:', response.data);
+      const response = await axios.post('http://localhost:3000/api/addStaff', outputData);
       alert('Success');
     } catch (error) {
       console.error('Error:', error);
     } finally {
-      navigate('/manage_doctor', { replace: true });
+      navigate('/manage_staff', { replace: true });
     }
   };
 
   function goBack() {
-    navigate('/manage_doctor', { replace: true });
+    navigate('/manage_staff', { replace: true });
   }
 
   return (
     <div className="mx-auto w-1/2">
-      <FormWrapper title="Insert Doctor">
+      <FormWrapper title="Insert Staff">
         <form onSubmit={submit}>
           <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
@@ -277,33 +269,22 @@ export default function InsertDoctor() {
                     <option value="AB">AB</option>
                     <option value="O">O</option>
                 </select>
-            </div>
-          <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Doctor License ID</label>
-            <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              value={data.d_license_id}
-              onChange={(e) => handleInputChange(e, 'd_license_id')}
-            />
           </div>
           <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role Name</label>
                 <select 
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    value={data.d_department_id}
-                    onChange={(e) => handleInputChange(e, 'd_department_id')}
+                    value={data.role_name}
+                    onChange={(e) => handleInputChange(e, 'role_name')}
                 >
-                    <option value="0">Select department</option>
-                    <option value="1">Bone</option>
-                    <option value="2">Eye</option>
-                    <option value="3">Heart</option>
-                    <option value="4">Dental</option>
-                    <option value="5">Skin</option>
-                    <option value="6">Ear, Nose, Throat</option>
+                    <option value="">Select Role</option>
+                    <option value="finance">Finance</option>
+                    <option value="register">Register</option>
                 </select>
-            </div>
-          
+          </div>
 
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mt-4">Emergency Contact</h3>
+          <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Emergency Contact Relation</label>
             <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -311,7 +292,6 @@ export default function InsertDoctor() {
               onChange={(e) => handleInputChange(e, 'relation')}
             />
           </div>
-          <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Emergency Contact First Name</label>
             <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               value={data.emergency.fName}
