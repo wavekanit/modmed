@@ -31,6 +31,8 @@ import ManageDoctorPage from "./components/pages/doctorInfo/ManageDoctorPage.tsx
 import DoctorInfo from "./components/pages/doctorInfo/DoctorInfoPage.tsx";
 import UpdateDoctorInfo from "./components/pages/doctorInfo/DoctorEdit/UpdatePersonalInfo.tsx";
 import InsertDoctor from "./components/pages/doctorInfo/DoctorEdit/InsertDoctor.tsx";
+import EditDocEducation from "./components/pages/doctorInfo/DoctorEdit/UpdateEducation.tsx";
+import InsertDocEducation from "./components/pages/doctorInfo/DoctorEdit/InsertEducation.tsx";
 
 import Income from "./components/pages/reportAll/Income.tsx";
 import RoomBooking from "./components/pages/roomManage/RoomBooking";
@@ -92,6 +94,8 @@ function App() {
         <Route path="/manage_doctor" element={<ManageDoctorPage />} />
         <Route path="/manage_doctor/details" element={<DoctorInfo />} />
         <Route path="/manage_doctor/details/doctor_update" element={<UpdateDoctorInfo />} />
+        <Route path="/manage_doctor/doctor_insert/education_update" element={<EditDocEducation />} />
+        <Route path="/manage_doctor/doctor_insert/education_insert" element={<InsertDocEducation />} />
 
         <Route path="/income" element={<Income />} />
         <Route path="/monthly_income" element={<MonthlyIncome />} />

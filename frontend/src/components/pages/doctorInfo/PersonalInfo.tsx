@@ -25,10 +25,18 @@ export default function PersonalInfo(props: { id: number }) {
         }
     }, [id]);
 
-    useEffect(() => {}, [dummy_data]);
+    useEffect(() => { }, [dummy_data]);
 
     function goEdit(val) {
         navigate("/manage_doctor/details/doctor_update", { replace: true, state: { val: val } });
+    }
+
+    function editEducation(val: any) {
+        navigate("/manage_doctor/doctor_insert/education_update", { replace: true, state: { val: val, id : id } });
+    }
+
+    function addEducation() {
+        navigate("/manage_doctor/doctor_insert/education_insert", { replace: true, state: { id : id } });
     }
 
     return (
@@ -74,33 +82,61 @@ export default function PersonalInfo(props: { id: number }) {
                                         <div>
                                             <span className="font-bold text-xl">Educational History</span>
                                             <div>
-                                                {data.educations.map((education, index2) => (
+                                                {data.educations.map((education: any, index2 : number) => (
                                                     <div key={index2}>
                                                         {education.diploma}, {education.institute}, {education.country} ({education.year_graduated})
+                                                        <button type="button" className="btn m-1 mx-2 btn-sm" onClick={() => editEducation(education)}>
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                className="h-4 w-4 mr-2 -ml-0.5"
+                                                                viewBox="0 0 20 20"
+                                                                fill="currentColor"
+                                                                aria-hidden="true"
+                                                            >
+                                                                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                                <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
+                                                            </svg>
+                                                            Edit Education
+                                                        </button>
                                                     </div>
                                                 ))}
+                                                <button type="button" className="btn my-1" onClick={addEducation}>
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                className="h-4 w-4 mr-2 -ml-0.5"
+                                                                viewBox="0 0 20 20"
+                                                                fill="currentColor"
+                                                                aria-hidden="true"
+                                                            >
+                                                                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                                <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
+                                                            </svg>
+                                                            Add More Education
+                                                        </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <button
-                                type="button"
-                                onClick={() => goEdit(data)}
-                                className="mt-2 py-2 px-3 flex mx-auto text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-4 w-4 mr-2 -ml-0.5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    aria-hidden="true"
+                            <div className='flex justify-between'>
+                                <button
+                                    type="button"
+                                    onClick={() => goEdit(data)}
+                                    className="mt-2 py-2 px-3 flex mx-auto text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                                 >
-                                    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                    <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
-                                </svg>
-                                Edit
-                            </button>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-4 w-4 mr-2 -ml-0.5"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                        <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
+                                    </svg>
+                                    Edit Personal Infomation
+                                </button>
+                            </div>
                         </li>
 
                     ))}

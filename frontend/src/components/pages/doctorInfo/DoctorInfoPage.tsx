@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
-// import AllergyInfo from './Allergy';
-// import CureHistory from './CureHistory';
 import PersonalInfo from './PersonalInfo';
 
 export default function PatientInfoPage() {
