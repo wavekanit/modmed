@@ -157,5 +157,29 @@ router.post("/updateDoctorInfo", (req, res) => {
     });
 });
 
+router.post("/updateDoctorEducation", (req, res) => {
+    const {level_edu, diploma, institute, country, year_graduated, id, old_level_edu, old_diploma} = req.body;
+    db.query("UPDATE edu SET level_edu = ?, diploma = ?, institute = ?, country = ?, year_graduated = ? WHERE id = ? AND level_edu = ? AND diploma = ?", [level_edu, diploma, institute, country, year_graduated, id, old_level_edu, old_diploma], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Education Updated");
+        }
+    });
+});
+
+router.post("/addDoctorEducation", (req, res) => {
+    const {level_edu, diploma, institute, country, year_graduated, id} = req.body;
+    db.query("INSERT INTO edu (level_edu, diploma, institute, country, year_graduated, id) VALUES (?,?,?,?,?,?)", [level_edu, diploma, institute, country, year_graduated, id], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Education Inserted");
+        }
+    });
+});
+
 module.exports = router;
 // module.exports = getDocInfo
