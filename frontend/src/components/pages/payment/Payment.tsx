@@ -1,4 +1,4 @@
- import React from "react";
+import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useMemo } from "react";
@@ -144,7 +144,7 @@ export default function Payment({}: Props) {
                               document.getElementById(val.p_id).showModal()
                             }
                           >
-                            Accent
+                            Pay
                           </button>
                         </div>
                       </td>
