@@ -33,28 +33,41 @@ export default function MonthlyIncome() {
         catch (error) {
             console.log("Error fetching data from API:", error);
         }
-    
+
     }
 
     const dummy = [];
-    for (let i = 0; i < numberHours.length; i++) {
-        dummy.push({
-            month: numberHours[i].month,
-            year: numberHours[i].year,
-            numberCases: numberCases[i].number_case,
-            hours_worked: numberHours[i].hours_worked,
-            income: numberHours[i].income
-        });
+    if (role_name === "doctor") {
+        for (let i = 0; i < numberHours.length; i++) {
+            dummy.push({
+                month: numberHours[i].month,
+                year: numberHours[i].year,
+                numberCases: numberCases[i].number_case,
+                hours_worked: numberHours[i].hours_worked,
+                income: numberHours[i].income
+            });
+        }
+    }
+    else{
+        for (let i = 0; i < numberHours.length; i++) {
+            dummy.push({
+                month: numberHours[i].month,
+                year: numberHours[i].year,
+                hours_worked: numberHours[i].hours_worked,
+                income: numberHours[i].income
+            });
+        }
+    
     }
 
     useEffect(() => {
         getNumberHour(),
-        getCase();
+            getCase();
     }, []);
     let hours_thisMonth = 0;
     let income_thisMonth = 0;
     let numberCases_thisMonth = 0;
-    let key =0;
+    let key = 0;
     let date = new Date();
     dummy.map((item, index) => {
         key = index;
@@ -73,10 +86,10 @@ export default function MonthlyIncome() {
 
                 {role_name === "doctor" ?
                     <div className="stat">
-                    <div className="stat-title">Number of Cases</div>
-                    <div className="stat-value">{numberCases_thisMonth}</div>
-                    <div className="stat-desc">Cases</div>
-                </div> : ""}
+                        <div className="stat-title">Number of Cases</div>
+                        <div className="stat-value">{numberCases_thisMonth}</div>
+                        <div className="stat-desc">Cases</div>
+                    </div> : ""}
 
                 <div className="stat">
                     <div className="stat-title">Current Income</div>
@@ -105,11 +118,11 @@ export default function MonthlyIncome() {
                                 <th scope="col" className="p-4">
                                     Month
                                 </th>
-                                
+
                                 {role_name === "doctor" ?
                                     <th scope="col" className="p-4">
-                                    Number of Cases
-                                </th> : ""}
+                                        Number of Cases
+                                    </th> : ""}
                                 <th scope="col" className="p-4">
                                     Total Hours Worked
                                 </th>
@@ -128,12 +141,12 @@ export default function MonthlyIncome() {
                                         <th>{item.month}-{item.year}</th>
                                     </div>
                                 </td>
-                               { role_name === "doctor" ?
-                                <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <div className="flex items-center">
-                                        <td>{item.numberCases}</td>
-                                    </div>
-                                </td>:""}
+                                {role_name === "doctor" ?
+                                    <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <div className="flex items-center">
+                                            <td>{item.numberCases}</td>
+                                        </div>
+                                    </td> : ""}
                                 <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div className="flex items-center">
                                         <td>{item.hours_worked}</td>
