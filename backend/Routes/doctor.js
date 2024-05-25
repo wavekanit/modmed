@@ -146,8 +146,8 @@ router.post("/addDoc", async (req, res) => {
 });
 
 router.post("/updateDoctorInfo", (req, res) => {
-    const {fName,mName,lName,idNumber,sex,id} = req.body;
-    db.query("UPDATE employee SET fName = ?, mName = ?, lName = ?, idNumber = ?, sex = ? WHERE id = ?", [fName, mName, lName, idNumber, sex, id], (error, result) => {
+    const {fName,mName,lName,idNumber,DOB,sex,addresses,tel,nationality,race,religion,bloodType,d_department_id,d_license_id,email,id} = req.body;
+    db.query("UPDATE employee SET fName = ?, mName = ?, lName = ?, idNumber = ?, DOB = ?, sex = ?, addresses = ?,tel = ?, nationality = ?,race = ?, religion = ?, bloodType = ?, d_department_id = ?, d_license_id = ?,email = ? WHERE id = ?", [fName,mName,lName,idNumber,DOB,sex,addresses,tel,nationality,race,religion,bloodType,d_department_id,d_license_id,email,id], (error, result) => {
         if(error){
             console.log(error);
             res.status(500).send("Internal Server Error");
@@ -177,6 +177,18 @@ router.post("/addDoctorEducation", (req, res) => {
             res.status(500).send("Internal Server Error");
         } else {
             res.send("Education Inserted");
+        }
+    });
+});
+
+router.post("/delDoctorEducation", (req, res) => {
+    const {id, level_edu, diploma} = req.body;
+    db.query("DELETE FROM edu WHERE id = ? AND level_edu = ? AND diploma = ?", [id, level_edu, diploma], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Education Deleted");
         }
     });
 });
