@@ -33,8 +33,8 @@ export default function PersonalInfo(props: { id: number }) {
 
     return (
         <>
-            <div className="bg-blue-500 text-white text-center py-4 px-2 rounded ml-10 w-full">
-                PersonalInfo of -- {id} --
+            <div className="bg-blue-500 font-bold text-white text-2xl text-center py-4 px-2 rounded ml-10 w-full">
+                Personal Infomation
             </div>
             <div className='flex flex-wrap justify-right items-right w-full h-full m-3 ml-10'>
                 <ul className='w-full'>

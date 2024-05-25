@@ -71,6 +71,9 @@ return (
               <tr>
                 <th scope="col" className="p-4"></th>
                 <th scope="col" className="p-4">
+                  ID Number
+                </th>
+                <th scope="col" className="p-4">
                   Name
                 </th>
                 <th scope="col" className="p-4">
@@ -118,6 +121,11 @@ return (
                 </td>
 
                 {/* Data for each column */}
+                <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <div className="flex items-center">
+                    <td>{val.idNumber}</td>
+                  </div>
+                </td>
                 <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   <div className="flex items-center">
                     <td>{val.fName}</td>
