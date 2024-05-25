@@ -13,6 +13,7 @@ import DocDetail from "./components/pages/docInfo/doctorDetailPage.tsx";
 import DocEdit from "./components/pages/docEditInfo/DocEditInfoPage";
 import PatientInfo from "./components/pages/patientInfo/PatientInfoPage";
 import CheckIn from "./components/pages/CheckIn";
+import PatientInfoStaff from "./components/pages/patientInfo/PatientInfoPageForStaff.tsx";
 
 import SearchPatientPage from "./components/pages/patientInfo/SearchPatientPage";
 import MyProfile from "./components/pages/myProfile.tsx";
@@ -21,6 +22,11 @@ import InsertCureHist from "./components/pages/patientInfo/CureEdit/CureInsert.t
 import UpdateCureHist from "./components/pages/patientInfo/CureEdit/CureUpdate.tsx";
 import AllergyUpdate from "./components/pages/patientInfo/AllergyEdit/AllergyUpdate.tsx";
 import AllergyInsert from "./components/pages/patientInfo/AllergyEdit/AllergyInsert.tsx";
+import InsertPatient from "./components/pages/patientInfo/PatientEdit/InsertPatient.tsx";
+import UpdatePatientInfo from "./components/pages/patientInfo/PatientEdit/UpdatePersonalInfo.tsx";
+import ManagePatientPage from "./components/pages/patientInfo/ManagePatientPage.tsx";
+
+
 
 import ManageDoctorPage from "./components/pages/doctorInfo/ManageDoctorPage.tsx";
 import DoctorInfo from "./components/pages/doctorInfo/DoctorInfoPage.tsx";
@@ -40,6 +46,7 @@ import ManageStaffPage from "./components/pages/staffInfo/ManageStaffPage.tsx";
 import StaffInfo from "./components/pages/staffInfo/StaffInfoPage.tsx";
 import UpdateStaffInfo from "./components/pages/staffInfo/StaffEdit/UpdatePersonalInfo.tsx";
 import InsertStaff from "./components/pages/staffInfo/StaffEdit/InsertStaff.tsx";
+
 
 
 
@@ -99,6 +106,11 @@ function App() {
         <Route path="/manage_staff/details" element={<StaffInfo />} />
         <Route path="/manage_staff/details/staff_update" element={<UpdateStaffInfo />} />
         <Route path="/manage_staff/staff_insert" element={<InsertStaff />} />
+
+        <Route path="/manage_patient" element={<ManagePatientPage />} />
+        <Route path="/manage_patient/details" element={<PatientInfoStaff />} />
+        <Route path="/manage_patient/details/patient_update" element={<UpdatePatientInfo />} />
+        <Route path="/manage_patient/patient_insert" element={<InsertPatient />} />
       </Routes>
     </>
   );

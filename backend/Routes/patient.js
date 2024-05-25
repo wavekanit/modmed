@@ -19,6 +19,47 @@ db.connect( (error) => {
     }
 });
 
+function insertEmergencyContact(emergency){
+    return new Promise((resolve, reject) => {
+        db.query("INSERT INTO emergency_contact (fName, mName, lName, tel, addresses, email) VALUES (?,?,?,?,?,?)", [emergency.fName, emergency.mName, emergency.lName, emergency.tel, emergency.address, emergency.email], (error, result) => {
+            if(error){
+                console.log(error)
+                reject(error);
+            } else {
+                console.log("Emergency Contact Inserted")
+                resolve(result);
+            }
+        });
+    });
+}
+
+function insertPatientInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, emer_id, relation){
+    return new Promise((resolve, reject) => {
+        console.log(DOB);
+        db.query("INSERT INTO patient (fName, mName, lName, idNumber, DOB, sex, addresses, tel, email, nationality, race, religion, bloodType, e_id, relation) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion, bloodType, emer_id, relation], (error, result) => {
+            if(error){
+                console.log(error)
+                reject(error);
+            } else {
+                console.log("Patient Inserted")
+                resolve(result);
+            }
+        });
+    });
+}
+function getAlreadExistEmerInfo(emergency){
+    const {fName, mName, lName, tel, address, email} = emergency;
+    return new Promise((resolve, reject) => {
+        db.query("SELECT * FROM emergency_contact WHERE fName = ? AND lName = ?", [fName, lName], (error, result) => {
+            if(error){
+                console.log(error);
+                reject(error);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+}
 router.get("/getPatientInProgress", (req, res) => {
     const sqlStatement = `
     SELECT p.p_id, p.fName, p.mName,  p.lName
@@ -161,5 +202,45 @@ router.get("/getPatientInfo/:id", (req, res) => {
     });
 });
 
+
+router.post("/addPatient", async (req, res) => {
+    const {info} = req.body;
+    const { fName, mName, lName, idNumber, DOB, sex, address, tel, email, nationality, race, religion,bloodType, emergency, relation} = info;
+    console.log("========================================= START ==============================================");
+    console.log("First Name " + fName);
+    console.log("DOB " + DOB);
+    console.log("Relation " + bloodType);
+    var emer_id;
+    try {
+        const alreadyPat = await getAlreadExistEmerInfo(emergency);
+        if(alreadyPat.length != 0){
+            // res.send(alreadyDoc[0]);
+            emer_id = alreadyPat[0].e_id;
+            console.log("ALREADY EXIST EMERGENCY CONTACT");
+            console.log(alreadyPat[0].e_id);
+        }else{
+            const result = await insertEmergencyContact(emergency);
+            console.log(result.insertId);
+            emer_id = result.insertId;
+        }
+        const result = await insertPatientInfo(fName, mName, lName, idNumber, DOB, sex, address, tel, email,  nationality, race, religion, bloodType, emer_id, relation);
+        console.log(result);
+        res.send("Success");
+    } catch (error) {
+        console.log(error);
+        res.send("Failed to insert patient");
+    }
+});
+router.post("/updatePatInfo", (req, res) => {
+    const {fName,mName,lName,idNumber,sex,p_id} = req.body;
+    db.query("UPDATE patient SET fName = ?, mName = ?, lName = ?, idNumber = ?, sex = ? WHERE p_id = ?", [fName, mName, lName, idNumber, sex, p_id], (error, result) => {
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+        } else {
+            res.send("Patient Updated");
+        }
+    });
+});
 
 module.exports = router
