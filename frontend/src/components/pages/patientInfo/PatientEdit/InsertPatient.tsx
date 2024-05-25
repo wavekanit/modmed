@@ -117,10 +117,11 @@ export default function InsertPatient() {
   }
 
   return (
-    <div className="mx-auto w-1/2">
+    <div className="mx-auto w-1/3">
       <FormWrapper title="Insert Patient">
         <form onSubmit={submit}>
           <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mt-4 divider">Personal Information</h3>
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
             <input required type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               value={data.fName}
@@ -221,17 +222,17 @@ export default function InsertPatient() {
                     <option value="AB">AB</option>
                     <option value="O">O</option>
                 </select>
-            </div>
+            </div>      
+
+          <br />
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mt-4 divider">Emergency Contact</h3>
           <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Relation</label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Emergency Contact Relation</label>
             <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               value={data.relation}
               onChange={(e) => handleInputChange(e, 'relation')}
             />
           </div>
-          
-
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white mt-4">Emergency Contact</h3>
           <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Emergency Contact First Name</label>
             <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

@@ -7,6 +7,12 @@ export default function CureHistory(props: { p_id: number }) {
   const { p_id } = props;
   const navigate = useNavigate();
   const [dummy_data, setDummyData] = useState([]);
+  const role = localStorage.getItem("role_name");
+  if (role === `"register"`) {
+    console.log("role : ", role);
+  } else {
+    console.log("not register role"); 
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -76,12 +82,13 @@ export default function CureHistory(props: { p_id: number }) {
                             <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd"/>
                             </svg>
                         Edit
-                        </button>
+                  </button>
                 </div>
               </div>
             </li>
           ))}
         </ul>
+        {role === `"register"` ? null :
         <button
           type="button"
           onClick={() => insertCure(p_id)}
@@ -98,7 +105,24 @@ export default function CureHistory(props: { p_id: number }) {
             <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
           </svg>
           Add
-        </button>
+        </button>}
+        {/* <button
+          type="button"
+          onClick={() => insertCure(p_id)}
+          className="py-3 px-4 flex mx-auto items-center font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 mr-2 -ml-0.5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+            <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
+          </svg>
+          Add
+        </button> */}
       </div>
     </>
   )

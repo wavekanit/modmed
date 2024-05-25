@@ -45,8 +45,10 @@ export default function AllergyUpdate() {
 
     return (
         <>
-            <form className="mx-auto w-1/2" onSubmit={submit}>
-                <FormWrapper title="Allergy Update">
+            <form className="mx-auto w-1/3" onSubmit={submit}>
+                <FormWrapper title="">
+                    <br />
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mt-4 divider">Update Allergy</h3>
                     <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                             Type
