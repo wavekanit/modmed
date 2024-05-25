@@ -193,7 +193,7 @@ export default function Payment({}: Props) {
                         : Math.floor(
                             (new Date().getTime() -
                               new Date(val.date_cure).getTime()) /
-                              (1000 * 3600 * 24)
+                              (1000 * 3600 * 24) +1
                           )}
                     </h3>
                     <h3 className="text-1xl">
@@ -204,7 +204,7 @@ export default function Payment({}: Props) {
                             (new Date().getTime() -
                               new Date(val.date_cure).getTime()) /
                               (1000 * 3600 * 24)
-                          ) * 1000}
+                          +1) * 1000}
                     </h3>
                     <div>
                       <div className="modal-action">
