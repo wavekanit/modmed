@@ -183,11 +183,13 @@ router.get("/getNumberOfCases/:month/:year", (req, res) => {
     JOIN
         department d ON e.d_department_id = d.department_id
     WHERE
-        YEAR(date_cure) = ? AND
-        MONTH(date_cure) = ? AND
-        c.d_id = e.id AND e.d_department_id = d.department_id
+        YEAR(c.date_cure) = ? AND
+        MONTH(c.date_cure) = ?
     GROUP BY
+        YEAR(c.date_cure),
+        MONTH(c.date_cure),
         d.department_name;
+
     `;
     db.query(query, [year, month], (error, result) => {
         if(error){

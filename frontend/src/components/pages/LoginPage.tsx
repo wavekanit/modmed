@@ -25,7 +25,7 @@ export default function LoginPage({}: Props) {
           });
           localStorage.setItem("isLoggedIn", "true");
           var role_name = localStorage.getItem("role_name");
-          window.location.href = "/";
+          // window.location.href = "/";
           if (role_name === '"finance"') {
             window.location.href = "/payment";
           } else if (role_name === '"doctor"') {
