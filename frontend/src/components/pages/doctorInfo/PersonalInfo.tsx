@@ -54,6 +54,17 @@ export default function PersonalInfo(props: { id: number }) {
         }
     }
 
+    function calculateAge(dob : any) {
+        var today = new Date();
+        var birthDate = new Date(dob);
+        var age_now = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age_now--;
+        }
+        return age_now;
+      }
+
     return (
         <>
             <div className="bg-blue-500 font-bold text-white text-2xl text-center py-4 px-2 rounded ml-10 w-full">
@@ -79,9 +90,9 @@ export default function PersonalInfo(props: { id: number }) {
                                 <li className="text-lg text-white">Citizen ID Number : {data.idNumber}</li>
                                 <li className="text-lg text-white">First Name : {data.fName}</li>
                                 <li className="text-lg text-white">Middle Name : {data.mName != null ? data.mName : "-"}</li>
-                                <li className="text-lg text-white">Last Name : {data.lName}</li>
-                                <li className="text-lg text-white">Date of Birth : {new Date(data.DOB).getDate()}/{new Date(data.DOB).getMonth() + 1}/{new Date(data.DOB).getFullYear()}</li>
+                                <li className="text-lg text-white">Last Name : {data.lName}</li>                                
                                 <li className="text-lg text-white">Sex : {data.sex}</li>
+                                <li className="text-lg text-white">Age : {calculateAge(data.DOB)}</li>
                                 <li className="text-lg text-white">Address : {data.addresses}</li>
                                 <li className="text-lg text-white">Telephone Number : {data.tel}</li>
                                 <li className="text-lg text-white">Nationality : {data.nationality}</li>

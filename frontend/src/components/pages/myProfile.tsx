@@ -31,6 +31,17 @@ export default function myProfile() {
         navigate("/my_profile/change_password", { replace: true, state: { val : id } });
     }
 
+    function calculateAge(dob : any) {
+        var today = new Date();
+        var birthDate = new Date(dob);
+        var age_now = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age_now--;
+        }
+        return age_now;
+      }
+
         return <>
             {/* {console.log(val)} */}
             <p className="card-title text-5xl text-white font-bold mt-5 mb-3 bg-blue-900 rounded-md p-3 w-3/5 mx-auto">Welcome to your profile! {fName} {lName}</p>
@@ -55,8 +66,8 @@ export default function myProfile() {
                                 <li className="text-lg text-white">First Name : {item.fName}</li>
                                 <li className="text-lg text-white">Middle Name : {item.mName != null ? item.mName : "-"}</li>
                                 <li className="text-lg text-white">Last Name : {item.lName}</li>
-                                <li className="text-lg text-white">Date of Birth : {new Date(item.DOB).getDate()}/{new Date(item.DOB).getMonth() + 1}/{new Date(item.DOB).getFullYear()}</li>
                                 <li className="text-lg text-white">Sex : {item.sex}</li>
+                                <li className="text-lg text-white">Age : {calculateAge(item.DOB)}</li>
                                 <li className="text-lg text-white">Address : {item.addresses}</li>
                                 <li className="text-lg text-white">Telephone Number : {item.tel}</li>
                                 <li className="text-lg text-white">Nationality : {item.nationality}</li>
