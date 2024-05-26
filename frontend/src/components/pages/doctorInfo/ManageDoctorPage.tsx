@@ -7,7 +7,7 @@ export default function ManageDoctorPage() {
 
   const navigate = useNavigate();
 
-  function detailClick(val : any) {
+  function detailClick(val: any) {
     navigate("/manage_doctor/details", { replace: true, state: { val } });
   }
 
@@ -15,14 +15,16 @@ export default function ManageDoctorPage() {
 
   async function SearchClick(searching: string) {
     setSearching(searching);
-    if (searching === "") {} else {
-            try {
-              const response = await axios.get(`http://localhost:3000/api/getDoctor/${searching}`);
-              setDummyData(response.data);
-            } catch (error) {
-              console.error("Error fetching data from API:", error);
-            }
-
+    if (searching === "") {
+    } else {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/getDoctor/${searching}`
+        );
+        setDummyData(response.data);
+      } catch (error) {
+        console.error("Error fetching data from API:", error);
+      }
     }
   }
 
@@ -42,7 +44,9 @@ export default function ManageDoctorPage() {
                   className="grow"
                   placeholder="Search"
                   value={searching}
-                  onChange={(e) => {SearchClick(e.target.value)}}
+                  onChange={(e) => {
+                    SearchClick(e.target.value);
+                  }}
                 />
                 {/* <button
                   className="btn bg-blue-500 w-16 text-xs text-white mx-2"
@@ -89,9 +93,6 @@ export default function ManageDoctorPage() {
                 <tr>
                   <th scope="col" className="p-4"></th>
                   <th scope="col" className="p-4">
-                    d_id
-                  </th>
-                  <th scope="col" className="p-4">
                     Name
                   </th>
                   <th scope="col" className="p-4">
@@ -106,9 +107,13 @@ export default function ManageDoctorPage() {
                   <th scope="col" className="p-4">
                     Sex
                   </th>
+                  <th scope="col" className="p-4">
+                    department
+                  </th>
                 </tr>
               </thead>
-              <tbody>{dummy_data.map((val) => (
+              <tbody>
+                {dummy_data.map((val) => (
                   <tr
                     key={val.id}
                     className="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -137,13 +142,8 @@ export default function ManageDoctorPage() {
                         </button>
                       </div>
                     </td>
-                
+
                     {/* Data for each column */}
-                    <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      <div className="flex items-center">
-                        <th>{val.id}</th>
-                      </div>
-                    </td>
                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       <div className="flex items-center">
                         <td>{val.fName}</td>
@@ -167,6 +167,11 @@ export default function ManageDoctorPage() {
                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       <div className="flex items-center">
                         <td>{val.sex}</td>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      <div className="flex items-center">
+                        <th>{val.department_name}</th>
                       </div>
                     </td>
                   </tr>
