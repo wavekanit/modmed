@@ -4,11 +4,6 @@ const dotenv = require("dotenv");
 const cors = require('cors');
 const moment = require("moment");
 const {readdir, readdirSync} = require("fs");
-// const doctor = require("./Routes/doctor");
-// const staff = require("./Routes/staff");
-// const patient = require("./Routes/patient");
-// const getDocInfo  = require("./Routes/doctor");
-// const getRegInfo = require("./Routes/staff");
 
 
 
@@ -223,5 +218,4 @@ app.listen(3000, () => {
     console.log("Server started on PORT 3000")
 });
 
-// ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY '1234';
 

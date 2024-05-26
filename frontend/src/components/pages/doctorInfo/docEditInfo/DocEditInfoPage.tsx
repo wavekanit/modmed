@@ -2,11 +2,11 @@
 
 import React from "react";
 import { FormEvent, useState } from "react";
-import { useMultistepForm } from "../../UseMultiForm";
+import { useMultistepForm } from "../../../UseMultiForm";
 import { PersonalInfoEdit } from "./PersonalInfoEdit";
 import { EcontactEdit } from "./EmergencyEdit";
 import { EducationalEdit } from "./EducationalEdit";
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 
 type Props = {};
 
@@ -35,7 +35,6 @@ type FormData = {
   password: string;
   confirmPassword: string;
 };
-
 
 // const INITIAL_DATA: FormData = {
 //   fName: "",
@@ -84,13 +83,13 @@ export default function StaffRegisPage({}: Props) {
     confirmPassword: "",
   };
   const [data, setData] = React.useState<FormData>(INITIAL_DATA);
-  
+
   console.log(val);
 
   function goBack(bool) {
-    if(bool) {
+    if (bool) {
       alert("Successful Docter Editing !");
-      navigate("/manage_doctor/details" , {replace: true, state: {val}});
+      navigate("/manage_doctor/details", { replace: true, state: { val } });
     }
   }
 
@@ -106,12 +105,12 @@ export default function StaffRegisPage({}: Props) {
   ]);
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    if(data.password !== data.confirmPassword){
+    if (data.password !== data.confirmPassword) {
       alert("Password and Confirm Password do not match");
       setData((prevData) => ({
         ...prevData,
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
       }));
       return;
     }
@@ -150,7 +149,7 @@ export default function StaffRegisPage({}: Props) {
                         : "bg-blue-600 hover:bg-blue-700"
                     }  font-medium rounded-lg text-sm px-5 py-2.5 text-center my-2 mx-2`}
                     type="submit"
-                    onClick={() => isLastStep ? goBack(1) : goBack(0)}
+                    onClick={() => (isLastStep ? goBack(1) : goBack(0))}
                   >
                     {isLastStep ? "Finish" : "Next"}
                   </button>

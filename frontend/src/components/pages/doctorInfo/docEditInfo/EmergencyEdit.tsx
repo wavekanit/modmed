@@ -1,21 +1,21 @@
 import React from "react";
-import FormWrapper from "../FormWrapper";
+import FormWrapper from "../../FormWrapper";
 
-type EcontactRegisData = {
-    eConFirstName: string;
-    eConMiddleName: string;
-    eConLastName: string;
-    eConRelation: string;
-    eConTel: string;
-    eConEmail: string;
-    eConAddress: string;
+type EcontactEditData = {
+  eConFirstName: string;
+  eConMiddleName: string;
+  eConLastName: string;
+  eConRelation: string;
+  eConTel: string;
+  eConEmail: string;
+  eConAddress: string;
 };
 
-type EcontactRegisProps = EcontactRegisData & {
-  updateFields: (fields: Partial<EcontactRegisData>) => void;
+type EcontactEditProps = EcontactEditData & {
+  updateFields: (fields: Partial<EcontactEditData>) => void;
 };
 
-export function EmergencyRegis({
+export function EcontactEdit({
   eConFirstName,
   eConMiddleName,
   eConLastName,
@@ -24,26 +24,26 @@ export function EmergencyRegis({
   eConEmail,
   eConAddress,
   updateFields, // Add the missing prop here
-}: EcontactRegisProps) {
+}: EcontactEditProps) {
   return (
-    <FormWrapper title="2/3 Emergency Contact">
+    <FormWrapper title="Emergency Contact">
       <div className="my-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          First Name
+          FirstName
         </label>
         <input
           type="text"
-          name="emergency.eConFirstName"
+          name="eConFirstName"
           value={eConFirstName}
           onChange={(e) => updateFields({ eConFirstName: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="First Name"
+          placeholder="FirstName"
           required
         />
       </div>
       <div className="my-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Middle Name
+          MiddleName
         </label>
         <input
           type="text"
@@ -51,13 +51,13 @@ export function EmergencyRegis({
           value={eConMiddleName}
           onChange={(e) => updateFields({ eConMiddleName: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Middle Name"
+          placeholder="MiddleName"
           required
         />
       </div>
       <div className="my-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Last Name
+          LastName
         </label>
         <input
           type="text"
@@ -65,10 +65,11 @@ export function EmergencyRegis({
           value={eConLastName}
           onChange={(e) => updateFields({ eConLastName: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Last Name"
+          placeholder="LastName"
           required
         />
-      </div><div className="my-2">
+      </div>
+      <div className="my-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Relation
         </label>
