@@ -75,8 +75,10 @@ export default function DocUpdate() {
     return (
         <>
             <form className="mx-auto w-1/2" onSubmit={submit}>
-                <FormWrapper title="Doctor Update">
+                <FormWrapper title="">
+                    
                     <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mt-4 divider">Personal Infomation Update</h3>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white ">
                             First Name
                         </label>

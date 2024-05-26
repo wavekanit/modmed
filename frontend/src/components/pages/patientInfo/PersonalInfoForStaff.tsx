@@ -30,6 +30,17 @@ export default function PersonalInfo(props: { p_id: number }) {
     navigate("/manage_patient/details/patient_update", { replace: true, state: { val: val } });
 }
 
+  function calculateAge(dob : any) {
+    var today = new Date();
+    var birthDate = new Date(dob);
+    var age_now = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age_now--;
+    }
+    return age_now;
+  }
+
   return (
     <>
         <div className="bg-blue-500 font-bold text-3xl text-white text-center py-4 px-2 rounded ml-10 w-full">
@@ -48,6 +59,7 @@ export default function PersonalInfo(props: { p_id: number }) {
                         <div className="text-sm text-white">Last Name : {data.lName}</div>
                         <div className="text-sm text-white">ID Number : {data.idNumber}</div>
                         <div className="text-sm text-white">Sex : {data.sex}</div>
+                        <div className="text-sm text-white">Age : {calculateAge(data.DOB)}</div>
                         <div className="text-sm text-white">Address : {data.addresses}</div>
                         <div className="text-sm text-white">Tel : {data.tel}</div>
                         <div className="text-sm text-white">Email : {data.email}</div>
