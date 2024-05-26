@@ -24,7 +24,15 @@ export default function LoginPage({}: Props) {
             localStorage.setItem(key, JSON.stringify(response.data[key]));
           });
           localStorage.setItem("isLoggedIn", "true");
-          window.location.href = "/";
+          var role_name = localStorage.getItem("role_name");
+          // window.location.href = "/";
+          if (role_name === '"finance"') {
+            window.location.href = "/payment";
+          } else if (role_name === '"doctor"') {
+            window.location.href = "/search_patient";
+          } else if (role_name === '"register"') {
+            window.location.href = "/manage_patient";
+          }
         }
       })
       .catch((error) => {

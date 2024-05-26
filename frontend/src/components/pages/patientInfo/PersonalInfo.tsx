@@ -1,7 +1,7 @@
-import React from 'react'
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function PersonalInfo(props: { p_id: number }) {
   const { p_id } = props;
@@ -64,14 +64,15 @@ export default function PersonalInfo(props: { p_id: number }) {
                         <div className="text-sm text-white">Race : {data.race}</div>
                         <div className="text-sm text-white">Religion : {data.religion}</div>
                         <div className="text-sm text-white">Blood Type : {data.bloodType}</div>
-
                         </div>
                     </div>
+                  </div>
                 </div>
-               </li>
-            ))}
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
     </>
-  )
+  );
 }

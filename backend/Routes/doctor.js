@@ -43,7 +43,7 @@ router.get("/getDocList/:id?", (req, res) => {
 
 router.get("/getDoctor/:search", (req, res) => {
     const searchN = req.params.search;
-    db.query("SELECT * FROM employee WHERE role_name = 'doctor' AND (fName LIKE ? OR lName LIKE ?)", [`%${searchN}%`, `%${searchN}%`], (error, result) => {
+    db.query("SELECT * FROM employee JOIN department ON employee.d_department_id = department.department_id WHERE role_name = 'doctor' AND (fName LIKE ? OR lName LIKE ?)", [`%${searchN}%`, `%${searchN}%`], (error, result) => {
         if(error){
             console.log(error);
             res.status(500).send("Internal Server Error");

@@ -1,7 +1,7 @@
-import React from 'react'
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function PersonalInfo(props: { p_id: number }) {
   const { p_id } = props;
@@ -26,9 +26,12 @@ export default function PersonalInfo(props: { p_id: number }) {
   }, [p_id]);
 
   useEffect(() => {}, [dummy_data]);
-  function goEdit(val : any) {
-    navigate("/manage_patient/details/patient_update", { replace: true, state: { val: val } });
-}
+  function goEdit(val: any) {
+    navigate("/manage_patient/details/patient_update", {
+      replace: true,
+      state: { val: val },
+    });
+  }
 
   function calculateAge(dob : any) {
     var today = new Date();
@@ -73,25 +76,29 @@ export default function PersonalInfo(props: { p_id: number }) {
                     type="button"
                     onClick={() => goEdit(data)}
                     className="mt-2 py-2 px-3 flex mx-auto text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                >
+                  >
                     <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 mr-2 -ml-0.5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 mr-2 -ml-0.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
                     >
-                        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                        <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
+                      <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                     Edit
-                </button>
-                    </div>
+                  </button>
                 </div>
-               </li>
-            ))}
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
     </>
-  )
+  );
 }
