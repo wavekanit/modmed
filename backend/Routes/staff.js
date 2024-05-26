@@ -196,24 +196,6 @@ router.get("/getMonthlyIncome/:id", (req, res) => {
             console.log(error);
             res.status(500).send("Internal Server Error");
         } else {
-            // db.query(sqlStatement2, [req.params.id], (error, result2) => {
-            //     if (error) {
-            //         console.log(error);
-            //         res.status(500).send("Internal Server Error");
-            //     } else {
-            //         const formattedResult = result.map(row => ({
-            //             ...row,
-            //             year: row.year,
-            //             month: row.month,
-            //             hours_worked: parseInt(row.hours_worked), // formatting hours_worked to 2 decimal places
-            //             income: parseInt(row.income), // formatting income to 2 decimal places
-            //             // number_case: result2.filter(row2 => row2.year_cure === row.year && row2.month_cure === row.month).length
-                        
-            //         }));
-            //         const final_result = [...formattedResult, ...result2];
-            //         res.send(final_result);
-            //     }
-            // });
             const formattedResult = result.map(row => ({
                 ...row,
                 year: row.year,
