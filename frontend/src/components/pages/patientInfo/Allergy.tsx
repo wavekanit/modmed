@@ -1,7 +1,7 @@
-import React from 'react'
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AllergyInfo(props: { p_id: number }) {
   const { p_id } = props;
@@ -25,8 +25,7 @@ export default function AllergyInfo(props: { p_id: number }) {
     }
   }, [p_id]);
 
-  useEffect(() => {
-  }, [dummy_data]);
+  useEffect(() => {}, [dummy_data]);
 
   async function handleCheckboxChange(index: number, value: string) {
     const newData = [...dummy_data];
@@ -34,12 +33,15 @@ export default function AllergyInfo(props: { p_id: number }) {
     setDummyData(newData);
 
     try {
-      const response = await axios.post("http://localhost:3000/api/updatePatientAllergies", {
-        allergy_id: newData[index].allergy_id,
-        type_allergy: newData[index].type_allergy,
-        allergy: newData[index].allergy,
-        status_allergy: newData[index].status_allergy,
-      });
+      const response = await axios.post(
+        "http://localhost:3000/api/updatePatientAllergies",
+        {
+          allergy_id: newData[index].allergy_id,
+          type_allergy: newData[index].type_allergy,
+          allergy: newData[index].allergy,
+          status_allergy: newData[index].status_allergy,
+        }
+      );
       alert(response.data);
     } catch (error) {
       console.error(error);
@@ -47,64 +49,80 @@ export default function AllergyInfo(props: { p_id: number }) {
   }
 
   function goEdit(val) {
-    navigate("/search_patient/details/allergy_update" , {replace : true, state: {val: val}});
+    navigate("/search_patient/details/allergy_update", {
+      replace: true,
+      state: { val: val },
+    });
   }
 
   function goInsert() {
-    navigate("/search_patient/details/allergy_insert" , {replace : true, state: {val: p_id}});
+    navigate("/search_patient/details/allergy_insert", {
+      replace: true,
+      state: { val: p_id },
+    });
   }
 
   return (
     <>
-        <div className="bg-blue-500 font-bold text-3xl text-white text-center py-4 px-2 rounded ml-10 w-full">
-            Allergy Info
-        </div>
-        <div className='flex flex-wrap justify-right items-right w-full h-full m-3 ml-10'>
-            <ul className='w-full'>
-            {dummy_data.map((data, index) => (
-                <li key={data.allergy_id} className='w-full mb-4'>
-                <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-                    <div className="card mx-auto my-3 w-full py-3 px-5 bg-grey dark:bg-grey-500 relative sm:rounded-lg">
-                        <div className="flex flex-col">
-                        <div className="text-lg font-bold text-white ">ALLERGY ID : {data.allergy_id}</div>
-                        <div className="text-sm text-white">Type : {data.type_allergy}</div>
-                        <div className="text-sm text-white">Allergy : {data.allergy}</div>
-                        </div>
- 
-                    <button
-                        type="button"
-                        onClick={() => goEdit(data)}
-                        className="mt-2 py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                        >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4 mr-2 -ml-0.5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                            >
-                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                            <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd"/>
-                            </svg>
-                        Edit
-                        </button>
-                        <label className="inline-flex items-center cursor-pointer mt-2">
-                          <input 
-                            type="checkbox" 
-                            value={data.status_allergy} 
-                            className="sr-only peer" 
-                            checked={data.status_allergy === 1}
-                            onChange={() => {
-                              handleCheckboxChange(index, data.status_allergy);
-                            }} 
-                          />
-                          <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-1 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                          <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">{data.status_allergy === 1 ? 'Infected' : 'Not Infected'}</span>
-                        </label>
+      <div className="bg-blue-500 font-bold text-3xl text-white text-center py-4 px-2 rounded ml-10 w-full">
+        Allergy Info
+      </div>
+      <div className="flex flex-wrap justify-right items-right w-full h-full m-3 ml-10">
+        <ul className="w-full">
+          {dummy_data.map((data, index) => (
+            <li key={data.allergy_id} className="w-full mb-4">
+              <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                <div className="card mx-auto my-3 w-full py-3 px-5 bg-grey dark:bg-grey-500 relative sm:rounded-lg">
+                  <div className="flex flex-col">
+                    {/* <div className="text-lg font-bold text-white ">ALLERGY ID : {data.allergy_id}</div> */}
+                    <div className="text-sm font-bold text-white">
+                      Type : {data.type_allergy}
                     </div>
+                    <div className="text-sm font-bold text-white">
+                      Allergy : {data.allergy}
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => goEdit(data)}
+                    className="mt-2 py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 mr-2 -ml-0.5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Edit
+                  </button>
+                  <label className="inline-flex items-center cursor-pointer mt-2">
+                    <input
+                      type="checkbox"
+                      value={data.status_allergy}
+                      className="sr-only peer"
+                      checked={data.status_allergy === 1}
+                      onChange={() => {
+                        handleCheckboxChange(index, data.status_allergy);
+                      }}
+                    />
+                    <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-1 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                      {data.status_allergy === 1 ? "Infected" : "Not Infected"}
+                    </span>
+                  </label>
                 </div>
-               </li>
-            ))}
+              </div>
+            </li>
+          ))}
         </ul>
         <button
           type="button"
@@ -119,11 +137,15 @@ export default function AllergyInfo(props: { p_id: number }) {
             aria-hidden="true"
           >
             <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-            <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
+            <path
+              fillRule="evenodd"
+              d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+              clipRule="evenodd"
+            />
           </svg>
           Add
         </button>
       </div>
     </>
-  )
+  );
 }
